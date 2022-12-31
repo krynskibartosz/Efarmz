@@ -1,74 +1,132 @@
 import { PRODUCT } from 'services/products/types';
 import { Row, Column } from 'components/bases/containers/Containers';
 import { Card } from 'components/bases/Card';
+import Image from 'next/image';
 import useRootStore from 'store/useRoot';
 
 export const ProductCard = ({ product }: { product: PRODUCT }) => {
     const { addProduct } = useRootStore.getState();
-
     return (
-        <Card
-            cover={'https://api.unsplash.com/photos/random?query=food'}
-            coverTag={product.unit}
-            key={product.id}
-        >
-            <div className="pb-5 px-5 ">
-                <p className="text-gray-700 font-semibold">{product.name}</p>
-                <div className="underline hover:brightness-50 text-gray-500 text-sm -translate-y-0.5">
-                    <a
-                        aria-label="products"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href={product.link}
-                    >
-                        {product?.brand?.name}
-                    </a>
+        <article className="h-full">
+            <Card>
+                <div className="relative w-full">
+                    <div className="text-white text-sm font-semibold absolute py-0.5 px-3 top-5 left-5 z-10 bg-[#FF6B7A] rounded-md">
+                        {product.unit}
+                    </div>
+                    <div className="relative min-h-52 h-52 w-full">
+                        <Image
+                            fill
+                            src={'/food.jpeg'}
+                            alt={product.name}
+                            className="object-cover rounded-t-md"
+                        />
+                    </div>
                 </div>
-            </div>
-            <div className="px-5 pb-5">
-                <p className="pb-5 font-bold">{product.price.toFixed(2)} €</p>
-                <Row className="w-ful gap-x-2">
-                    <Badges product={product} />
-                </Row>
-            </div>
-            <Column className="w-full ">
-                <button
-                    disabled={false}
-                    className="text-white hover:brightness-110 font-semibold py-2 w-full bg-green-500"
-                    onClick={() => addProduct(product)}
+
+                <Column
+                    verticalPosition="between"
+                    className="h-full w-full pt-3"
                 >
-                    Ajouter au panier
-                </button>
-                <button
-                    disabled={false}
-                    className="text-white rounded-b-md hover:brightness-110 ligth font-semibold py-2 w-full bg-yellow-500"
-                >
-                    Ajouter à l'abonnement
-                </button>
-            </Column>
-        </Card>
+                    <Column
+                        verticalPosition="between"
+                        className="w-full h-full"
+                    >
+                        <div className="pb-5 px-5 ">
+                            <h3 className="text-gray-700 font-semibold text-lg">
+                                {product.name}
+                            </h3>
+                            <div className="underline hover:brightness-50 text-gray-700 text-sm -translate-y-0.5">
+                                <a
+                                    aria-label="products"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    href={product.link}
+                                >
+                                    {product.brand?.name}
+                                </a>
+                            </div>
+                        </div>
+                        <div className="px-5 pb-5">
+                            <p className="pb-5 font-bold">
+                                {product.price.toFixed(2)} €
+                            </p>
+                            <Row className="w-ful gap-x-2">
+                                <Badges product={product} />
+                            </Row>
+                        </div>
+                    </Column>
+                    <Column className="w-full ">
+                        <button
+                            disabled={false}
+                            className="border-t transition-all duration-300 ease-in-out border-[#CBF6DA] hover:bg-[#EEFCF3] font-semibold py-2 w-full text-green-700"
+                            onClick={() => addProduct(product)}
+                        >
+                            Ajouter au panier
+                        </button>
+                        <button
+                            disabled={false}
+                            className=" bg-green-700 transition-all duration-300 ease-in-out rounded-b-md hover:brightness-110 ligth font-semibold py-2 w-full text-white"
+                        >
+                            Ajouter à l'abonnement
+                        </button>
+                    </Column>
+                </Column>
+            </Card>
+        </article>
     );
 };
 
-const Badges = ({ product }: { product: PRODUCT }) => {
-    if (product.is_bio)
-        return (
-            <p className="text-gray-500 border text-sm border-gray-200 rounded-md py-0.5 px-3">
-                Bio
-            </p>
-        );
-    if (product.new)
-        return (
-            <p className="text-gray-500 border text-sm border-gray-200 rounded-md py-0.5 px-3">
-                Bio
-            </p>
-        );
-    if (product.fresh)
-        return (
-            <p className="text-gray-500 border text-sm border-gray-200 rounded-md py-0.5 px-3">
-                Bio
-            </p>
-        );
+export const ProductCardSkeleton = () => {
+    return (
+        <Column
+            as="article"
+            className={`h-fit  w-full animate-pulse border rounded-lg border-fresh-gray-100   `}
+        >
+            {/* COVER */}
+            <div className="relative  w-full rounded-t-md bg-gray-200 lg:bg-fresh-gray-200 min-h-52 h-52 ">
+                <span className=" h-5 w-16 absolute top-5 left-5   rounded-md bg-gray-100" />
+            </div>
+            <Column verticalPosition="between" className=" h-full w-full pt-3">
+                <Column className="w-full">
+                    <Column className="pb-5 px-5 mb-4 w-full">
+                        <span className=" h-[18px] mb-2 w-10/12  rounded-md bg-gray-200" />
 
-    return <></>;
+                        <span className=" h-3.5 w-4/12   rounded-md bg-gray-100" />
+                    </Column>
+                    <Column className="px-5 pb-5 w-full">
+                        <span className=" h-5 mb-5 w-14  rounded-md bg-gray-200" />
+                        <Row className="w-ful gap-x-2">
+                            <span className="h-5  w-16  rounded-full bg-gray-100" />
+                            <span className="h-5  w-20  rounded-full bg-gray-100" />
+                        </Row>
+                    </Column>
+                </Column>
+                <Column className="w-full ">
+                    <span className=" h-10  w-full   bg-gray-300" />
+                    <span className=" h-10 rounded-b-md  w-full  bg-gray-400" />
+                </Column>
+            </Column>
+        </Column>
+    );
+};
+const Badges = ({ product }: { product: PRODUCT }) => {
+    return (
+        <>
+            {product.is_bio && (
+                <p className="text-[#00C5FF] font-medium border text-sm border-[#00C5FF] rounded-md py-0.5 px-3">
+                    Bio
+                </p>
+            )}
+            {product.new && (
+                <p className="text-[#00C5FF] font-medium border text-sm border-[#00C5FF] rounded-md py-0.5 px-3">
+                    Nouveau
+                </p>
+            )}
+            {product.fresh && (
+                <p className="text-[#00C5FF] font-medium border text-sm border-[#00C5FF] rounded-md py-0.5 px-3">
+                    Frais
+                </p>
+            )}
+        </>
+    );
 };

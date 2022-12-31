@@ -2,11 +2,7 @@
 const nextConfig = {
     reactStrictMode: true,
     images: {
-        domains: [
-            'unsplash.com',
-            'https://efarmz.be/api/v1/',
-            'https://efarmz.be',
-        ],
+        domains: ['api.unsplash.com'],
     },
 };
 

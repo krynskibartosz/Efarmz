@@ -17,7 +17,7 @@ function useFetch<T = unknown>(
     url?: string,
     options?: RequestInit,
     cacheTime?: number,
-    forceFetch?: boolean
+    forceFetch = false
 ): State<T> {
     const dataCache = useRef<Cache<T>>({});
 

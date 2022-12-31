@@ -1,48 +1,53 @@
 import { ColumnPosition, RowPosition } from './types';
 
-export const getColumnAndRowAlignmentClassNames = (
-  horizontalClassName: ColumnPosition,
-  verticalPosition: RowPosition,
-  type: 'column' | 'row'
-) => {
-  const alignmentClassNames = {
-    center: 'justify-center items-center',
-    left: 'justify-start items-start',
-    right: 'justify-end items-end',
-    top: 'justify-start items-start',
-    bottom: 'justify-end items-end',
+const ColumnX = {
+    center: 'items-center',
+    left: 'items-start',
+    right: 'items-end',
+    stretch: 'items-stretch',
+    baseline: 'items-baseline',
+};
+const RowY = {
+    center: 'items-center',
+    top: 'items-start',
+    bottom: 'items-end',
+    stretch: 'items-stretch',
+    baseline: 'items-baseline',
+};
+
+const RowX = {
+    center: 'justify-center',
+    left: 'justify-start',
+    right: 'justify-end',
     between: 'justify-between',
     around: 'justify-around',
     evenly: 'justify-evenly',
-    stretch: 'justify-stretch items-stretch',
-    normal: 'justify-normal',
-    baseline: 'items-baseline',
-    'space-between': 'justify-space-between',
-    'space-around': 'justify-space-around',
-    'space-evenly': 'justify-space-evenly',
-    'safe center': 'justify-safe center',
-    'unsafe center': 'justify-unsafe center',
-    'flex-start': 'justify-flex-start',
-    'flex-end': 'justify-flex-end',
-  };
+    stretch: 'justify-stretch',
+};
 
-  let posX = '';
-  let posY = '';
-  switch (type) {
-    case 'column':
-      posY =
-        alignmentClassNames[verticalPosition] ?? 'justify-start items-start';
-      posX =
-        alignmentClassNames[horizontalClassName] ?? 'justify-start items-start';
-      break;
-    case 'row':
-      posY =
-        alignmentClassNames[verticalPosition] ?? 'justify-start items-start';
-      posX =
-        alignmentClassNames[horizontalClassName] ?? 'justify-start items-start';
-      break;
-    default:
-      break;
-  }
-  return `${posX} ${posY}`;
+const ColumnY = {
+    center: 'justify-center',
+    top: 'justify-start',
+    bottom: 'justify-end',
+    between: 'justify-between',
+    around: 'justify-around',
+    evenly: 'justify-evenly',
+    stretch: 'justify-stretch',
+};
+
+export const getColumnAndRowAlignmentClassNames = (
+    horizontalPosition: ColumnPosition,
+    verticalPosition: RowPosition,
+    type: 'column' | 'row'
+) => {
+    let posX = '';
+    let posY = '';
+    if (type === 'column') {
+        posY = ColumnY[verticalPosition] || 'justify-start';
+        posX = ColumnX[horizontalPosition] || 'items-start';
+    } else if (type === 'row') {
+        posY = RowY[verticalPosition] || 'items-start';
+        posX = RowX[horizontalPosition] || 'justify-start';
+    }
+    return `${posX} ${posY}`;
 };

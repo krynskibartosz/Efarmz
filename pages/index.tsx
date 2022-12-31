@@ -1,43 +1,35 @@
-import { Products } from 'services/products/Products';
-import { CATEGORIES, PRODUCT } from 'services/products/types';
+import { ProductsContainer } from 'services/products/ProductsContainer';
+import { API_PRODUCT_RESPONSE, CATEGORIES } from 'services/products/types';
 import Head from 'next/head';
-import { Row } from 'components/bases/containers/Containers';
+import { Column, Row } from 'components/bases/containers/Containers';
 import { SubNavbar } from 'services//products/category/SubNavbar';
-import { DeliverySlotsModal } from 'services/delivery/DeliverySlotsModal';
+import { DeliverySlotsModal } from 'services/user/delivery/DeliverySlotsModal';
 import { useModal } from 'lib/hooks/useModal';
-import { ShoppindCartModal } from 'services/shoppingCart/ShoppinCartModal';
 import useRootStore from 'store/useRoot';
+import useFetch from 'lib/hooks/useFetch';
+import { GlobeAltIcon } from '@heroicons/react/24/outline';
+import { useHasHydrated } from 'lib/hooks/useHasHydrated';
 
-export async function getServerSideProps() {
-    try {
-        const resProducts = await fetch(
-            'https://www.efarmz.be/api/v1/products'
+export default function Home() {
+    const hasHydrated = useHasHydrated();
+    const { user } = useRootStore.getState();
+    const {
+        adress: { country, zipCode, deliveryDate, deliveryMode },
+    } = user.data;
+
+    const { data: products, loading: isProductsLoading } =
+        useFetch<API_PRODUCT_RESPONSE>(
+            'https://dev.efarmz.be/api/v1/products',
+            { method: 'GET' },
+            60000
         );
-        const resCategories = await fetch(
-            'https://www.efarmz.be/api/v1/categories'
-        );
-        const products = await resProducts.json();
-        const categories = await resCategories.json();
 
-        return {
-            props: {
-                products,
-                categories: categories,
-            },
-        };
-    } catch (error) {
-        console.error(error);
-        return { props: {} };
-    }
-}
+    const { data: categories } = useFetch<CATEGORIES>(
+        'https://dev.efarmz.be/api/v1/categories',
+        { method: 'GET' },
+        60000
+    );
 
-export default function Home({
-    products,
-    categories,
-}: {
-    products: { data: PRODUCT[] };
-    categories: CATEGORIES;
-}) {
     const modal = useModal();
     const { shoppingCart } = useRootStore.getState();
 
@@ -51,26 +43,70 @@ export default function Home({
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
+
             <main className="">
                 <DeliverySlotsModal modal={modal} />
-                <ShoppindCartModal modal={modal} />
-                <header className="bg-gray-300 pt-5 w-full pb-4 mb-10 ">
-                    <Row className="w-full items-center mb-5 gap-x-10">
-                        <p className="text-center text-3xl font-bold">Logo</p>
-                        <p onClick={() => modal.toggle('deliverySlot')}>
-                            Choisir son créneaux horaire
+                {/* <ShoppindCartModal modal={modal} /> */}
+                <header className="bg-white-300 border-b border-gray-200 shadow-main pt-5 w-full pb-4 mb-10 xl:px-32">
+                    <Row
+                        verticalPosition="center"
+                        className="w-full items-center mb-5 gap-x-10"
+                    >
+                        <p className="text-center text-green-700 text-4xl font-bold">
+                            Efarmz
                         </p>
+                        {deliveryDate.length === 0 && hasHydrated && (
+                            <p onClick={() => modal.toggle('deliverySlot')}>
+                                Choisir son créneaux horaire
+                            </p>
+                        )}
+                        {deliveryDate.length > 0 && hasHydrated && (
+                            <div
+                                onClick={() => modal.toggle('deliverySlot')}
+                                className="cursor-pointer rounded-md hover:bg-green-100 w-max px-3 py-1 transition-all duration-300 ease-in-out"
+                            >
+                                <Row
+                                    verticalPosition="center"
+                                    className="gap-x-1"
+                                >
+                                    <Column
+                                        verticalPosition="center"
+                                        className="h-full"
+                                    >
+                                        <GlobeAltIcon className="h-7 text-green-700" />
+                                    </Column>
+                                    <Column>
+                                        <p className="text-xs text-green-700">
+                                            Livraison le {deliveryDate}
+                                        </p>
+                                        <p className="text-xs text-green-700">
+                                            {deliveryMode} - {country} {zipCode}
+                                        </p>
+                                    </Column>
+                                </Row>
+                            </div>
+                        )}
 
-                        <p onClick={() => modal.toggle('shoppingCart')}>
-                            Panier {shoppingCart.length}
-                        </p>
+                        {/* <p onClick={() => modal.toggle('shoppingCart')}>
+                            Panier {shoppingCart?.length ?? 0}
+                        </p> */}
                     </Row>
-                    <SubNavbar categories={categories?.data} />
+                    <nav className="h-5">
+                        {categories && (
+                            <SubNavbar categories={categories.data} />
+                        )}
+                    </nav>
                 </header>
-                <div className="px-10 pb-10">
-                    <h1 className="text-5xl mb-4 font-bold">Nos produits</h1>
-                    {<Products data={products?.data} />}
-                </div>
+                <section className="xl:px-32 px-5 pb-10">
+                    <h1 className="text-4xl mb-4 font-bold">
+                        Que souhaitez-vous manger cette semaine ?
+                    </h1>
+                    <ProductsContainer
+                        numberOfProductsToDisplay={40}
+                        products={products?.data}
+                        isLoading={isProductsLoading}
+                    />
+                </section>
             </main>
         </>
     );
