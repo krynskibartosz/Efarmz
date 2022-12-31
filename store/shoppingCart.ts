@@ -10,6 +10,7 @@ type SHOPPING_CART_STORE = {
     };
     addProduct: (reponse: PRODUCT) => void;
     deductProduct: (reponse: PRODUCT) => void;
+    removeProduct: (reponse: PRODUCT) => void;
     deleteProduct: (reponse: PRODUCT) => void;
     // updateProduct: (reponse: PRODUCT) => void;
 };
@@ -45,6 +46,20 @@ export const shoppingCartSlice: StoreSlice<SHOPPING_CART_STORE> = (set) => ({
         set((state) =>
             produce(state, (draft) => {
                 removeElementById(draft.shoppingCart.basic, product.id);
+                draft.shoppingCart.basic;
+            })
+        );
+    },
+    removeProduct: (product) => {
+        set((state) =>
+            produce(state, (draft) => {
+                while (
+                    draft.shoppingCart.basic.some(
+                        (item) => item.id === product.id
+                    )
+                ) {
+                    removeElementById(draft.shoppingCart.basic, product.id);
+                }
                 draft.shoppingCart.basic;
             })
         );

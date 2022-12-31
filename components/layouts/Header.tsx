@@ -44,9 +44,11 @@ export const Header = () => {
                     className="w-full gap-x-10 items-center mb-5 "
                 >
                     <Row verticalPosition="center" className="w-full">
-                        <p className="text-center mr-3 text-green-700 text-4xl font-bold">
-                            Efarmz
-                        </p>
+                        <Link href={'/'}>
+                            <p className="text-center mr-3 text-green-700 text-4xl font-bold">
+                                Efarmz
+                            </p>
+                        </Link>
                         {deliveryDate.length === 0 && hasHydrated && (
                             <p
                                 className="cursor-pointer rounded-md hover:bg-green-100 w-max px-3 py-1 transition-all duration-300 ease-in-out text-green-700"

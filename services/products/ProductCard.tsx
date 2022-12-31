@@ -100,6 +100,7 @@ const RenderButton = ({ product }: { product: PRODUCT }) => {
     const totalAddedToCart = basicShoppingCart.filter(
         (el) => el.id === product.id
     );
+
     const productWasAlreadySelected = basicShoppingCart.find(
         (el) => el.id === product.id
     );
