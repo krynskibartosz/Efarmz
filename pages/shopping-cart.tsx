@@ -40,8 +40,11 @@ const ShoppingCart = () => {
 
     return (
         <main className="xl:px-32 px-5 pb-10">
-            <Row horizontalPosition="between" className="w-full">
-                <Column className="w-full">
+            <Row
+                horizontalPosition="between"
+                className="w-full flex-col md:flex-row gap-y-10"
+            >
+                <Column className="w-full order-2 md:order-1">
                     <h1 className="text-3xl font-bold mb-10">Mon panier</h1>
                     <Column as="ul" className="w-full gap-y-10">
                         {hasHydrated &&
@@ -58,7 +61,7 @@ const ShoppingCart = () => {
                             })}
                     </Column>
                 </Column>
-                <div className="bg-[#EEFCF3] w-full h-96 p-5">
+                <Column className="bg-[#EEFCF3]  h-96 p-5 order-1 md:order-2 w-full">
                     <h2 className="text-xl font-bold">Ma commande</h2>
                     {hasHydrated && (
                         <>
@@ -71,7 +74,7 @@ const ShoppingCart = () => {
                             </p>
                         </>
                     )}
-                </div>
+                </Column>
             </Row>
         </main>
     );

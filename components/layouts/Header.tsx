@@ -37,7 +37,7 @@ export const Header = () => {
     return (
         <>
             <DeliverySlotsModal modal={modal} />
-            <header className="bg-white-300 border-b border-gray-200 shadow-main pt-5 w-full pb-4 mb-10 xl:px-32">
+            <header className="bg-white-300 border-b border-gray-200 shadow-main pt-5 w-full pb-4 mb-10 xl:px-32 px-5">
                 <Row
                     verticalPosition="center"
                     horizontalPosition="between"
@@ -64,7 +64,7 @@ export const Header = () => {
                             >
                                 <Row
                                     verticalPosition="center"
-                                    className="gap-x-1 text-green-700"
+                                    className="gap-x-1 text-green-700 hidden md:flex"
                                 >
                                     <Column
                                         verticalPosition="center"
@@ -89,7 +89,7 @@ export const Header = () => {
                     {hasHydrated && (
                         <Link href="/shopping-cart">
                             <Row
-                                className="gap-x-2 rounded-md hover:bg-green-100 w-max  px-3 text-green-700 py-1 transition-all duration-300 ease-in-out"
+                                className="gap-x-2 rounded-md hover:bg-green-100 w-max  md:flex  px-3 text-green-700 py-1 transition-all duration-300 ease-in-out"
                                 horizontalPosition="right"
                                 verticalPosition="center"
                             >
@@ -104,9 +104,31 @@ export const Header = () => {
                         </Link>
                     )}
                 </Row>
-                <nav className="h-5">
+                <nav className="h-5 mb-5 md:mb-0">
                     {categories && <SubNavbar categories={categories.data} />}
                 </nav>
+                <Row
+                    verticalPosition="center"
+                    className="gap-x-1 text-green-700  md:hidden w-full"
+                    onClick={() => modal.toggle('deliverySlot')}
+                >
+                    <Column verticalPosition="center" className="h-full">
+                        {/* todo: change icon by location icon */}
+                        <GlobeAltIcon className="h-7 " />
+                    </Column>
+                    <Column>
+                        {hasHydrated && (
+                            <>
+                                <p className="text-xs ">
+                                    Livraison le {deliveryDate}
+                                </p>
+                                <p className="text-xs ">
+                                    {deliveryMode} - {country} {zipCode}
+                                </p>
+                            </>
+                        )}
+                    </Column>
+                </Row>
             </header>
         </>
     );

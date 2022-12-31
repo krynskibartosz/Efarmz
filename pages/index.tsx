@@ -32,17 +32,15 @@ function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <main className="">
-                <section className="xl:px-32 px-5 pb-10">
-                    <h1 className="text-4xl mb-4 font-bold">
-                        Que souhaitez-vous manger cette semaine ?
-                    </h1>
-                    <ProductsContainer
-                        numberOfProductsToDisplay={40}
-                        products={products?.data}
-                        isLoading={isProductsLoading}
-                    />
-                </section>
+            <main className="xl:px-32 px-5 pb-10">
+                <h1 className="text-4xl mb-4 font-bold">
+                    Que souhaitez-vous manger cette semaine ?
+                </h1>
+                <ProductsContainer
+                    numberOfProductsToDisplay={40}
+                    products={products?.data}
+                    isLoading={isProductsLoading}
+                />
             </main>
         </>
     );
