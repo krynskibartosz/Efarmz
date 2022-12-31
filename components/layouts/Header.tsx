@@ -37,7 +37,7 @@ export const Header = () => {
     return (
         <>
             <DeliverySlotsModal modal={modal} />
-            <header className="bg-white-300 border-b border-gray-200 shadow-main pt-5 w-full pb-4 mb-10 xl:px-32 px-5">
+            <header className="bg-white fixed top-0 left-0 z-20 border-b border-gray-200 shadow-main pt-5 w-full pb-4  xl:px-32 px-5">
                 <Row
                     verticalPosition="center"
                     horizontalPosition="between"

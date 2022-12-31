@@ -24,7 +24,7 @@ function Home() {
     return (
         <>
             <Head>
-                <title>Efarmz</title>
+                <title>Efarmz - Home</title>
                 <meta
                     name="viewport"
                     content="width=device-width, initial-scale=1"
@@ -32,7 +32,7 @@ function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <main className="xl:px-32 px-5 pb-10">
+            <main className="xl:px-32 px-5 pb-10 mt-52 w-full">
                 <h1 className="text-4xl mb-4 font-bold">
                     Que souhaitez-vous manger cette semaine ?
                 </h1>
