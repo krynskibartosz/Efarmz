@@ -43,10 +43,14 @@ export const getColumnAndRowAlignmentClassNames = (
     let posX = '';
     let posY = '';
     if (type === 'column') {
+        // @ts-ignore
         posY = ColumnY[verticalPosition] || 'justify-start';
+        // @ts-ignore
         posX = ColumnX[horizontalPosition] || 'items-start';
     } else if (type === 'row') {
+        // @ts-ignore
         posY = RowY[verticalPosition] || 'items-start';
+        // @ts-ignore
         posX = RowX[horizontalPosition] || 'justify-start';
     }
     return `${posX} ${posY}`;

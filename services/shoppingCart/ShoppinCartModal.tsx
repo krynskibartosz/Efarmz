@@ -44,7 +44,7 @@ export const ShoppindCartModal = ({ modal }: { modal: MODAL }) => {
                         <Column className="relative w-full  h-[100%-20px] overflow-y-auto ">
                             <ul>
                                 <p>
-                                    {shoppingCart.map((el, i) => (
+                                    {shoppingCart.basic.map((el, i) => (
                                         <Row className="gap-x-10">
                                             <p key={i}>{el.name}</p>
                                             <p

@@ -12,7 +12,7 @@ import { useHasHydrated } from 'lib/hooks/useHasHydrated';
 
 export default function Home() {
     const hasHydrated = useHasHydrated();
-    const { user } = useRootStore.getState();
+    const { user, shoppingCart } = useRootStore.getState();
     const {
         adress: { country, zipCode, deliveryDate, deliveryMode },
     } = user.data;
@@ -31,7 +31,6 @@ export default function Home() {
     );
 
     const modal = useModal();
-    const { shoppingCart } = useRootStore.getState();
 
     return (
         <>
@@ -50,7 +49,7 @@ export default function Home() {
                 <header className="bg-white-300 border-b border-gray-200 shadow-main pt-5 w-full pb-4 mb-10 xl:px-32">
                     <Row
                         verticalPosition="center"
-                        className="w-full items-center mb-5 gap-x-10"
+                        className="w-full gap-x-10 items-center mb-5 "
                     >
                         <p className="text-center text-green-700 text-4xl font-bold">
                             Efarmz
@@ -86,10 +85,11 @@ export default function Home() {
                                 </Row>
                             </div>
                         )}
-
-                        {/* <p onClick={() => modal.toggle('shoppingCart')}>
-                            Panier {shoppingCart?.length ?? 0}
-                        </p> */}
+                        {/* {hasHydrated && (
+                            <p onClick={() => modal.toggle('shoppingCart')}>
+                                Panier {shoppingCart.basic?.length}
+                            </p>
+                        )} */}
                     </Row>
                     <nav className="h-5">
                         {categories && (

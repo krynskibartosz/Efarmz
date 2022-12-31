@@ -65,7 +65,7 @@ export const ProductCard = ({ product }: { product: PRODUCT }) => {
                         </button>
                         <button
                             disabled={false}
-                            className=" bg-green-700 transition-all duration-300 ease-in-out rounded-b-md hover:brightness-110 ligth font-semibold py-2 w-full text-white"
+                            className=" bg-green-700 transition-all duration-300 ease-in-out rounded-b-md hover:brightness-110 ligth font-semibold disabled:opacity-60 py-2 w-full text-white"
                         >
                             Ajouter à l'abonnement
                         </button>

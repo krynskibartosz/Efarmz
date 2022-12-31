@@ -12,6 +12,7 @@ export const transformDateStringtoReadableDate = (
         day: 'numeric',
         // hour: '2-digit',
     };
+    // @ts-ignore
     const readableDate = date.toLocaleDateString('fr-FR', dateOptions);
 
     // Use the toLocaleTimeString method to get a readable time string
@@ -20,6 +21,7 @@ export const transformDateStringtoReadableDate = (
         minute: 'numeric',
         second: 'numeric',
     };
+    // @ts-ignore
     const readableTime = date.toLocaleTimeString('fr-FR', timeOptions);
 
     return `${readableDate}`;

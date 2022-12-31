@@ -7,7 +7,10 @@ export const SubNavbar = ({
     categories: PRODUCT_CATEGORY[];
 }) => {
     return (
-        <Row horizontalPosition="between" className="gap-x-10 !justify-between">
+        <Row
+            horizontalPosition="between"
+            className="gap-x-40 !justify-between "
+        >
             <p>Searchbar…</p>
 
             <Row className="gap-x-5 w-full overflow-x-scroll">
