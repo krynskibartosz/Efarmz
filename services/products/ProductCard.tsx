@@ -3,9 +3,12 @@ import { Row, Column } from 'components/bases/containers/Containers';
 import { Card } from 'components/bases/Card';
 import Image from 'next/image';
 import useRootStore from 'store/useRoot';
+import { Tooltip } from 'components/utils/Tooltip';
+import shallow from 'zustand/shallow';
+
+// todo: refacto button part
 
 export const ProductCard = ({ product }: { product: PRODUCT }) => {
-    const { addProduct } = useRootStore.getState();
     return (
         <article className="h-full">
             <Card>
@@ -56,23 +59,89 @@ export const ProductCard = ({ product }: { product: PRODUCT }) => {
                         </div>
                     </Column>
                     <Column className="w-full ">
-                        <button
-                            disabled={false}
-                            className="border-t transition-all duration-300 ease-in-out border-[#CBF6DA] hover:bg-[#EEFCF3] font-semibold py-2 w-full text-green-700"
-                            onClick={() => addProduct(product)}
-                        >
-                            Ajouter au panier
-                        </button>
-                        <button
-                            disabled={false}
-                            className=" bg-green-700 transition-all duration-300 ease-in-out rounded-b-md hover:brightness-110 ligth font-semibold disabled:opacity-60 py-2 w-full text-white"
-                        >
-                            Ajouter à l'abonnement
-                        </button>
+                        <RenderButton product={product} />
+                        <div className="has-tooltip w-full">
+                            {true && (
+                                <Tooltip
+                                    className="w-full text-sm text-center"
+                                    position="bottom"
+                                >
+                                    Vous devez d'abbord choisir votre crénaux
+                                    horaire
+                                </Tooltip>
+                            )}
+
+                            <button
+                                disabled={true}
+                                className=" bg-green-700 transition-all duration-300 ease-in-out disabled:hover:brightness-100 rounded-b-md hover:brightness-110 ligth font-semibold disabled:cursor-not-allowed disabled:opacity-60 py-2 w-full text-white"
+                            >
+                                Ajouter à l'abonnement
+                            </button>
+                        </div>
                     </Column>
                 </Column>
             </Card>
         </article>
+    );
+};
+
+const RenderButton = ({ product }: { product: PRODUCT }) => {
+    const { addProduct, deductProduct } = useRootStore.getState();
+
+    const { shoppingCart: basicShoppingCart, user } = useRootStore(
+        (state) => ({
+            shoppingCart: state.shoppingCart.basic,
+            user: state.user,
+        }),
+        shallow
+    );
+    const { hasMinimalAdress } = user.data;
+
+    const totalAddedToCart = basicShoppingCart.filter(
+        (el) => el.id === product.id
+    );
+    const productWasAlreadySelected = basicShoppingCart.find(
+        (el) => el.id === product.id
+    );
+
+    if (productWasAlreadySelected) {
+        return (
+            <Row
+                horizontalPosition="between"
+                verticalPosition="center"
+                className="border-t rounded-r-md  transition-all duration-300 ease-in-out border-[#CBF6DA]  font-semibold  w-full "
+            >
+                <button
+                    className="text-green-700 py-2 hover:bg-[#EEFCF3] w-full"
+                    onClick={() => deductProduct(product)}
+                >
+                    Déduire
+                </button>
+                <p>{totalAddedToCart.length}</p>
+                <button
+                    onClick={() => addProduct(product)}
+                    className="text-green-700 rounded-l-md py-2 hover:bg-[#EEFCF3] w-full rounded-md "
+                >
+                    Ajouter
+                </button>
+            </Row>
+        );
+    }
+    return (
+        <div className="w-full has-tooltip">
+            {!hasMinimalAdress && (
+                <Tooltip className="w-full text-sm text-center" position="top">
+                    Vous devez d'abbord choisir votre crénaux horaire
+                </Tooltip>
+            )}
+            <button
+                disabled={!hasMinimalAdress}
+                className="border-t transition-all duration-300 ease-in-out border-[#CBF6DA] disabled:hover:bg-white disabled:opacity-60 disabled:cursor-not-allowed hover:bg-[#EEFCF3] font-semibold py-2 w-full text-green-700 "
+                onClick={() => addProduct(product)}
+            >
+                Ajouter au panier
+            </button>
+        </div>
     );
 };
 
