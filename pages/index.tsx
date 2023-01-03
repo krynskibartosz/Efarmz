@@ -1,22 +1,12 @@
-import { ProductsContainer } from 'services/products/ProductsContainer';
-import { API_PRODUCT_RESPONSE, CATEGORIES } from 'services/products/types';
 import Head from 'next/head';
-import { Column, Row } from 'components/bases/containers/Containers';
-import { SubNavbar } from 'services//products/category/SubNavbar';
-import { DeliverySlotsModal } from 'services/user/delivery/DeliverySlotsModal';
-import { useModal } from 'lib/hooks/useModal';
-import useRootStore from 'store/useRoot';
-import useFetch from 'lib/hooks/useFetch';
-import { GlobeAltIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
-import { useHasHydrated } from 'lib/hooks/useHasHydrated';
-import shallow from 'zustand/shallow';
-import Link from 'next/link';
-import { Header } from 'components/layouts/Header';
+import { API_PRODUCT_RESPONSE } from 'store/shopping/types';
+import { useFetch } from 'lib/hooks';
+import { ProductsContainer } from 'products';
 
 function Home() {
     const { data: products, loading: isProductsLoading } =
         useFetch<API_PRODUCT_RESPONSE>(
-            'https://dev.efarmz.be/api/v1/products',
+            `${process.env.NEXT_PUBLIC_END_POINT}products`,
             { method: 'GET' },
             60000
         );

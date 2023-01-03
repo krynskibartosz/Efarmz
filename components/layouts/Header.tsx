@@ -1,15 +1,15 @@
-import { Row, Column } from 'components/bases/containers/Containers';
 import { GlobeAltIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
-import { CATEGORIES } from 'services/products/types';
 
-import useFetch from 'lib/hooks/useFetch';
 import { useHasHydrated } from 'lib/hooks/useHasHydrated';
 import { useModal } from 'lib/hooks/useModal';
 import Link from 'next/link';
 import useRootStore from 'store/useRoot';
 import shallow from 'zustand/shallow';
-import { SubNavbar } from 'services/products/category/SubNavbar';
-import { DeliverySlotsModal } from 'services/user/delivery/DeliverySlotsModal';
+import { CATEGORIES } from 'store/shopping/types';
+import { useFetch } from 'lib/hooks';
+import { Row, Column } from 'components/bases';
+import { SubNavbar } from 'products';
+import { DeliverySlotsModal } from 'services/user';
 
 export const Header = () => {
     const hasHydrated = useHasHydrated();
@@ -27,7 +27,7 @@ export const Header = () => {
     } = user.data;
 
     const { data: categories } = useFetch<CATEGORIES>(
-        'https://dev.efarmz.be/api/v1/categories',
+        `${process.env.NEXT_PUBLIC_END_POINT}categories`,
         { method: 'GET' },
         60000
     );

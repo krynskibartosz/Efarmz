@@ -16,9 +16,10 @@
         "jsx": "preserve",
         "incremental": true,
         "paths": {
-            "@components": ["components/*"],
-            "@lib": ["libraries/*"],
-            "@services": ["services/*"]
+            "components": ["components/index.ts"],
+            "lib": ["lib/hooks/index.ts"],
+            "products": ["services/products/index.ts"],
+            "user": ["services/user/index.ts"]
         }
     },
     "include": ["next-env.d.ts", "**/*.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"],

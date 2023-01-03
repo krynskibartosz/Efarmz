@@ -13,7 +13,7 @@ interface State<T> {
 
 type Cache<T> = { [url: string]: CacheEntry<T> };
 
-function useFetch<T = unknown>(
+export function useFetch<T = unknown>(
     url?: string,
     options?: RequestInit,
     cacheTime?: number,
@@ -92,5 +92,3 @@ function useFetch<T = unknown>(
 
     return state;
 }
-
-export default useFetch;

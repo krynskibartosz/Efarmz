@@ -93,3 +93,19 @@ export interface PRODUCT_CATEGORY {
 export type CATEGORIES = {
     data: PRODUCT_CATEGORY[];
 };
+
+export type SHOPPING_CART = {
+    basic: PRODUCT[];
+    express: PRODUCT[];
+    subscriptions: PRODUCT[];
+};
+
+export type ACTIONS = {
+    addProduct: (product: PRODUCT) => void;
+    deductProduct: (product: PRODUCT) => void;
+    removeProduct: (product: PRODUCT) => void;
+};
+
+export type SHOPPING_CART_STORE = {
+    shoppingCart: SHOPPING_CART;
+} & ACTIONS;

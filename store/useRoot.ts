@@ -1,7 +1,7 @@
 import create, { SetState, GetState } from 'zustand';
 import { persist, devtools } from 'zustand/middleware';
-import { shoppingCartSlice } from './shoppingCart';
 import { userSlice } from './user';
+import { shoppingCartSlice } from './shopping';
 
 export type StoreSlice<T extends object, E extends object = T> = (
     set: SetState<E extends T ? E : E & T>,

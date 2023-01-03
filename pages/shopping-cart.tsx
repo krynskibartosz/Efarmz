@@ -1,11 +1,12 @@
-import { PRODUCT } from 'services/products/types';
-import { Row, Column } from 'components/bases/containers/Containers';
 import Image from 'next/image';
 import useRootStore from 'store/useRoot';
 import shallow from 'zustand/shallow';
-import { useHasHydrated } from 'lib/hooks/useHasHydrated';
 import Head from 'next/head';
+import { PRODUCT } from 'store/shopping/types';
+import { useHasHydrated } from 'lib';
+import { Row, Column } from 'components';
 
+// todo: create an vertical scroll on products container
 // todo: separate concern of this features
 // todo: when the list update she render element in different order
 const ShoppingCart = () => {

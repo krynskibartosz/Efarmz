@@ -1,10 +1,9 @@
-import { PRODUCT } from 'services/products/types';
-import { Row, Column } from 'components/bases/containers/Containers';
-import { Card } from 'components/bases/Card';
 import Image from 'next/image';
 import useRootStore from 'store/useRoot';
-import { Tooltip } from 'components/utils/Tooltip';
 import shallow from 'zustand/shallow';
+import classnames from 'classnames';
+import { PRODUCT } from 'store/shopping/types';
+import { Card, Column, Row, Tooltip } from 'components';
 
 // todo: refacto button part
 
@@ -13,7 +12,21 @@ export const ProductCard = ({ product }: { product: PRODUCT }) => {
         <article className="h-full">
             <Card>
                 <div className="relative w-full">
-                    <div className="text-white text-sm font-semibold absolute py-0.5 px-3 top-5 left-5 z-10 bg-[#FF6B7A] rounded-md">
+                    <div
+                        className={classnames(
+                            'text-white',
+                            'text-sm',
+                            'font-semibold',
+                            'absolute',
+                            'py-0.5',
+                            'px-3',
+                            'top-5',
+                            'left-5',
+                            'z-10',
+                            'bg-[#FF6B7A]',
+                            'rounded-md'
+                        )}
+                    >
                         {product.unit}
                     </div>
                     <div className="relative min-h-52 h-52 w-full">
@@ -59,7 +72,7 @@ export const ProductCard = ({ product }: { product: PRODUCT }) => {
                         </div>
                     </Column>
                     <Column className="w-full ">
-                        <RenderButton product={product} />
+                        <ProductActionButton product={product} />
                         <div className="has-tooltip w-full">
                             {true && (
                                 <Tooltip
@@ -73,7 +86,22 @@ export const ProductCard = ({ product }: { product: PRODUCT }) => {
 
                             <button
                                 disabled={true}
-                                className=" bg-green-700 transition-all duration-300 ease-in-out disabled:hover:brightness-100 rounded-b-md hover:brightness-110 ligth font-semibold disabled:cursor-not-allowed disabled:opacity-60 py-2 w-full text-white"
+                                className={classnames(
+                                    'bg-green-700',
+                                    'transition-all',
+                                    'duration-300',
+                                    'ease-in-out',
+                                    'disabled:hover:brightness-100',
+                                    'rounded-b-md',
+                                    'hover:brightness-110',
+                                    'light',
+                                    'font-semibold',
+                                    'disabled:cursor-not-allowed',
+                                    'disabled:opacity-60',
+                                    'py-2',
+                                    'w-full',
+                                    'text-white'
+                                )}
                             >
                                 Ajouter à l'abonnement
                             </button>
@@ -85,7 +113,7 @@ export const ProductCard = ({ product }: { product: PRODUCT }) => {
     );
 };
 
-const RenderButton = ({ product }: { product: PRODUCT }) => {
+const ProductActionButton = ({ product }: { product: PRODUCT }) => {
     const { addProduct, deductProduct } = useRootStore.getState();
 
     const { shoppingCart: basicShoppingCart, user } = useRootStore(
@@ -110,10 +138,24 @@ const RenderButton = ({ product }: { product: PRODUCT }) => {
             <Row
                 horizontalPosition="between"
                 verticalPosition="center"
-                className="border-t rounded-r-md  transition-all duration-300 ease-in-out border-[#CBF6DA]  font-semibold  w-full "
+                className={classnames(
+                    'border-t',
+                    'rounded-r-md',
+                    'transition-all',
+                    'duration-300',
+                    'ease-in-out',
+                    'border-[#CBF6DA]',
+                    'font-semibold',
+                    'w-full'
+                )}
             >
                 <button
-                    className="text-green-700 py-2 hover:bg-[#EEFCF3] w-full"
+                    className={classnames(
+                        'text-green-700',
+                        'py-2',
+                        'hover:bg-[#EEFCF3]',
+                        'w-full'
+                    )}
                     onClick={() => deductProduct(product)}
                 >
                     Déduire
@@ -121,7 +163,14 @@ const RenderButton = ({ product }: { product: PRODUCT }) => {
                 <p>{totalAddedToCart.length}</p>
                 <button
                     onClick={() => addProduct(product)}
-                    className="text-green-700 rounded-l-md py-2 hover:bg-[#EEFCF3] w-full rounded-md "
+                    className={classnames(
+                        'text-green-700',
+                        'rounded-l-md',
+                        'py-2',
+                        'hover:bg-[#EEFCF3]',
+                        'w-full',
+                        'rounded-md'
+                    )}
                 >
                     Ajouter
                 </button>
@@ -137,7 +186,21 @@ const RenderButton = ({ product }: { product: PRODUCT }) => {
             )}
             <button
                 disabled={!hasMinimalAdress}
-                className="border-t transition-all duration-300 ease-in-out border-[#CBF6DA] disabled:hover:bg-white disabled:opacity-60 disabled:cursor-not-allowed hover:bg-[#EEFCF3] font-semibold py-2 w-full text-green-700 "
+                className={classnames(
+                    'border-t',
+                    'transition-all',
+                    'duration-300',
+                    'ease-in-out',
+                    'border-[#CBF6DA]',
+                    'disabled:hover:bg-white',
+                    'disabled:opacity-60',
+                    'disabled:cursor-not-allowed',
+                    'hover:bg-[#EEFCF3]',
+                    'font-semibold',
+                    'py-2',
+                    'w-full',
+                    'text-green-700'
+                )}
                 onClick={() => addProduct(product)}
             >
                 Ajouter au panier
@@ -150,11 +213,38 @@ export const ProductCardSkeleton = () => {
     return (
         <Column
             as="article"
-            className={`h-fit  w-full animate-pulse border rounded-lg border-fresh-gray-100   `}
+            className={classnames(
+                'h-fit',
+                'w-full',
+                'animate-pulse',
+                'border',
+                'rounded-lg',
+                'border-fresh-gray-100'
+            )}
         >
             {/* COVER */}
-            <div className="relative  w-full rounded-t-md bg-gray-200 lg:bg-fresh-gray-200 min-h-52 h-52 ">
-                <span className=" h-5 w-16 absolute top-5 left-5   rounded-md bg-gray-100" />
+            <div
+                className={classnames(
+                    'relative',
+                    'w-full',
+                    'rounded-t-md',
+                    'bg-gray-200',
+                    'lg:bg-fresh-gray-200',
+                    'min-h-52',
+                    'h-52'
+                )}
+            >
+                <span
+                    className={classnames(
+                        'h-5',
+                        'w-16',
+                        'absolute',
+                        'top-5',
+                        'left-5',
+                        'rounded-md',
+                        'bg-gray-100'
+                    )}
+                />
             </div>
             <Column verticalPosition="between" className=" h-full w-full pt-3">
                 <Column className="w-full">
@@ -180,23 +270,13 @@ export const ProductCardSkeleton = () => {
     );
 };
 const Badges = ({ product }: { product: PRODUCT }) => {
+    const className =
+        'text-[#00C5FF] font-medium border text-sm border-[#00C5FF] rounded-md py-0.5 px-3';
     return (
         <>
-            {product.is_bio && (
-                <p className="text-[#00C5FF] font-medium border text-sm border-[#00C5FF] rounded-md py-0.5 px-3">
-                    Bio
-                </p>
-            )}
-            {product.new && (
-                <p className="text-[#00C5FF] font-medium border text-sm border-[#00C5FF] rounded-md py-0.5 px-3">
-                    Nouveau
-                </p>
-            )}
-            {product.fresh && (
-                <p className="text-[#00C5FF] font-medium border text-sm border-[#00C5FF] rounded-md py-0.5 px-3">
-                    Frais
-                </p>
-            )}
+            {product.is_bio && <p className={className}>Bio</p>}
+            {product.new && <p className={className}>Nouveau</p>}
+            {product.fresh && <p className={className}>Frais</p>}
         </>
     );
 };

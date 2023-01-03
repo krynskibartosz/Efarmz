@@ -2,6 +2,7 @@ import { INPUT } from 'components/forms/types';
 import { ChangeEvent, InputHTMLAttributes, useState } from 'react';
 import { TextInput } from './Text';
 import { Column, Row } from 'components/bases/containers/Containers';
+import classNames from 'classnames';
 
 interface TEXT_INPUT_PROPS extends INPUT {
     label: string;
@@ -45,7 +46,15 @@ export const TextAreaInput = ({
             {label && (
                 <label
                     htmlFor={label}
-                    className={`mb-2 text-sm font-semibold text-fresh-gray-900 first-letter:uppercase lg:text-base 2xl:text-lg`}
+                    className={classNames(
+                        'mb-2',
+                        'text-sm',
+                        'font-semibold',
+                        'text-fresh-gray-900',
+                        'first-letter:uppercase',
+                        'lg:text-base',
+                        '2xl:text-lg'
+                    )}
                 >
                     {label}
                 </label>
@@ -57,29 +66,57 @@ export const TextAreaInput = ({
             >
                 {isRequired && (
                     <div
-                        className={`${
-                            focused
-                                ? 'bg-[#9ABE36]'
-                                : error
-                                ? 'bg-red-500'
-                                : 'bg-[#9ABE36]'
-                        }  absolute right-0 -top-3 h-1.5 w-1.5 rounded-full bg-[#9ABE36]`}
+                        className={classNames(
+                            {
+                                'bg-red-500': error,
+                                'bg-[#9ABE36]': !focused && !error,
+                            },
+                            'absolute',
+                            'right-0',
+                            '-top-3',
+                            'h-1.5',
+                            'w-1.5',
+                            'rounded-full',
+                            'bg-[#9ABE36]'
+                        )}
                     />
                 )}
                 {optionnal && (
                     <div
-                        className={`${
-                            focused
-                                ? 'bg-fresh-yellow-900'
-                                : error
-                                ? 'bg-red-500'
-                                : 'bg-fresh-yellow-900'
-                        }  absolute right-0 -top-3 h-1.5 w-1.5 rounded-full bg-fresh-yellow-900`}
+                        className={classNames(
+                            {
+                                'bg-red-500': error,
+                                'bg-yellow-900': !focused && !error,
+                            },
+                            'absolute',
+                            'right-0',
+                            '-top-3',
+                            'h-1.5',
+                            'w-1.5',
+                            'rounded-full',
+                            'bg-fresh-yellow-900'
+                        )}
                     />
                 )}
                 <textarea
                     id={id || label}
-                    className={` w-full resize-y !rounded-md bg-transparent py-2 px-3 text-fresh-gray-700 outline-none  placeholder:text-fresh-gray-200  hover:text-fresh-gray-800 focus:border-transparent focus:text-fresh-gray-900   md:text-base 2xl:text-lg ${className}`}
+                    className={classNames(
+                        'w-full',
+                        'resize-y',
+                        '!rounded-md',
+                        'bg-transparent',
+                        'py-2',
+                        'px-3',
+                        'text-fresh-gray-700',
+                        'outline-none',
+                        'placeholder:text-fresh-gray-200',
+                        'hover:text-fresh-gray-800',
+                        'focus:border-transparent',
+                        'focus:text-fresh-gray-900',
+                        'md:text-base',
+                        '2xl:text-lg',
+                        { [className]: className }
+                    )}
                     onFocus={() => setFocused(true)}
                     onBlur={() => setFocused(false)}
                     //   type={type}

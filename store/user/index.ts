@@ -1,36 +1,6 @@
 import produce from 'immer';
-import { StoreSlice } from './useRoot';
-
-type LANGUAGE = 'fr' | 'nl';
-
-type AUTHENTIFICATION = {
-    token: string;
-    refreshToken: string;
-};
-
-type ADRESS = {
-    country: 'Belgique' | 'Luxembourg';
-    zipCode: number | null;
-    deliveryMode: 'home' | 'collection-point';
-    deliveryDate: string;
-};
-
-type USER = {
-    auth: AUTHENTIFICATION & { isAuthenticated: boolean };
-    data: {
-        adress: ADRESS;
-        hasMinimalAdress: boolean;
-    };
-    language: LANGUAGE;
-};
-
-type USER_STORE = {
-    user: USER;
-    updateLanguage: (language: LANGUAGE) => void;
-    updateMinimalAdress: (adress: ADRESS) => void;
-    login: (reponse: AUTHENTIFICATION) => void;
-    logout: () => void;
-};
+import { StoreSlice } from '../useRoot';
+import { USER, USER_STORE } from './types';
 
 const initialUser: USER = {
     auth: {
@@ -67,7 +37,6 @@ export const userSlice: StoreSlice<USER_STORE> = (set) => ({
             })
         );
     },
-
     login: (response) => {
         set((state) =>
             produce(state, (draft) => {

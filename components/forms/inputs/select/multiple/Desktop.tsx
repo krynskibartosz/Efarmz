@@ -20,7 +20,6 @@ export const MultilpleSelectDesktopInput = ({
     required = false,
     form,
 }: MULTIPLE_SELECT & INPUT) => {
-    console.log('🚀 ~ file: Desktop.tsx ~ line 23 ~ value', value);
     return (
         <Dropdown
             dropdownContentClassName="  w-full mt-2"
@@ -91,10 +90,6 @@ export const MultilpleSelectDesktopInput = ({
                     >
                         {options.map((el, i) => {
                             const isActive = value?.includes(el.value);
-                            console.log(
-                                '🚀 ~ file: Desktop.tsx ~ line 79 ~ {options.map ~ el.value',
-                                el.value
-                            );
                             return (
                                 <option
                                     key={i}

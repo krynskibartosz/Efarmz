@@ -1,8 +1,3 @@
-import { Row, Column } from 'components/bases/containers/Containers';
-import { TextInput } from 'components/forms/inputs/text-field/Text';
-import { SelectInput } from 'components/forms/inputs/select/Select';
-import { Overlay } from 'components/utils/Overlay';
-import { ClickOutside } from 'components/utils/ClickOutside';
 import { Controller, useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { MODAL } from 'lib/hooks/useModal';
@@ -11,22 +6,29 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import useRootStore from 'store/useRoot';
 
-import {
-    belgiumZipCodeLength,
-    fetchDeliveriesDate,
-} from 'services/user/delivery/deliveryDate';
 import { CircleSpinner } from 'components/feedbacks/Spinner';
-import { useLockedBody } from 'lib/hooks/useLockedBody';
-import { useKeyPress } from 'lib/hooks/useKeyPress';
-import { useUpdateEffect } from 'lib/hooks/useUpdateEffect';
+
+import classNames from 'classnames';
+import { COUNTRY } from 'store/user/types';
+import {
+    Overlay,
+    Column,
+    Row,
+    SelectInput,
+    TextInput,
+    ClickOutside,
+} from 'components/';
+import { useKeyPress, useUpdateEffect, useLockedBody } from 'lib';
+import { belgiumZipCodeLength, fetchDeliveriesDate } from './deliveryDate';
 
 type DATA_TO_SUBMIT = {
-    country: 'Belgique' | 'Luxembourg';
+    country: COUNTRY;
     zipCode: string;
 };
 
 // todo: separate form validation logique
 // todo: create component for ModalCard
+// todo: when the zipCode is the same or was already type, block the fetcher function to doesn't execute
 
 export const DeliverySlotsModal = ({ modal }: { modal: MODAL }) => {
     const onExit = useKeyPress(27);
@@ -48,8 +50,11 @@ export const DeliverySlotsModal = ({ modal }: { modal: MODAL }) => {
     const [localDeliveryDate, setDeliveryDate] = useState(deliveryDate);
 
     const schema = yup.object().shape({
-        zipCode: yup.string().length(4).required('Le zip code est requis'),
         country: yup.string().oneOf(['Belgique', 'Luxembourg']).required(),
+        zipCode: yup.string().when('country', {
+            is: (value: COUNTRY) => ['Belgique', 'Luxembourg'].includes(value),
+            then: yup.string().length(4).required('Le zip code est requis'),
+        }),
     });
 
     const isModalOpen = modal.opened === 'deliverySlot';
@@ -99,9 +104,19 @@ export const DeliverySlotsModal = ({ modal }: { modal: MODAL }) => {
                 }}
             >
                 <div
-                    className={`fixed  bottom-0 w-full rounded-t-3xl bg-white  shadow-main md:rounded-md ${
-                        isModalOpen ? 'z-50 ' : '-z-50 '
-                    }`}
+                    className={classNames(
+                        {
+                            'z-50': isModalOpen,
+                            '-z-50': !isModalOpen,
+                        },
+                        'fixed',
+                        'bottom-0',
+                        'w-full',
+                        'rounded-t-3xl',
+                        'bg-white',
+                        'shadow-main',
+                        'md:rounded-md'
+                    )}
                     style={{
                         height: isModalOpen ? '95%' : '0%',
                         opacity: isModalOpen ? 1 : 0,
@@ -121,7 +136,21 @@ export const DeliverySlotsModal = ({ modal }: { modal: MODAL }) => {
                                 className="w-full pt-3 pr-3"
                             >
                                 <div
-                                    className=" grid h-10 w-10 cursor-pointer place-items-center rounded-full border-fresh-gray-200 hover:bg-gray-100 bg-s hover:shadow-main transition-all duration-300 ease-in-out "
+                                    className={classNames(
+                                        'grid',
+                                        'h-10',
+                                        'w-10',
+                                        'cursor-pointer',
+                                        'place-items-center',
+                                        'rounded-full',
+                                        'border-fresh-gray-200',
+                                        'hover:bg-gray-100',
+                                        'bg-s',
+                                        'hover:shadow-main',
+                                        'transition-all',
+                                        'duration-300',
+                                        'ease-in-out'
+                                    )}
                                     onClick={() => {
                                         modal.close();
                                     }}
@@ -221,7 +250,25 @@ export const DeliverySlotsModal = ({ modal }: { modal: MODAL }) => {
 
                                 <button
                                     disabled={!canBeSubmitted || error}
-                                    className="py-2 hover:bg-green-700 hover:text-white transition-colors duration-300 ease-in-out text-green-700 font-bold  border border-green-700 disabled:opacity-60 disabled:cursor-not-allowed disabled:border-gray-700 disabled:text-gray-700 disabled:hover:bg-white disabled:hover:text-gray-700 rounded-md"
+                                    className={classNames(
+                                        'py-2',
+                                        'hover:bg-green-700',
+                                        'hover:text-white',
+                                        'transition-colors',
+                                        'duration-300',
+                                        'ease-in-out',
+                                        'text-green-700',
+                                        'font-bold',
+                                        'border',
+                                        'border-green-700',
+                                        'disabled:opacity-60',
+                                        'disabled:cursor-not-allowed',
+                                        'disabled:border-gray-700',
+                                        'disabled:text-gray-700',
+                                        'disabled:hover:bg-white',
+                                        'disabled:hover:text-gray-700',
+                                        'rounded-md'
+                                    )}
                                     type="submit"
                                 >
                                     Enregistrer

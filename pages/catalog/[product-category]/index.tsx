@@ -1,19 +1,19 @@
-import { ProductsContainer } from 'services/products/ProductsContainer';
-import useFetch from 'lib/hooks/useFetch';
 import { useRouter } from 'next/router';
-import { Pagination } from 'components/forms/Pagination';
 import { useState } from 'react';
-import { Row } from 'components/bases/containers/Containers';
 import Head from 'next/head';
+import { useFetch } from 'lib/hooks';
+import { Pagination, Row } from 'components/';
+import { ProductsContainer } from 'products';
 
 //todo: produits disparrait puis réapparait
 const ProductCategory = () => {
     const router = useRouter();
     const { query } = router;
-    console.log('🚀 ~ file: index.tsx:7 ~ ProductCategory ~ query', query);
     const [currentPage, setCurrentPage] = useState(1);
     const { data, error, loading } = useFetch(
-        `https://dev.efarmz.be/api/v1/categories/${query['product-category']}?page=${currentPage}`
+        `${process.env.NEXT_PUBLIC_END_POINT}categories/${query['product-category']}?page=${currentPage}`,
+        { method: 'GET' },
+        60000
     );
 
     return (

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import useEventListener from './useEventListener';
+import { useEventListener } from './useEventListener';
 
 type SCREEN_MATCHES = {
     maxSm: boolean;

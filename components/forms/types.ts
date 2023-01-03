@@ -11,26 +11,3 @@ export type INPUT = {
     setValue?: any;
     form?: any;
 };
-
-type FORM_CHILDREN = {
-    inputProps: INPUT_FCT;
-    body: any;
-    errors: any;
-    handleSubmit: () => void;
-    changes: any;
-    isUpdated: boolean;
-};
-export interface FORM {
-    initialBody: any;
-    reset?: any;
-    children: (data: FORM_CHILDREN) => ReactNode;
-    submit: (body: any) => void;
-    schema?: any;
-    noSubmit?: boolean;
-    updated?: boolean;
-    showLogs?: boolean;
-    className?: string;
-    name: string;
-    id: string;
-    form: string;
-}
