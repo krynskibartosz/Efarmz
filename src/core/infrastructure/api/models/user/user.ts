@@ -1,7 +1,5 @@
-// todo: this sould go to models folder
+import { COUNTRY, LANGUAGE } from 'src/core/logic/language';
 
-export type LANGUAGE = 'fr' | 'nl';
-export type COUNTRY = 'Belgique' | 'Luxembourg';
 export type DELIVERY_MODE = 'home' | 'collection-point';
 
 export type AUTHENTIFICATION = {
@@ -29,7 +27,6 @@ export type USER_STORE = {
 } & ACTIONS;
 
 // todo: Action type should go to another folder
-
 export type ACTIONS = {
     updateLanguage: (language: LANGUAGE) => void;
     updateMinimalAdress: (adress: ADRESS) => void;

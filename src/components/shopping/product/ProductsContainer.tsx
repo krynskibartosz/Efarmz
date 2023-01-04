@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { ProductCard, ProductCardSkeleton } from 'src/components/shopping';
-import { PRODUCT } from 'src/core/store/shopping/types';
+import { PRODUCT } from 'src/core/infrastructure/api/models/shopping/catalog/product';
 
 type PRODUCT_CONTAINER_PROPS = {
     products: PRODUCT[] | undefined;

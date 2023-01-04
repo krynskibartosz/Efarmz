@@ -1,6 +1,10 @@
 import produce from 'immer';
+import {
+    PRODUCT,
+    SHOPPING_CART,
+} from 'src/core/infrastructure/api/models/shopping/catalog/product';
+import { SHOPPING_CART_STORE } from 'src/core/infrastructure/api/models/shopping/orders';
 import { StoreSlice } from 'src/core/store/useRoot';
-import { PRODUCT, SHOPPING_CART, SHOPPING_CART_STORE } from './types';
 
 function removeProductById(array: PRODUCT[], id: string) {
     const index = array.findIndex((item) => item.id === id);

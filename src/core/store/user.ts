@@ -1,6 +1,6 @@
 import produce from 'immer';
-import { StoreSlice } from '../useRoot';
-import { USER, USER_STORE } from './types';
+import { StoreSlice } from './useRoot';
+import { USER, USER_STORE } from 'src/core/infrastructure/api/models/user/user';
 
 const initialUser: USER = {
     auth: {

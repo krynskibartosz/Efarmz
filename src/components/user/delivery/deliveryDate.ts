@@ -28,55 +28,6 @@ export const transformDateStringtoReadableDate = (
 
     return `${readableDate}`;
 };
-// todo: this function sould go to api folder
-export const fetchDeliveriesDate = ({
-    zipCode,
-    setLoading,
-    setData,
-    setError,
-}: {
-    zipCode: string;
-    setLoading: any;
-    setData: any;
-    setError: any;
-}) => {
-    const canFetchData = zipCode?.length === belgiumZipCodeLength;
-
-    const fetchData = async () => {
-        try {
-            setLoading(true);
-            const response = await fetch(
-                `https://dev.efarmz.be/api/v1/deliverydates/${+zipCode}`,
-                {
-                    headers: {
-                        methods: 'GET',
-                        'Content-Type': 'application/json',
-                    },
-                }
-            );
-            const data = await response.json();
-
-            setError(false);
-            setData(
-                transformDateStringtoReadableDate(
-                    data?.data?.startOrderableDate
-                )
-            );
-        } catch (error) {
-            console.log(
-                '🚀 ~ file: deliveryDate.ts:58 ~ fetchData ~ error',
-                error
-            );
-            setError('Fail to fetch');
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    if (canFetchData) {
-        fetchData();
-    }
-};
 
 interface CARRIER {
     id: number;

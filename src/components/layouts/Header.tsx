@@ -5,11 +5,18 @@ import { useModal } from 'src/hooks/useModal';
 import Link from 'next/link';
 import useRootStore from 'src/core/store/useRoot';
 import shallow from 'zustand/shallow';
-import { CATEGORIES } from 'src/core/store/shopping/types';
-import { useFetch } from 'src/hooks';
 import { Row, Column } from 'src/ui/bases';
 import { SubNavbar } from 'src/components/shopping';
 import { DeliverySlotsModal } from 'src/components/user';
+import { ApiAdapter } from 'src/adapters/api-adapter';
+import { ApiPort } from 'src/ports/api';
+import { CategoryService } from 'src/core/infrastructure/api/client/shopping/catalog/category';
+import { useState, useEffect } from 'react';
+
+const api: ApiPort = new ApiAdapter(
+    process.env.NEXT_PUBLIC_END_POINT as string
+);
+const categoryService = new CategoryService(api);
 
 export const Header = () => {
     const hasHydrated = useHasHydrated();
@@ -26,12 +33,22 @@ export const Header = () => {
         adress: { country, zipCode, deliveryDate, deliveryMode },
     } = user.data;
 
-    // todo: this should go to api folder
-    const { data: categories } = useFetch<CATEGORIES>(
-        `${process.env.NEXT_PUBLIC_END_POINT}categories`,
-        { method: 'GET' },
-        60000
-    );
+    const [categories, setCategories] = useState();
+
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            setLoading(true);
+            const categories = await categoryService.getProductsCategories(
+                'categories'
+            );
+
+            setCategories(categories);
+            setLoading(false);
+        };
+        fetchProducts();
+    }, []);
 
     const modal = useModal();
 

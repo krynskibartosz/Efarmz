@@ -2,8 +2,8 @@ import Image from 'next/image';
 import useRootStore from 'src/core/store/useRoot';
 import shallow from 'zustand/shallow';
 import classnames from 'classnames';
-import { PRODUCT } from 'src/core/store/shopping/types';
 import { Card, Column, Row, Tooltip } from 'src/ui';
+import { PRODUCT } from 'src/core/infrastructure/api/models/shopping/catalog/product';
 
 // todo: refacto button part
 

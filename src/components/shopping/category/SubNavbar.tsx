@@ -1,13 +1,14 @@
 import Link from 'next/link';
 import classNames from 'classnames';
-import { PRODUCT_CATEGORY } from 'src/core/store/shopping/types';
 import { Row } from 'src/ui';
+import { PRODUCT_CATEGORY } from 'src/core/infrastructure/api/models/shopping/catalog/category';
 
 export const SubNavbar = ({
     categories,
 }: {
     categories: PRODUCT_CATEGORY[];
 }) => {
+    console.log('🚀 ~ file: SubNavbar.tsx:11 ~ categories', categories);
     const formatName = (name: string) => name.replace(/ /g, '_');
     return (
         <Row

@@ -2,9 +2,9 @@ import Image from 'next/image';
 import useRootStore from 'src/core/store/useRoot';
 import shallow from 'zustand/shallow';
 import Head from 'next/head';
-import { PRODUCT } from 'src/core/store/shopping/types';
 import { useHasHydrated } from 'src/hooks';
 import { Row, Column } from 'src/ui';
+import { PRODUCT } from 'src/core/infrastructure/api/models/shopping/catalog/product';
 
 // todo: create an vertical scroll on products container
 // todo: when the list update she render element in different order

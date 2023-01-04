@@ -1,4 +1,11 @@
-// todo: this sould go to models folder
+export interface Category {
+    id: number;
+    name: string;
+    parentId: string;
+    banner: string;
+    image: string;
+    linkRewrite: string;
+}
 
 export interface PRODUCT_CATEGORY {
     banner: string;

@@ -9,7 +9,6 @@ import useRootStore from 'src/core/store/useRoot';
 import { CircleSpinner } from 'src/ui/feedbacks/Spinner';
 
 import classNames from 'classnames';
-import { COUNTRY } from 'src/core/store/user/types';
 import {
     Overlay,
     Column,
@@ -19,7 +18,14 @@ import {
     ClickOutside,
 } from 'src/ui';
 import { useKeyPress, useUpdateEffect, useLockedBody } from 'src/hooks';
-import { belgiumZipCodeLength, fetchDeliveriesDate } from './deliveryDate';
+import {
+    belgiumZipCodeLength,
+    transformDateStringtoReadableDate,
+} from './deliveryDate';
+import { COUNTRY } from 'src/core/logic/language';
+import { ApiPort } from 'src/ports/api';
+import { ApiAdapter } from 'src/adapters/api-adapter';
+import { UserService } from 'src/core/infrastructure/api/client/user/users';
 
 type DATA_TO_SUBMIT = {
     country: COUNTRY;
@@ -30,7 +36,16 @@ type DATA_TO_SUBMIT = {
 // todo: create component for ModalCard
 // todo: when the zipCode is the same or was already type, block the fetcher function to doesn't execute
 
+const api: ApiPort = new ApiAdapter(
+    process.env.NEXT_PUBLIC_END_POINT as string
+);
+const userService = new UserService(api);
+
 export const DeliverySlotsModal = ({ modal }: { modal: MODAL }) => {
+    const [userDeliveryDates, setUserDeliveryDate] = useState();
+
+    const [loading, setLoading] = useState(true);
+
     const onExit = useKeyPress(27);
     useUpdateEffect(() => {
         modal.close();
@@ -45,7 +60,6 @@ export const DeliverySlotsModal = ({ modal }: { modal: MODAL }) => {
         adress: { country, zipCode, deliveryDate, deliveryMode },
     } = user.data;
 
-    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [localDeliveryDate, setDeliveryDate] = useState(deliveryDate);
 
@@ -83,14 +97,34 @@ export const DeliverySlotsModal = ({ modal }: { modal: MODAL }) => {
         watchZipCode.length === belgiumZipCodeLength;
 
     useLockedBody(modal.opened.length > 0, 'root');
+
     useEffect(() => {
-        fetchDeliveriesDate({
-            zipCode: watchZipCode,
-            setData: setDeliveryDate,
-            setLoading,
-            setError,
-        });
-    }, [watchZipCode?.length === belgiumZipCodeLength]);
+        const fetchUserDeliveryDate = async () => {
+            setLoading(true);
+            if (watchZipCode.length === 4) {
+                const userDeliveryDates =
+                    await userService.getUserDeliveryDates(watchZipCode);
+
+                setUserDeliveryDate(
+                    transformDateStringtoReadableDate(
+                        userDeliveryDates?.startOrderableDate
+                    )
+                );
+                updateMinimalAdress({
+                    deliveryMode: 'home',
+                    deliveryDate:
+                        transformDateStringtoReadableDate(
+                            userDeliveryDates?.startOrderableDate
+                        ) || localDeliveryDate,
+                    zipCode: watchZipCode,
+                    country: country,
+                });
+
+                setLoading(false);
+            }
+        };
+        fetchUserDeliveryDate();
+    }, [watchZipCode.length === 4]);
 
     return (
         <Overlay
@@ -242,7 +276,9 @@ export const DeliverySlotsModal = ({ modal }: { modal: MODAL }) => {
                                                 Date de livraison:{' '}
                                             </p>
                                             <time dateTime="todo">
-                                                {error || localDeliveryDate}
+                                                {error ||
+                                                    userDeliveryDates ||
+                                                    localDeliveryDate}
                                             </time>
                                         </div>
                                     )}
