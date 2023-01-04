@@ -18,14 +18,13 @@ import {
     ClickOutside,
 } from 'src/ui';
 import { useKeyPress, useUpdateEffect, useLockedBody } from 'src/hooks';
-import {
-    belgiumZipCodeLength,
-    transformDateStringtoReadableDate,
-} from './deliveryDate';
+
 import { COUNTRY } from 'src/core/logic/language';
 import { ApiPort } from 'src/ports/api';
 import { ApiAdapter } from 'src/adapters/api-adapter';
 import { UserService } from 'src/core/infrastructure/api/client/user/users';
+import { belgiumZipCodeLength } from 'src/core/logic/user';
+import { transformDateStringtoReadableDate } from 'src/lib/date';
 
 type DATA_TO_SUBMIT = {
     country: COUNTRY;

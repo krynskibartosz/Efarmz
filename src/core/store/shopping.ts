@@ -5,13 +5,7 @@ import {
 } from 'src/core/infrastructure/api/models/shopping/catalog/product';
 import { SHOPPING_CART_STORE } from 'src/core/infrastructure/api/models/shopping/orders';
 import { StoreSlice } from 'src/core/store/useRoot';
-
-function removeProductById(array: PRODUCT[], id: string) {
-    const index = array.findIndex((item) => item.id === id);
-    if (index !== -1) {
-        return array.splice(index, 1);
-    }
-}
+import { removeElementById } from 'src/lib/array';
 
 const initialState: SHOPPING_CART = {
     basic: [],
@@ -19,7 +13,6 @@ const initialState: SHOPPING_CART = {
     subscriptions: [],
 };
 
-// todo: create small function of service, and separate it into a folder
 // todo!: there's a bug when the remove product is used in the shopping cart,
 //! It re order the list when we deduct a product from the shoppingCart
 export const shoppingCartSlice: StoreSlice<SHOPPING_CART_STORE> = (set) => ({
@@ -37,7 +30,7 @@ export const shoppingCartSlice: StoreSlice<SHOPPING_CART_STORE> = (set) => ({
     deductProduct: (product) => {
         set((state) =>
             produce(state, (draft) => {
-                removeProductById(draft.shoppingCart.basic, product.id);
+                removeElementById(draft.shoppingCart.basic, product.id);
                 draft.shoppingCart.basic;
             })
         );
@@ -50,7 +43,7 @@ export const shoppingCartSlice: StoreSlice<SHOPPING_CART_STORE> = (set) => ({
                         (item) => item.id === product.id
                     )
                 ) {
-                    removeProductById(draft.shoppingCart.basic, product.id);
+                    removeElementById(draft.shoppingCart.basic, product.id);
                 }
                 draft.shoppingCart.basic;
             })

@@ -1,10 +1,11 @@
-import Image from 'next/image';
 import useRootStore from 'src/core/store/useRoot';
 import shallow from 'zustand/shallow';
 import Head from 'next/head';
 import { useHasHydrated } from 'src/hooks';
 import { Row, Column } from 'src/ui';
-import { PRODUCT } from 'src/core/infrastructure/api/models/shopping/catalog/product';
+
+import { hasFreeShipping, shippingPrice } from 'src/core/logic/order';
+import { ProductCardInShoppingCart } from 'src/components/shopping/order/product';
 
 // todo: create an vertical scroll on products container
 // todo: when the list update she render element in different order
@@ -28,11 +29,8 @@ const ShoppingCart = () => {
         0
     );
 
-    // todo: this 3 lines should go to logic folder
-    const hasFreeShipping = totalPriceOfProduct >= 50;
-    const shippingPrice = 5.0;
     const totalShoppingPrice = () => {
-        if (hasFreeShipping) {
+        if (hasFreeShipping(totalPriceOfProduct)) {
             return totalPriceOfProduct - shippingPrice;
         }
         return totalPriceOfProduct;
@@ -72,7 +70,10 @@ const ShoppingCart = () => {
                             <>
                                 <p>
                                     Livraison:{' '}
-                                    {hasFreeShipping ? 0.0 : shippingPrice}€
+                                    {hasFreeShipping(totalPriceOfProduct)
+                                        ? 0.0
+                                        : shippingPrice}
+                                    €
                                 </p>
                                 <p className="text-lg font-bold">
                                     {totalShoppingPrice().toFixed()} €
@@ -83,66 +84,6 @@ const ShoppingCart = () => {
                 </Row>
             </main>
         </>
-    );
-};
-
-const ProductCardInShoppingCart = ({ product }: { product: PRODUCT }) => {
-    const { addProduct, deductProduct, removeProduct } =
-        useRootStore.getState();
-
-    const { shoppingCart: basicShoppingCart } = useRootStore(
-        (state) => ({
-            shoppingCart: state.shoppingCart.basic,
-            user: state.user,
-        }),
-        shallow
-    );
-    const totalAddedToCart = basicShoppingCart.filter(
-        (el) => el.id === product.id
-    );
-
-    return (
-        <article className="w-full">
-            <Row className="w-full gap-x-5">
-                <div className="relative min-h-20 h-20 w-20">
-                    <Image
-                        fill
-                        src={'/food.jpeg'}
-                        alt={product.name}
-                        className="object-cover rounded-md"
-                    />
-                </div>
-                <Column className="w-full ">
-                    <h3 className="text-lg font-bold">{product.name}</h3>
-                    <p className="text-md font-semibold">
-                        {product.price.toFixed(2)} €
-                    </p>
-                    <p className="text-md font-semibold">
-                        {totalAddedToCart.length}
-                    </p>
-                    <Row className="w-full gap-x-4">
-                        <p
-                            className="text-green-700 cursor-pointer hover:brightness-110"
-                            onClick={() => addProduct(product)}
-                        >
-                            Ajouter
-                        </p>
-                        <p
-                            className="text-green-700 cursor-pointer hover:brightness-110"
-                            onClick={() => deductProduct(product)}
-                        >
-                            Déduire
-                        </p>
-                        <p
-                            className="text-green-700 cursor-pointer hover:brightness-110"
-                            onClick={() => removeProduct(product)}
-                        >
-                            Supprimer
-                        </p>
-                    </Row>
-                </Column>
-            </Row>
-        </article>
     );
 };
 

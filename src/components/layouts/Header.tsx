@@ -8,15 +8,7 @@ import shallow from 'zustand/shallow';
 import { Row, Column } from 'src/ui/bases';
 import { SubNavbar } from 'src/components/shopping';
 import { DeliverySlotsModal } from 'src/components/user';
-import { ApiAdapter } from 'src/adapters/api-adapter';
-import { ApiPort } from 'src/ports/api';
-import { CategoryService } from 'src/core/infrastructure/api/client/shopping/catalog/category';
-import { useState, useEffect } from 'react';
-
-const api: ApiPort = new ApiAdapter(
-    process.env.NEXT_PUBLIC_END_POINT as string
-);
-const categoryService = new CategoryService(api);
+import { useFetchProductsCategories } from '../../hooks/services/useFetchProductsCategory';
 
 export const Header = () => {
     const hasHydrated = useHasHydrated();
@@ -33,24 +25,9 @@ export const Header = () => {
         adress: { country, zipCode, deliveryDate, deliveryMode },
     } = user.data;
 
-    const [categories, setCategories] = useState();
-
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchProducts = async () => {
-            setLoading(true);
-            const categories = await categoryService.getProductsCategories(
-                'categories'
-            );
-
-            setCategories(categories);
-            setLoading(false);
-        };
-        fetchProducts();
-    }, []);
-
     const modal = useModal();
+
+    const { categories, loading } = useFetchProductsCategories();
 
     return (
         <>
@@ -105,7 +82,7 @@ export const Header = () => {
                     </Row>
 
                     {hasHydrated && (
-                        <Link href="/shopping-cart">
+                        <Link href="/shopping/cart">
                             <Row
                                 className="gap-x-2 rounded-md hover:bg-green-100 w-max  md:flex  px-3 text-green-700 py-1 transition-all duration-300 ease-in-out"
                                 horizontalPosition="right"

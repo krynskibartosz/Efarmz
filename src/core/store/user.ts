@@ -2,7 +2,7 @@ import produce from 'immer';
 import { StoreSlice } from './useRoot';
 import { USER, USER_STORE } from 'src/core/infrastructure/api/models/user/user';
 
-const initialUser: USER = {
+export const initialUser: USER = {
     auth: {
         token: '',
         refreshToken: '',

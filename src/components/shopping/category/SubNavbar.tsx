@@ -8,7 +8,6 @@ export const SubNavbar = ({
 }: {
     categories: PRODUCT_CATEGORY[];
 }) => {
-    console.log('🚀 ~ file: SubNavbar.tsx:11 ~ categories', categories);
     const formatName = (name: string) => name.replace(/ /g, '_');
     return (
         <Row
@@ -28,7 +27,9 @@ export const SubNavbar = ({
                 {categories?.map((el, i) => {
                     return (
                         <Link
-                            href={`/catalog/${el.id}--${formatName(el.name)}`}
+                            href={`/shopping/catalog/${el.id}--${formatName(
+                                el.name
+                            )}`}
                             key={i}
                             className={classNames('whitespace-nowrap')}
                         >
