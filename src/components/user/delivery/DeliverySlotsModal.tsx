@@ -94,8 +94,8 @@ export const DeliverySlotsModal = ({ modal }: { modal: MODAL }) => {
     const canBeSubmitted =
         localDeliveryDate.length > 0 &&
         watchZipCode.length === belgiumZipCodeLength;
-
-    useLockedBody(modal.opened.length > 0, 'root');
+    // todo
+    // useLockedBody(modal.opened.length > 0, 'root');
 
     useEffect(() => {
         const fetchUserDeliveryDate = async () => {
