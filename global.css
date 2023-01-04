@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    .has-tooltip {
+        @apply relative;
+    }
+
+    .tooltip {
+        @apply invisible absolute;
+    }
+    .has-tooltip:hover .tooltip {
+        @apply visible z-50;
+    }
+
+    .icon {
+        @apply h-8 w-8 cursor-pointer rounded p-1 text-gray-700 transition-all ease-in-out hover:bg-gray-100 hover:text-gray-900;
+    }
+    @font-face {
+        font-family: Roboto;
+        font-weight: 300;
+        src: local('Roboto'),
+            url('./public/fonts/roboto/Roboto-Thin.ttf') format('truetype');
+    }
+    @font-face {
+        font-family: Roboto;
+        font-weight: 300;
+        src: local('Roboto'),
+            url('./public/fonts/roboto/Roboto-Light.ttf') format('truetype');
+    }
+    @font-face {
+        font-family: Roboto;
+        font-weight: 400;
+        src: local('Roboto'),
+            url('./public/fonts/roboto/Roboto-Regular.ttf') format('truetype');
+    }
+
+    @font-face {
+        font-family: Roboto;
+        font-weight: 500;
+        src: local('Roboto'),
+            url('./public/fonts/roboto/Roboto-Medium.ttf') format('truetype');
+    }
+    /* semibold */
+    @font-face {
+        font-family: Roboto;
+        font-weight: 600;
+        src: local('Roboto'),
+            url('./public/fonts/roboto/Roboto-Bold.ttf') format('truetype');
+    }
+    /* bold */
+    @font-face {
+        font-family: Roboto;
+        font-weight: 700;
+        src: local('Roboto'),
+            url('./public/fonts/roboto/Roboto-Black.ttf') format('truetype');
+    }
+}
+
+.shadow-main {
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.05);
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+/*
+    2. Remove default margin
+  */
+* {
+    margin: 0;
+}
+/*
+    3. Allow percentage-based heights in the application
+  */
+html,
+body {
+    height: 100%;
+}
+/*
+    Typographic tweaks!
+    4. Add accessible line-height
+    5. Improve text rendering
+  */
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+/*
+    6. Improve media defaults
+  */
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+/*
+    7. Remove built-in form typography styles
+  */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+/*
+    8. Avoid text overflows
+  */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+/*
+    9. Create a root stacking context
+  */
+#root,
+#__next {
+    isolation: isolate;
+}
+
+/**
+ * Chrome has a bug with transitions on load since 2012!
+ *
+ * To prevent a "pop" of content, you have to disable all transitions until
+ * the page is done loading.
+ *
+ * https://lab.laukstein.com/bug/input
+ * https://twitter.com/timer150/status/1345217126680899584
+ */
+body.loading * {
+    transition: none !important;
+}
