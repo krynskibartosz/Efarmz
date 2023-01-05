@@ -15,7 +15,6 @@ export class UserService {
     }
     async getUserDeliveryDates(zipCode: string): Promise<User[]> {
         const response = await this.api.get(`/deliverydates/${zipCode}`);
-
         return response.data;
     }
 

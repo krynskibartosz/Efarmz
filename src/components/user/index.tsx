@@ -1,1 +1,1 @@
-export { DeliverySlotsModal } from './delivery/DeliverySlotsModal';
+export { DeliveryOptionsModal } from './delivery/DeliveryOptionsModal';

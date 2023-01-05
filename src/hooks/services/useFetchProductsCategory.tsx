@@ -9,6 +9,7 @@ const api: ApiPort = new ApiAdapter(
 );
 const categoryService = new CategoryService(api);
 
+// todo: check if the categories was already fetched and stop the execution of the categories if is true
 export const useFetchProductsCategories = () => {
     const [categories, setCategories] = useState();
 

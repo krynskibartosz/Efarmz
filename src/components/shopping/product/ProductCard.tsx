@@ -5,8 +5,6 @@ import classnames from 'classnames';
 import { Card, Column, Row, Tooltip } from 'src/ui';
 import { PRODUCT } from 'src/core/infrastructure/api/models/shopping/catalog/product';
 
-// todo: refacto button part
-
 export const ProductCard = ({ product }: { product: PRODUCT }) => {
     return (
         <article className="h-full">

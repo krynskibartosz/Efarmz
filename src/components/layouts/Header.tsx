@@ -7,7 +7,7 @@ import useRootStore from 'src/core/store/useRoot';
 import shallow from 'zustand/shallow';
 import { Row, Column } from 'src/ui/bases';
 import { SubNavbar } from 'src/components/shopping';
-import { DeliverySlotsModal } from 'src/components/user';
+import { DeliveryOptionsModal } from 'src/components/user';
 import { useFetchProductsCategories } from '../../hooks/services/useFetchProductsCategory';
 
 export const Header = () => {
@@ -27,11 +27,11 @@ export const Header = () => {
 
     const modal = useModal();
 
-    const { categories, loading } = useFetchProductsCategories();
+    const { categories } = useFetchProductsCategories();
 
     return (
         <>
-            <DeliverySlotsModal modal={modal} />
+            <DeliveryOptionsModal modal={modal} />
             <header className="bg-white fixed top-0 left-0 z-20 border-b border-gray-200 shadow-main pt-5 w-full pb-4  xl:px-32 px-5">
                 <Row
                     verticalPosition="center"
