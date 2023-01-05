@@ -1,8 +1,5 @@
 import produce from 'immer';
-import {
-    PRODUCT,
-    SHOPPING_CART,
-} from 'src/core/infrastructure/api/models/shopping/catalog/product';
+import { SHOPPING_CART } from 'src/core/infrastructure/api/models/shopping/catalog/product';
 import { SHOPPING_CART_STORE } from 'src/core/infrastructure/api/models/shopping/orders';
 import { StoreSlice } from 'src/core/store/useRoot';
 import { removeElementById } from 'src/lib/array';
