@@ -1,5 +1,5 @@
 import { Row, Pagination } from 'components';
-import { ProductsContainer } from '../product/ProductsContainer';
+import { ProductsContainer } from './product/ProductsContainer';
 import { CATEGORIES } from 'src/core/infrastructure/api/models/shopping/catalog/category';
 
 export const ProductsOfACategoryShow = ({

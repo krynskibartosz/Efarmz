@@ -1,10 +1,8 @@
 import Image from 'next/image';
 import useRootStore from 'src/core/store/useRoot';
 import shallow from 'zustand/shallow';
-import { useHasHydrated } from 'src/hooks';
 import { Row, Column } from 'src/ui';
 import { PRODUCT } from 'src/core/infrastructure/api/models/shopping/catalog/product';
-import { hasFreeShipping, shippingPrice } from 'src/core/logic/order';
 
 export const ProductCardInShoppingCart = ({
     product,
@@ -18,15 +16,10 @@ export const ProductCardInShoppingCart = ({
         shallow
     );
 
-    const totalPriceOfProduct = basicShoppingCart.reduce(
-        (acc, product) => acc + product.price,
-        0
-    );
-
     const { addProduct, deductProduct, removeProduct } =
         useRootStore.getState();
 
-    const totalAddedToCart = basicShoppingCart.filter(
+    const numberOfProductsSelectedByCartToCart = basicShoppingCart.filter(
         (el) => el.id === product.id
     );
 
@@ -47,7 +40,7 @@ export const ProductCardInShoppingCart = ({
                         {product.price.toFixed(2)} €
                     </p>
                     <p className="text-md font-semibold">
-                        {totalAddedToCart.length}
+                        {numberOfProductsSelectedByCartToCart.length}
                     </p>
                     <Row className="w-full gap-x-4">
                         <p

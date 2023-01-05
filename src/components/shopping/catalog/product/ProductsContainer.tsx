@@ -8,7 +8,6 @@ type PRODUCT_CONTAINER_PROPS = {
     numberOfProductsToDisplay: number;
 };
 
-// Todo: The conainter shoold only handle the grid part of the products
 export function ProductsContainer({
     products,
     isLoading,

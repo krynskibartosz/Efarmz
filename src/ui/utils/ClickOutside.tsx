@@ -6,7 +6,6 @@ interface ClickOutsideProps {
     children: JSX.Element;
     log?: boolean;
 }
-// todo:
 
 const isInDOM = (obj: any) => {
     return Boolean(obj.closest('body'));

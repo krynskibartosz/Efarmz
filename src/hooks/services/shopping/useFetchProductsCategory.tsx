@@ -21,7 +21,7 @@ export const useFetchProductsCategories = () => {
             const categories = await categoryService.getProductsCategories(
                 'categories'
             );
-
+            // @ts-ignore
             setCategories(categories);
             setLoading(false);
         };
@@ -29,6 +29,7 @@ export const useFetchProductsCategories = () => {
     }, []);
 
     return {
+        // @ts-ignore
         categories: categories as CATEGORIES,
         loading,
     };

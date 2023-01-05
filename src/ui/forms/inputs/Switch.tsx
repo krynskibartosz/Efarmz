@@ -79,7 +79,6 @@ export const SwitchInputControlled = ({
             }}
             className={`w-full  cursor-pointer items-center  ${className}`}
         >
-            {/* //todo: update orders here */}
             <div className="w-12 h-6 relative border border-freshGreen rounded-full">
                 <div
                     className={`bg-freshGreen transition-all duration-300 ease-in-out absolute top-1/2  -translate-y-1/2 h-4 w-4 rounded-full ${

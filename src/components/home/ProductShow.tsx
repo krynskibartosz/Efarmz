@@ -1,5 +1,5 @@
 import { PRODUCT } from 'src/core/infrastructure/api/models/shopping/catalog/product';
-import { ProductsContainer } from '../shopping/product/ProductsContainer';
+import { ProductsContainer } from '../shopping/catalog/product/ProductsContainer';
 
 export const ProductShow = ({
     products,

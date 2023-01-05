@@ -13,7 +13,7 @@ import { useKeyPress, useUpdateEffect } from 'src/hooks';
 import { COUNTRY } from 'src/core/logic/language';
 
 import { belgiumZipCodeLength, countries } from 'src/core/logic/user';
-import { useFetchUserDeliveryDate } from 'src/hooks/services/useFetchUserDeliveryDate';
+import { useFetchUserDeliveryDate } from 'src/hooks/services/user/useFetchUserDeliveryDate';
 import { deliveryOptionsSchema } from 'src/core/infrastructure/api/models/user/schema/deliveryOptions';
 
 type DELIVERY_OPTIONS_DTO = {

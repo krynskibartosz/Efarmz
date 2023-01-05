@@ -5,7 +5,7 @@ import { CategoryService } from 'src/core/infrastructure/api/client/shopping/cat
 import { CATEGORIES } from 'src/core/infrastructure/api/models/shopping/catalog/category';
 import { ApiPort } from 'src/ports/api';
 
-export const useFetchProductsCategories = ({
+export const useFetchItemsByProductCategory = ({
     currentPage,
 }: {
     currentPage: number;

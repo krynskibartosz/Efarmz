@@ -1,5 +1,3 @@
-// todo: this sould go to models folder
-
 import { Category } from './category';
 
 export interface Brand {

@@ -123,7 +123,7 @@ const ProductActionButton = ({ product }: { product: PRODUCT }) => {
     );
     const { hasMinimalAdress } = user.data;
 
-    const totalAddedToCart = basicShoppingCart.filter(
+    const numberOfProductsSelectedByCartToCart = basicShoppingCart.filter(
         (el) => el.id === product.id
     );
 
@@ -158,7 +158,7 @@ const ProductActionButton = ({ product }: { product: PRODUCT }) => {
                 >
                     Déduire
                 </button>
-                <p>{totalAddedToCart.length}</p>
+                <p>{numberOfProductsSelectedByCartToCart.length}</p>
                 <button
                     onClick={() => addProduct(product)}
                     className={classnames(

@@ -23,7 +23,6 @@ export interface TEXT_INPUT_PROPS extends INPUT {
     errorMsg?: string;
     cy?: string;
 }
-// todo: set input to full height
 export const TextInput = ({
     error = false,
     label,

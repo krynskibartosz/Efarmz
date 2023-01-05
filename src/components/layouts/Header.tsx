@@ -8,7 +8,7 @@ import shallow from 'zustand/shallow';
 import { Row, Column } from 'src/ui/bases';
 import { SubNavbar } from 'src/components/shopping';
 import { DeliveryOptionsModal } from 'src/components/user';
-import { useFetchProductsCategories } from '../../hooks/services/useFetchProductsCategory';
+import { useFetchProductsCategories } from 'src/hooks/services/shopping/useFetchProductsCategory';
 
 export const Header = () => {
     const modal = useModal();
@@ -34,7 +34,7 @@ export const Header = () => {
                         </div>
                     </Row>
 
-                    <ShoppingCartLink modal={modal} />
+                    <ShoppingCartLink />
                 </Row>
                 <nav className="h-5 mb-5 md:mb-0">
                     <SubNavbar categories={categories?.data} />
@@ -47,9 +47,9 @@ export const Header = () => {
     );
 };
 
-const ShoppingCartLink = ({ modal }: { modal: MODAL }) => {
+const ShoppingCartLink = () => {
     const hasHydrated = useHasHydrated();
-    const { shoppingCart: basicShoppingCart, user } = useRootStore(
+    const { shoppingCart: basicShoppingCart } = useRootStore(
         (state) => ({
             shoppingCart: state.shoppingCart.basic,
             user: state.user,
@@ -59,17 +59,14 @@ const ShoppingCartLink = ({ modal }: { modal: MODAL }) => {
 
     if (hasHydrated) {
         return (
-            <Link href="/shopping/cart">
+            <Link href="/shopping/checkout">
                 <Row
                     className="gap-x-2 rounded-md hover:bg-green-100 w-max  md:flex  px-3 text-green-700 py-1 transition-all duration-300 ease-in-out"
                     horizontalPosition="right"
                     verticalPosition="center"
                 >
                     <ShoppingCartIcon className="h-6 w-6" />
-                    <p
-                        className="whitespace-nowrap"
-                        onClick={() => modal.toggle('shoppingCart')}
-                    >
+                    <p className="whitespace-nowrap">
                         Panier {basicShoppingCart.length}
                     </p>
                 </Row>
