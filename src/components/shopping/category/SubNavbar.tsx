@@ -12,13 +12,17 @@ export const SubNavbar = ({
     return (
         <Row
             horizontalPosition="between"
-            className={classNames('xl:gap-x-40', 'gap-x-5', '!justify-between')}
+            className={classNames(
+                'xl:gap-x-40',
+                'gap-x-10',
+                '!justify-between'
+            )}
         >
             <p>Searchbar…</p>
 
             <Row
                 className={classNames(
-                    'gap-x-5',
+                    'gap-x-2',
                     'w-full',
                     'overflow-x-scroll',
                     'pb-2'
@@ -31,7 +35,10 @@ export const SubNavbar = ({
                                 el.name
                             )}`}
                             key={i}
-                            className={classNames('whitespace-nowrap')}
+                            className={classNames(
+                                'whitespace-nowrap',
+                                'px-3 py-0.5 rounded-md transition-all duration-300 ease-in-out  hover:bg-[#CBF6DA] text-green-700'
+                            )}
                         >
                             {el.name}
                         </Link>
