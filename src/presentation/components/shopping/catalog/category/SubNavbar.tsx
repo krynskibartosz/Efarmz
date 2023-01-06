@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import classNames from 'classnames';
 import { Row } from 'components';
-import { PRODUCT_CATEGORY } from 'src/core/domains/models/shopping/catalog/category/category';
+import { PRODUCT_CATEGORY } from 'src/core/domains/models/shopping/catalog/category/mod_category';
 
 export const SubNavbar = ({
     categories,

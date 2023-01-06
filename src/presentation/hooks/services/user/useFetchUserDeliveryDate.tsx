@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import { ApiAdapter } from 'src/adapters/api-adapter';
+import { UserApiAdapter } from 'src/adapters/user-api-adapter';
 import { belgiumZipCodeLength } from 'src/core/domains/logic/user';
-import { UserService } from 'src/infrastructure/api/client/user/users';
+import { UserService } from 'src/infrastructure/api/user/users';
 import { transformDateStringtoReadableDate } from 'src/libraries/date';
-import { ApiPort } from 'src/ports/api';
+import { UserApiPort } from 'src/ports/user-port';
 
-const api: ApiPort = new ApiAdapter(
+const api: UserApiPort = new UserApiAdapter(
     process.env.NEXT_PUBLIC_END_POINT as string
 );
 const userService = new UserService(api);

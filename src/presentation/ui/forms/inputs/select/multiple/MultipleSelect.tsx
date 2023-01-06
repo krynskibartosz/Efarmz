@@ -3,7 +3,7 @@ import { MultilpleSelectMobileInput } from './Mobile';
 import { MultilpleSelectSafariInput } from './DesktopSafari';
 import { isSafari } from 'react-device-detect';
 import { INPUT } from 'src/presentation/ui/forms/types';
-import { useMediaQuery } from 'src/presentation/hooks/useMediaQuery';
+import { useMediaQuery } from 'lib';
 type OPTION = { value: string; label: string };
 
 type MULTIPLE_SELECT = {

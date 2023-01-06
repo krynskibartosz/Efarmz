@@ -1,7 +1,7 @@
 import classNames from 'classnames';
-import { MODAL } from 'src/presentation/hooks/useModal';
 import { Overlay, ClickOutside } from '../utils';
 import { Column } from './containers/Containers';
+import { MODAL } from 'src/presentation/hooks/event/useModal';
 
 export const CardModalOverlay = ({
     children,

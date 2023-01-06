@@ -1,6 +1,6 @@
 import produce from 'immer';
 import { StoreSlice } from './useRoot';
-import { USER, USER_STORE } from 'src/core/domains/models/user/user';
+import { USER, USER_STORE } from 'src/core/domains/models/user/mod_user';
 import { updateUserAdress } from 'src/core/usecases/user/action';
 
 export const initialUser: USER = {

@@ -1,4 +1,7 @@
-import { hasFreeShipping, shippingPrice } from 'src/core/domains/logic/order';
+import {
+    hasFreeShipping,
+    shippingPrice,
+} from 'src/core/domains/logic/checkout';
 import {
     calculateTotalProductCost,
     calculateTotalShoppingPrice,

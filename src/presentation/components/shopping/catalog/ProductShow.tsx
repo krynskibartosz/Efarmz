@@ -1,6 +1,6 @@
 import { Row, Pagination } from 'components';
 import { ProductsContainer } from './product/ProductsContainer';
-import { PRODUCTS } from 'src/core/domains/models/shopping/catalog/product/product';
+import { PRODUCTS } from 'src/core/domains/models/shopping/catalog/product/mod_product';
 
 export const ProductsOfACategoryShow = ({
     currentPage,

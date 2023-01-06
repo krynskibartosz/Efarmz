@@ -1,7 +1,7 @@
 import produce from 'immer';
-import { SHOPPING_CART } from 'src/core/domains/models/shopping/catalog/product/product-store';
+import { SHOPPING_CART } from 'src/core/domains/models/shopping/catalog/product/mod_product_store';
 
-import { SHOPPING_CART_STORE } from 'src/core/domains/models/shopping/checkout';
+import { SHOPPING_CART_STORE } from 'src/core/domains/models/shopping/mod_checkout';
 import { StoreSlice } from './useRoot';
 import {
     decrementProductQuantity,

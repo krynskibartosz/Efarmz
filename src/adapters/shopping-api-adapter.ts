@@ -1,6 +1,6 @@
-import { ApiPort } from 'src/ports/api';
+import { ShoppingApiPort } from 'src/ports/shopping-port';
 
-export class ApiAdapter implements ApiPort {
+export class ShoppingApiAdapter implements ShoppingApiPort {
     baseUrl: string;
 
     constructor(baseUrl: string) {

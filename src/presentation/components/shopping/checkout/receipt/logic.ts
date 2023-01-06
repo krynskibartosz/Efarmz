@@ -1,5 +1,8 @@
-import { hasFreeShipping, shippingPrice } from 'src/core/domains/logic/order';
-import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/product';
+import {
+    hasFreeShipping,
+    shippingPrice,
+} from 'src/core/domains/logic/checkout';
+import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/mod_product';
 
 export const calculateTotalProductCost = (shoppingCartItems: PRODUCT[]) => {
     return shoppingCartItems.reduce((acc, product) => acc + product.price, 0);

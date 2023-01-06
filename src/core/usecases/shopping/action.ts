@@ -1,4 +1,4 @@
-import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/product';
+import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/mod_product';
 import { removeElementById } from 'src/libraries/array';
 
 type ACTIONS_PROPS = {

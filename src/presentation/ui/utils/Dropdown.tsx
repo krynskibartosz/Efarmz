@@ -3,8 +3,7 @@ import { Row, Column } from 'src/presentation/ui/bases/containers/Containers';
 
 import { CSSProperties, ReactNode, useState } from 'react';
 import { ClickOutside } from './ClickOutside';
-import { useKeyPress } from 'src/presentation/hooks/useKeyPress';
-import { useUpdateEffect } from 'src/presentation/hooks/useUpdateEffect';
+import { useKeyPress, useUpdateEffect } from 'lib';
 
 type DROPDOWN = {
     Button: ({ open }: any) => ReactNode;

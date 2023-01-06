@@ -1,4 +1,4 @@
-import { COUNTRY } from 'src/core/domains/logic/language';
+import { COUNTRY } from 'src/core/domains/logic/mod_language';
 import * as yup from 'yup';
 
 export const deliveryOptionsSchema = yup.object().shape({

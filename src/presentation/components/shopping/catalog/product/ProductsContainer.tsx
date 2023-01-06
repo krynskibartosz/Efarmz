@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/product';
+import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/mod_product';
 import { ProductCardSkeleton, ProductCard } from './ProductCard';
 
 type PRODUCT_CONTAINER_PROPS = {

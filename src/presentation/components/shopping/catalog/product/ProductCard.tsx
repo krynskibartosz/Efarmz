@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import classnames from 'classnames';
 import { Card, Column, Row, Tooltip } from 'components';
-import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/product';
+import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/mod_product';
 import shallow from 'zustand/shallow';
 import useRootStore from 'src/presentation/global-state/useRoot';
 

@@ -1,5 +1,5 @@
-import { ACTIONS } from '../../../../presentation/global-state/actions/user';
-import { COUNTRY, LANGUAGE } from '../../logic/language';
+import { ACTIONS } from '../../../../presentation/global-state/actions/mod_user';
+import { COUNTRY, LANGUAGE } from '../../logic/mod_language';
 
 export type DELIVERY_MODE = 'home' | 'collection-point';
 

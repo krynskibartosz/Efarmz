@@ -1,13 +1,13 @@
-import { ApiPort } from 'src/ports/api';
 import {
     PRODUCT,
     PRODUCTS,
-} from '../../../../../core/domains/models/shopping/catalog/product/product';
+} from 'src/core/domains/models/shopping/catalog/product/mod_product';
+import { ShoppingApiPort } from 'src/ports/shopping-port';
 
 export class ProductService {
-    api: ApiPort;
+    api: ShoppingApiPort;
 
-    constructor(api: ApiPort) {
+    constructor(api: ShoppingApiPort) {
         this.api = api;
     }
 

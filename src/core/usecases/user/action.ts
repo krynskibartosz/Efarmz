@@ -1,4 +1,4 @@
-import { ADRESS } from 'src/core/domains/models/user/user';
+import { ADRESS } from 'src/core/domains/models/user/mod_user';
 
 export const updateUserAdress = (
     draft: {

@@ -1,4 +1,4 @@
-import { PRODUCTS } from '../product';
+import { PRODUCTS } from '../mod_product';
 
 export interface CHILDREN_ITEM {
     checked: boolean;

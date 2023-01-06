@@ -1,4 +1,4 @@
-import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/product';
+import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/mod_product';
 
 export const removeDuplicateProducts = (products: PRODUCT[]) => {
     const uniqueIds = new Set();

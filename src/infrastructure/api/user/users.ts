@@ -1,10 +1,10 @@
-import { ApiPort } from 'src/ports/api';
-import { DELIVERY_OPTIONS_RESPONSE } from '../../../../core/domains/models/user/schema/deliveryOptions';
+import { DELIVERY_OPTIONS_RESPONSE } from 'src/core/domains/models/user/schema/mod_deliveryOptions';
+import { UserApiPort } from 'src/ports/user-port';
 
 export class UserService {
-    api: ApiPort;
+    api: UserApiPort;
 
-    constructor(api: ApiPort) {
+    constructor(api: UserApiPort) {
         this.api = api;
     }
 

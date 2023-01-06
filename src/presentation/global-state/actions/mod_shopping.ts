@@ -1,4 +1,4 @@
-import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/product';
+import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/mod_product';
 
 export type ACTIONS = {
     addProduct: (product: PRODUCT) => void;

@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import { ApiAdapter } from 'src/adapters/api-adapter';
-import { CategoryService } from 'src/infrastructure/api/client/shopping/catalog/category';
-import { RESPONSE } from 'src/core/domains/models/shopping/catalog/product/by-category/products-response';
+import { RESPONSE } from 'src/core/domains/models/shopping/catalog/product/by-category/mod_products_response';
 
-import { ApiPort } from 'src/ports/api';
+import { ShoppingApiAdapter } from 'src/adapters/shopping-api-adapter';
+import { ShoppingApiPort } from 'src/ports/shopping-port';
+import { CategoryService } from 'src/infrastructure/api/shopping/catalog/category';
 
-const api: ApiPort = new ApiAdapter(
+const api: ShoppingApiPort = new ShoppingApiAdapter(
     process.env.NEXT_PUBLIC_END_POINT as string
 );
 

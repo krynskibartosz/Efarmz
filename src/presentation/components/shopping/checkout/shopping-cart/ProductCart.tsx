@@ -1,6 +1,6 @@
 import { Row, Column } from 'components';
 import Image from 'next/image';
-import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/product';
+import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/mod_product';
 import useRootStore from 'src/presentation/global-state/useRoot';
 import shallow from 'zustand/shallow';
 

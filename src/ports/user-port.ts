@@ -1,4 +1,4 @@
-export interface ApiPort {
+export interface UserApiPort {
     get<T>(path: string, params?: object): Promise<T>;
     post<T>(path: string, body?: object): Promise<T>;
     put<T>(path: string, body?: object): Promise<T>;

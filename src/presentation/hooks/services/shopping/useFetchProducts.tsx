@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { ApiAdapter } from 'src/adapters/api-adapter';
-import { ProductService } from 'src/infrastructure/api/client/shopping/catalog/product';
-import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/product';
 
-import { ApiPort } from 'src/ports/api';
+import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/mod_product';
 
-const api: ApiPort = new ApiAdapter(
+import { ShoppingApiAdapter } from 'src/adapters/shopping-api-adapter';
+import { ShoppingApiPort } from 'src/ports/shopping-port';
+import { ProductService } from 'src/infrastructure/api/shopping/catalog/product';
+
+const api: ShoppingApiPort = new ShoppingApiAdapter(
     process.env.NEXT_PUBLIC_END_POINT as string
 );
 const productService = new ProductService(api);

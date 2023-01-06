@@ -9,14 +9,14 @@ import {
 } from 'components';
 import { useKeyPress, useUpdateEffect } from 'lib';
 import { useForm, Controller } from 'react-hook-form';
-import { COUNTRY } from 'src/core/domains/logic/language';
+import { COUNTRY } from 'src/core/domains/logic/mod_language';
 import { belgiumZipCodeLength, countries } from 'src/core/domains/logic/user';
-import { deliveryOptionsSchema } from 'src/core/domains/models/user/schema/deliveryOptions';
+import { deliveryOptionsSchema } from 'src/core/domains/models/user/schema/mod_deliveryOptions';
 import { useFetchUserDeliveryDate } from 'src/presentation/hooks/services/user/useFetchUserDeliveryDate';
-import { MODAL } from 'src/presentation/hooks/useModal';
 import { CircleSpinner } from 'src/presentation/ui/feedbacks/Spinner';
 import { yupResolver } from '@hookform/resolvers/yup';
 import useRootStore from 'src/presentation/global-state/useRoot';
+import { MODAL } from 'src/presentation/hooks/event/useModal';
 
 type DELIVERY_OPTIONS_DTO = {
     country: COUNTRY;

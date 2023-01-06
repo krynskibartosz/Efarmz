@@ -1,11 +1,11 @@
-import { ApiPort } from 'src/ports/api';
-import { RESPONSE } from '../../../../../core/domains/models/shopping/catalog/product/by-category/products-response';
-import { PRODUCT_CATEGORY_API_RESPONSE } from '../../../../../core/domains/models/shopping/catalog/category/category';
+import { PRODUCT_CATEGORY_API_RESPONSE } from 'src/core/domains/models/shopping/catalog/category/mod_category';
+import { RESPONSE } from 'src/core/domains/models/shopping/catalog/product/by-category/mod_products_response';
+import { ShoppingApiPort } from 'src/ports/shopping-port';
 
 export class CategoryService {
-    api: ApiPort;
+    api: ShoppingApiPort;
 
-    constructor(api: ApiPort) {
+    constructor(api: ShoppingApiPort) {
         this.api = api;
     }
 

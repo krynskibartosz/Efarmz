@@ -1,4 +1,4 @@
-import { PRODUCT } from './product';
+import { PRODUCT } from './mod_product';
 
 export interface API_PRODUCT_RESPONSE {
     current_page: number;

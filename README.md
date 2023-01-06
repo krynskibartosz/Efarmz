@@ -9,27 +9,107 @@
 `-public
 -src
     - adapters
-        - api-adapter.ts
+        - shopping-api-adapter.ts
+        - user-api-adapter.ts
     - core
-        - browser
-            -actions
-            -shopping.ts
-            -user.ts
-            useRoot.ts
+        - usecases
+            - shopping
+                -actions.ts
+            - user
+                -actions.ts
         - domains
             -logic
+                - language.ts
+                - order.ts
+                - user.ts
             -models
                 - shopping
+                    - catalog
+                        - category
+                            -  category.ts
+                        - product
+                            - by-category
+                                - products-response.ts
+                            - product-response.ts
+                            - product-sotre.ts
+                            - product.ts
+                        checkout.ts
                 - user
+                    -schema
+                        - deliveryOptions.ts
+                    user.ts
     - infrastructure
         -api
             -client
                 -shopping
+                    - catalog
+                        - category.ts
+                        - product.ts
                 -user
+                    - user.ts
+    - libraries
+        - array.ts
+        - date.ts
     - pages
+        - shopping
+            - checkout.tsx
+            - catalog
+                - [product-category]
+                    - index.tsx
     - presentation
         - components
+            - home
+                - ProductShow.tsx
+            - layouts
+                - Footer.tsx
+                - Header.tsx
+            - shopping
+                - catalog
+                    - category
+                        - SubNavbar.tsx
+                    - product
+                        - ProductCard.tsx
+                        - ProductContainer.tsx
+                    - checkout
+                        - receipt
+                            - CommandResume.tsx
+                            - index.tsx
+                            - logic.ts
+                        - shopping-cart
+                            - logic.ts
+                            - ProductCart.tsx
+                            - ShoppingCart.tsx
+                            - ShoppingCartItems.tsx
+                    - ProductShow.tsx
+                    - index.ts
+            - user
+                - delivery
+                    - DeliveryOptionsModal.tsx
+                - index.tsx
+        - global-state
+            -actions
+            -shopping.ts
+            -user.ts
+            -useRoot.ts
+        - hooks
+            - services
+                - shopping
+                    - useFetchItemsByProductCategory.tsx
+                    - useFetchProducts.tsx
+                    - useFetchProductsCategory.tsx
+                - user
+                    - useFetchUserDeliveryDate.tsx
+            - index.ts
+            - useEventListener.ts
+            - useHasHydrated.ts
+            - useIsomorphicLayoutEffect.ts
+            - useKeyPress.ts
+            - useLockedBody.ts
+            - useMediaQuery.ts
+            - useModal.ts
+            - useUpdateEffect.ts
         - ui
     - ports
-        -api.ts
+        - shopping-port.ts
+        - user-port.ts
 -test`
