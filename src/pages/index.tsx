@@ -1,4 +1,4 @@
-import { ProductShow } from 'src/presentation/components/components/home/ProductShow';
+import { ProductShow } from 'src/presentation/components/home/ProductShow';
 import { useFetchProducts } from 'src/presentation/hooks/services/shopping/useFetchProducts';
 
 function Home() {

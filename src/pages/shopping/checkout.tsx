@@ -1,8 +1,7 @@
 import { Row } from 'components';
 import Head from 'next/head';
-
-import { Receipt } from 'src/presentation/components/components/shopping/checkout/receipt';
-import { ShoppingCart } from 'src/presentation/components/components/shopping/checkout/shopping-cart/ShoppingCart';
+import { Receipt } from 'src/presentation/components/shopping/checkout/receipt';
+import { ShoppingCart } from 'src/presentation/components/shopping/checkout/shopping-cart/ShoppingCart';
 
 const Checkout = () => {
     return (
