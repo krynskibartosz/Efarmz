@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import classnames from 'classnames';
 import { Card, Column, Row, Tooltip } from 'components';
-import useRootStore from 'src/core/browser/useRoot';
 import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/product';
 import shallow from 'zustand/shallow';
+import useRootStore from 'src/presentation/global-state/useRoot';
 
 export const ProductCard = ({ product }: { product: PRODUCT }) => {
     return (

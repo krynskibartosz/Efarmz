@@ -1,9 +1,12 @@
 import produce from 'immer';
+import { SHOPPING_CART } from 'src/core/domains/models/shopping/catalog/product/product-store';
 
 import { SHOPPING_CART_STORE } from 'src/core/domains/models/shopping/checkout';
-import { StoreSlice } from 'src/core/browser/useRoot';
-import { removeElementById } from 'src/libraries/array';
-import { SHOPPING_CART } from '../domains/models/shopping/catalog/product/product-store';
+import { StoreSlice } from './useRoot';
+import {
+    decrementProductQuantity,
+    removeAProductOfCart,
+} from 'src/core/usecases/shopping/action';
 
 const initialState: SHOPPING_CART = {
     basic: [],
@@ -28,22 +31,20 @@ export const shoppingCartSlice: StoreSlice<SHOPPING_CART_STORE> = (set) => ({
     deductProduct: (product) => {
         set((state) =>
             produce(state, (draft) => {
-                removeElementById(draft.shoppingCart.basic, product.id);
-                draft.shoppingCart.basic;
+                decrementProductQuantity({
+                    cart: draft.shoppingCart.basic,
+                    product,
+                });
             })
         );
     },
     removeProduct: (product) => {
         set((state) =>
             produce(state, (draft) => {
-                while (
-                    draft.shoppingCart.basic.some(
-                        (item) => item.id === product.id
-                    )
-                ) {
-                    removeElementById(draft.shoppingCart.basic, product.id);
-                }
-                draft.shoppingCart.basic;
+                removeAProductOfCart({
+                    cart: draft.shoppingCart.basic,
+                    product,
+                });
             })
         );
     },

@@ -1,10 +1,10 @@
-import useRootStore from 'src/core/browser/useRoot';
 import { hasFreeShipping, shippingPrice } from 'src/core/domains/logic/order';
 import {
     calculateTotalProductCost,
     calculateTotalShoppingPrice,
 } from './logic';
 import shallow from 'zustand/shallow';
+import useRootStore from 'src/presentation/global-state/useRoot';
 
 export const CommandResume = () => {
     const { shoppingCart: basicShoppingCart } = useRootStore(

@@ -3,7 +3,7 @@ import { Column } from 'components';
 import { ProductCardInShoppingCart } from './ProductCart';
 import shallow from 'zustand/shallow';
 import { removeDuplicateProducts } from './logic';
-import useRootStore from 'src/core/browser/useRoot';
+import useRootStore from 'src/presentation/global-state/useRoot';
 
 export const ShoppingCartItems = () => {
     const { shoppingCart: basicShoppingCart } = useRootStore(

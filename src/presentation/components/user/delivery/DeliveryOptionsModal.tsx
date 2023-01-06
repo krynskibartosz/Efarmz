@@ -9,7 +9,6 @@ import {
 } from 'components';
 import { useKeyPress, useUpdateEffect } from 'lib';
 import { useForm, Controller } from 'react-hook-form';
-import useRootStore from 'src/core/browser/useRoot';
 import { COUNTRY } from 'src/core/domains/logic/language';
 import { belgiumZipCodeLength, countries } from 'src/core/domains/logic/user';
 import { deliveryOptionsSchema } from 'src/core/domains/models/user/schema/deliveryOptions';
@@ -17,6 +16,7 @@ import { useFetchUserDeliveryDate } from 'src/presentation/hooks/services/user/u
 import { MODAL } from 'src/presentation/hooks/useModal';
 import { CircleSpinner } from 'src/presentation/ui/feedbacks/Spinner';
 import { yupResolver } from '@hookform/resolvers/yup';
+import useRootStore from 'src/presentation/global-state/useRoot';
 
 type DELIVERY_OPTIONS_DTO = {
     country: COUNTRY;

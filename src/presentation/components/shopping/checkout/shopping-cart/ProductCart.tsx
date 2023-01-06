@@ -1,7 +1,7 @@
 import { Row, Column } from 'components';
 import Image from 'next/image';
-import useRootStore from 'src/core/browser/useRoot';
 import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/product';
+import useRootStore from 'src/presentation/global-state/useRoot';
 import shallow from 'zustand/shallow';
 
 export const ProductCardInShoppingCart = ({

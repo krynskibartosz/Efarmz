@@ -1,6 +1,7 @@
 import produce from 'immer';
 import { StoreSlice } from './useRoot';
 import { USER, USER_STORE } from 'src/core/domains/models/user/user';
+import { updateUserAdress } from 'src/core/usecases/user/action';
 
 export const initialUser: USER = {
     language: 'fr',
@@ -17,26 +18,10 @@ export const initialUser: USER = {
 
 export const userSlice: StoreSlice<USER_STORE> = (set) => ({
     user: initialUser,
-    updateLanguage: (language) => {
-        set((state) =>
-            produce(state, (draft) => {
-                draft.user.language = language;
-            })
-        );
-    },
     updateMinimalAdress: (adress) => {
         set((state) =>
             produce(state, (draft) => {
-                draft.user.data.adress = adress;
-                draft.user.data.hasMinimalAdress = true;
-            })
-        );
-    },
-
-    logout: () => {
-        set((state) =>
-            produce(state, (draft) => {
-                draft.user = initialUser;
+                updateUserAdress(draft.user.data, adress);
             })
         );
     },

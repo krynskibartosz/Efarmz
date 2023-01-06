@@ -2,12 +2,12 @@ import { ShoppingCartIcon, GlobeAltIcon } from '@heroicons/react/24/outline';
 import { Row, Column } from 'components';
 import { useModal, useHasHydrated } from 'lib';
 import Link from 'next/link';
-import useRootStore from 'src/core/browser/useRoot';
 import { useFetchProductsCategories } from 'src/presentation/hooks/services/shopping/useFetchProductsCategory';
 import { MODAL } from 'src/presentation/hooks/useModal';
 import shallow from 'zustand/shallow';
 import { SubNavbar } from '../shopping';
 import { DeliveryOptionsModal } from '../user';
+import useRootStore from 'src/presentation/global-state/useRoot';
 
 export const Header = () => {
     const modal = useModal();
