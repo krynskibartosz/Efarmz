@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { ColumnPosition, RowPosition } from './types';
 
 const ColumnX = {

@@ -4,8 +4,8 @@ import styles from './Switch.module.css';
 import { Row } from 'src/presentation/ui/bases/containers/Containers';
 
 type SWITCH = {
-    leftLabel?: any;
-    rightLabel?: any;
+    leftLabel?: string | JSX.Element;
+    rightLabel?: string | JSX.Element;
     size?: 'small' | 'medium';
 } & INPUT;
 

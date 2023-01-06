@@ -24,33 +24,32 @@ export const useFetchUserDeliveryDate = ({
     const zipCodeHasRequirementToBeFetched =
         watchZipCode.length === belgiumZipCodeLength;
 
-    const fetchUserDeliveryDate = async () => {
-        try {
-            if (zipCodeHasRequirementToBeFetched && isDirty) {
-                setLoading(true);
-                const deliveryDatesByZipCode =
-                    await userService.getUserDeliveryDates(watchZipCode);
-                setError('');
-                setDeliveryDatesByZipCode(
-                    transformDateStringtoReadableDate(
-                        deliveryDatesByZipCode.data?.startOrderableDate
-                    )
-                );
-            }
-        } catch (error) {
-            console.error(error);
-            setError(
-                'An error occurred while fetching the delivery dates. Please try again later.'
-            );
-            setDeliveryDatesByZipCode('');
-        } finally {
-            setLoading(false);
-        }
-    };
-
     useEffect(() => {
+        const fetchUserDeliveryDate = async () => {
+            try {
+                if (zipCodeHasRequirementToBeFetched && isDirty) {
+                    setLoading(true);
+                    const deliveryDatesByZipCode =
+                        await userService.getUserDeliveryDates(watchZipCode);
+                    setError('');
+                    setDeliveryDatesByZipCode(
+                        transformDateStringtoReadableDate(
+                            deliveryDatesByZipCode.data?.startOrderableDate
+                        )
+                    );
+                }
+            } catch (error) {
+                console.error(error);
+                setError(
+                    'An error occurred while fetching the delivery dates. Please try again later.'
+                );
+                setDeliveryDatesByZipCode('');
+            } finally {
+                setLoading(false);
+            }
+        };
         fetchUserDeliveryDate();
-    }, [zipCodeHasRequirementToBeFetched]);
+    }, [isDirty, watchZipCode, zipCodeHasRequirementToBeFetched]);
 
     return { loading, error, deliveryDatesByZipCode };
 };

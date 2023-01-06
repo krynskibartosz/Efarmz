@@ -77,8 +77,9 @@ export const ProductCard = ({ product }: { product: PRODUCT }) => {
                                     className="w-full text-sm text-center"
                                     position="bottom"
                                 >
-                                    Vous devez d'abbord choisir votre crénaux
-                                    horaire
+                                    {
+                                        "Vous devez d'abbord choisir votre crénaux horaire"
+                                    }
                                 </Tooltip>
                             )}
 
@@ -101,7 +102,7 @@ export const ProductCard = ({ product }: { product: PRODUCT }) => {
                                     'text-white'
                                 )}
                             >
-                                Ajouter à l'abonnement
+                                {"Ajouter à l'abonnement"}
                             </button>
                         </div>
                     </Column>
@@ -179,7 +180,7 @@ const ProductActionButton = ({ product }: { product: PRODUCT }) => {
         <div className="w-full has-tooltip">
             {!hasMinimalAdress && (
                 <Tooltip className="w-full text-sm text-center" position="top">
-                    Vous devez d'abbord choisir votre crénaux horaire
+                    {"Vous devez d'abbord choisir votre crénaux horaire"}
                 </Tooltip>
             )}
             <button

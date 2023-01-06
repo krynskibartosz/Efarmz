@@ -5,7 +5,7 @@ export const ProductShow = ({
     products,
     isLoading,
 }: {
-    products: PRODUCT[];
+    products: PRODUCT[] | undefined;
     isLoading: boolean;
 }) => (
     <section>

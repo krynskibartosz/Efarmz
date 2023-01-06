@@ -11,6 +11,8 @@ type MULTIPLE_SELECT = {
     id: string;
     options: OPTION[];
     required?: boolean;
+    value: unknown[];
+    setValue: (e?: unknown) => void;
 };
 
 export const MultilpleSelectSafariInput = ({
@@ -90,7 +92,7 @@ export const MultilpleSelectSafariInput = ({
                 DropdownContent={({
                     setOpen,
                 }: {
-                    setOpen: (e: any) => void;
+                    setOpen: (e: boolean) => void;
                 }) => {
                     return (
                         <ul className="max-h-52 w-full overflow-y-auto">

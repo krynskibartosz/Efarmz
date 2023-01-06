@@ -1,5 +1,6 @@
 import { Row, Pagination } from 'components';
 import { ProductsContainer } from './product/ProductsContainer';
+import { PRODUCTS } from 'src/core/domains/models/shopping/catalog/product/product';
 
 export const ProductsOfACategoryShow = ({
     currentPage,
@@ -10,7 +11,7 @@ export const ProductsOfACategoryShow = ({
     currentPage: number;
     setCurrentPage: (e: number) => void;
     loading: boolean;
-    categories: CATEGOIES;
+    categories: PRODUCTS | undefined;
 }) => {
     return (
         <>
@@ -18,16 +19,13 @@ export const ProductsOfACategoryShow = ({
                 <Pagination
                     currentPage={currentPage}
                     onChangePage={(page: number) => setCurrentPage(page)}
-                    // @ts-ignore
                     totalPages={categories?.last_page}
                 />
             </Row>
 
             <ProductsContainer
-                // @ts-ignore
                 products={categories?.data}
                 isLoading={loading}
-                // @ts-ignore
                 numberOfProductsToDisplay={40}
             />
         </>

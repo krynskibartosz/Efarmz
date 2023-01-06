@@ -5,13 +5,15 @@ export const Pagination = ({
     currentPage,
     onChangePage,
 }: {
-    totalPages: number;
+    totalPages: number | undefined;
     currentPage: number;
     onChangePage: (e: number) => void;
 }) => {
     const pages = [];
-    for (let i = 1; i <= totalPages; i++) {
-        pages.push(i);
+    if (totalPages !== undefined) {
+        for (let i = 1; i <= totalPages; i++) {
+            pages.push(i);
+        }
     }
 
     return (

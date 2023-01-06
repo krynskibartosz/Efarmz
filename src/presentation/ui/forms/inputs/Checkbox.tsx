@@ -6,13 +6,12 @@ type CHECKBOX = {
     label: string;
     id: string;
     checked?: unknown;
-    onChange?: unknown;
+    onChange: (e?: unknown) => void;
 } & INPUT;
 
 export const CheckboxInput = ({
     value,
     onChange,
-    checked,
     label,
     id,
     ...rest
@@ -32,7 +31,6 @@ export const CheckboxInput = ({
                         style={{ minWidth: 24, minHeight: 24 }}
                         className="h-6 w-6 cursor-pointer appearance-none rounded-md border border-fresh-gray-300 bg-fresh-gray-50 transition-all checked:border-freshGreen checked:bg-freshGreen hover:border-freshGreen "
                         checked={value}
-                        // @ts-ignore
                         onChange={(e) => onChange(e.target.checked)}
                         {...rest}
                     />

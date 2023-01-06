@@ -17,5 +17,5 @@ export function useEventListener(
         element.addEventListener(eventType, handler);
 
         return () => element.removeEventListener(eventType, handler);
-    }, [eventType]);
+    }, [element, eventType]);
 }

@@ -47,21 +47,30 @@ const ProductList = ({
     isLoading,
     numberOfProductsToDisplay,
 }: PRODUCT_CONTAINER_PROPS) => {
-    if (isLoading)
-        return new Array(numberOfProductsToDisplay).fill({}).map((_, i) => {
-            if (i > numberOfProductsToDisplay) return <></>;
-            return (
-                <li className={productGridClassName} key={i}>
-                    <ProductCardSkeleton />
-                </li>
-            );
-        });
-    return products?.map((product: PRODUCT, i) => {
-        if (i > numberOfProductsToDisplay) return <></>;
+    if (isLoading) {
         return (
-            <li className={productGridClassName} key={product.id}>
-                <ProductCard product={product} />
-            </li>
+            <>
+                {new Array(numberOfProductsToDisplay).fill({}).map((_, i) => {
+                    if (i > numberOfProductsToDisplay) return <></>;
+                    return (
+                        <li className={productGridClassName} key={i}>
+                            <ProductCardSkeleton />
+                        </li>
+                    );
+                })}
+            </>
         );
-    });
+    }
+    return (
+        <>
+            {products?.map((product: PRODUCT, i) => {
+                if (i > numberOfProductsToDisplay) return <></>;
+                return (
+                    <li className={productGridClassName} key={product.id}>
+                        <ProductCard product={product} />
+                    </li>
+                );
+            })}
+        </>
+    );
 };

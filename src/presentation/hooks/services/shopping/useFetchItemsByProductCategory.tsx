@@ -6,6 +6,12 @@ import { RESPONSE } from 'src/core/domains/models/shopping/catalog/product/by-ca
 
 import { ApiPort } from 'src/ports/api';
 
+const api: ApiPort = new ApiAdapter(
+    process.env.NEXT_PUBLIC_END_POINT as string
+);
+
+const categoryService = new CategoryService(api);
+
 export const useFetchItemsByProductCategory = ({
     currentPage,
 }: {
@@ -15,11 +21,6 @@ export const useFetchItemsByProductCategory = ({
     const { query } = router;
     const [categories, setCategories] = useState<RESPONSE>();
     const [loading, setLoading] = useState(true);
-
-    const api: ApiPort = new ApiAdapter(
-        process.env.NEXT_PUBLIC_END_POINT as string
-    );
-    const categoryService = new CategoryService(api);
 
     const productQuery = query?.['product-category'];
     useEffect(() => {
@@ -39,7 +40,7 @@ export const useFetchItemsByProductCategory = ({
             }
         };
         fetchProducts();
-    }, [productQuery, currentPage]);
+    }, [productQuery, currentPage, query]);
     return {
         categories: categories,
         loading,

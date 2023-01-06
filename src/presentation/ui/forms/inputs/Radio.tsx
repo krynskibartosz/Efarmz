@@ -4,16 +4,17 @@ import { INPUT } from '../types';
 type RADIO = {
     options: { value: string; label: string }[];
     label: string;
+    value: unknown;
+    direction: 'horizontal' | 'vertical';
 } & INPUT;
 
 export const Radio = ({
     value,
     label,
-    setValue,
     options,
     direction = 'horizontal',
     ...rest
-}: any) => {
+}: RADIO) => {
     return (
         <Column>
             {label && (
@@ -27,9 +28,10 @@ export const Radio = ({
                     direction === 'vertical' ? 'flex-col' : 'items-center'
                 }`}
             >
-                {options.map((el: any, i: any) => {
+                {options.map((el, i) => {
                     return (
                         <Row
+                            key={i}
                             className="items-center gap-x-2"
                             positionY="center"
                         >

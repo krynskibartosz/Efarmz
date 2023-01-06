@@ -17,16 +17,13 @@ interface TEXT_INPUT_PROPS extends INPUT {
 }
 
 export const TextAreaInput = ({
-    maxLength,
     error = false,
     label,
-    type = 'text',
     id,
     cy,
     borderColor,
     className = '',
     children,
-    pattern,
     errorMsg,
     isRequired,
     optionnal,
@@ -138,7 +135,7 @@ export const TextAreaInput = ({
 export type COUNTER_INPUT = {
     maxLength: number;
     type?: 'input' | 'textArea';
-    style?: any;
+    style?: unknown;
 } & TEXT_INPUT_PROPS;
 
 export const CounterInput = ({

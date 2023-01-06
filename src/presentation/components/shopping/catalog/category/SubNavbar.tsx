@@ -6,7 +6,7 @@ import { PRODUCT_CATEGORY } from 'src/core/domains/models/shopping/catalog/categ
 export const SubNavbar = ({
     categories,
 }: {
-    categories: PRODUCT_CATEGORY[];
+    categories: PRODUCT_CATEGORY[] | undefined;
 }) => {
     const formatName = (name: string) => name.replace(/ /g, '_');
     return (

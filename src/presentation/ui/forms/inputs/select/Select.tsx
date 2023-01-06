@@ -37,7 +37,7 @@ export const SelectInput = ({
     children,
     ...rest
 }: TEXT_INPUT_PROPS & {
-    options: any;
+    options: { label: string; value: string }[];
 } & InputHTMLAttributes<HTMLSelectElement>) => {
     return (
         <Column className="group relative w-full cursor-pointer">
@@ -128,8 +128,8 @@ export const SelectInput = ({
                     {...rest}
                 >
                     {children}
-                    {options.map((el: any, key: number) => (
-                        <option key={key} value={el.id ?? el.value}>
+                    {options.map((el, key) => (
+                        <option key={key} value={el.value}>
                             {el.label}
                         </option>
                     ))}

@@ -6,7 +6,7 @@ export const onChangeHandler = ({
     setValue,
 }: {
     event: React.ChangeEvent<HTMLSelectElement>;
-    setValue: (e?: any) => void;
+    setValue: (e?: unknown) => void;
 }) => {
     const selectedOptions = event.currentTarget.selectedOptions;
     const newColors = [];
@@ -21,7 +21,7 @@ export const Badge = ({
     onDelete,
 }: {
     text: string;
-    onDelete: (el?: any) => void;
+    onDelete: (el?: unknown) => void;
 }) => {
     return (
         <Row

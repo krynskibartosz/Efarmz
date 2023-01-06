@@ -4,13 +4,15 @@ import { MultilpleSelectSafariInput } from './DesktopSafari';
 import { isSafari } from 'react-device-detect';
 import { INPUT } from 'src/presentation/ui/forms/types';
 import { useMediaQuery } from 'src/presentation/hooks/useMediaQuery';
+type OPTION = { value: string; label: string };
 
 type MULTIPLE_SELECT = {
-    options: any[];
-    id: string;
     label: string;
+    id: string;
+    options: OPTION[];
     required?: boolean;
-    onChange?: any;
+    value: unknown[];
+    setValue: (e?: unknown) => void;
 };
 
 export const MultilpleSelectInput = ({ ...rest }: MULTIPLE_SELECT & INPUT) => {
