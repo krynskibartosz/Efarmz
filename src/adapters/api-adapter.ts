@@ -7,15 +7,22 @@ export class ApiAdapter implements ApiPort {
         this.baseUrl = baseUrl;
     }
 
-    async get(path: string, params?: object): Promise<any> {
-        const response = await fetch(`${this.baseUrl}${path}`, {
+    async get<T>(path: string, params?: { [key: string]: string }): Promise<T> {
+        let url = `${this.baseUrl}${path}`;
+        if (params) {
+            const searchParams = new URLSearchParams();
+            for (const key of Object.keys(params)) {
+                searchParams.set(key, params[key]);
+            }
+            url += `?${searchParams.toString()}`;
+        }
+        const response = await fetch(url, {
             method: 'GET',
-            params: params,
         });
         return await response.json();
     }
 
-    async post(path: string, body?: object): Promise<any> {
+    async post<T>(path: string, body?: object): Promise<T> {
         const response = await fetch(`${this.baseUrl}${path}`, {
             method: 'POST',
             body: JSON.stringify(body),
@@ -26,7 +33,7 @@ export class ApiAdapter implements ApiPort {
         return await response.json();
     }
 
-    async put(path: string, body?: object): Promise<any> {
+    async put<T>(path: string, body?: object): Promise<T> {
         const response = await fetch(`${this.baseUrl}${path}`, {
             method: 'PUT',
             body: JSON.stringify(body),
@@ -36,7 +43,7 @@ export class ApiAdapter implements ApiPort {
         });
         return await response.json();
     }
-    async delete(path: string): Promise<any> {
+    async delete<T>(path: string): Promise<T> {
         const response = await fetch(`${this.baseUrl}${path}`, {
             method: 'DELETE',
         });

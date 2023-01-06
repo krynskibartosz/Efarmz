@@ -16,10 +16,12 @@
         "jsx": "preserve",
         "incremental": true,
         "paths": {
-            "components": ["src/ui/index.ts"],
-            "lib": ["src/hooks/index.ts"],
-            "products": ["src/components/shopping/index.ts"],
-            "user": ["src/components/user/index.ts"]
+            "components": ["src/presentation/ui/index.ts"],
+            "lib": ["src/presentation/hooks/index.ts"],
+            "products": [
+                "src/presentation/components/components/shopping/index.ts"
+            ],
+            "user": ["src/presentation/components/components/user/index.ts"]
         }
     },
     "include": ["next-env.d.ts", "**/*.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"],

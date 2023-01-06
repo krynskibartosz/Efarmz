@@ -1,5 +1,5 @@
-import { ProductShow } from 'src/components/home/ProductShow';
-import { useFetchProducts } from 'src/hooks/services/shopping/useFetchProducts';
+import { ProductShow } from 'src/presentation/components/components/home/ProductShow';
+import { useFetchProducts } from 'src/presentation/hooks/services/shopping/useFetchProducts';
 
 function Home() {
     const { products, isLoading } = useFetchProducts();
