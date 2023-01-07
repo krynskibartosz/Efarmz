@@ -2,26 +2,50 @@ import { expect, test } from 'vitest';
 
 import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/mod_product';
 
-import { createRandomCart, createRandomProduct } from '__test__/mocks/product';
+import { createRandomCart } from '__test__/mocks/product';
 
 import {
-    // decrementTheQuantityOfAProduct,
+    decrementTheQuantityOfAProduct,
     removeProductWithSameID,
 } from 'src/core/usecases/shopping/action';
 
-const product = createRandomProduct();
-
 test('removeProductWithSameID removes all products with the same ID from the cart', () => {
+    const cart = createRandomCart().data;
     function createExpectedResult(
         cartData: PRODUCT[],
         productToRemove: PRODUCT
     ): PRODUCT[] {
         return cartData.filter((product) => product.id !== productToRemove.id);
     }
+    const expectedResult = createExpectedResult(cart, cart[cart.length - 1]);
 
-    const cart = createRandomCart().data;
-    const expectedResult = createExpectedResult(cart, product);
-
-    removeProductWithSameID({ cart, product });
+    removeProductWithSameID({ cart, product: cart[0] });
     expect(cart).toEqual(expectedResult);
+});
+
+test('decrementTheQuantityOfAProduct removes the product from the cart', () => {
+    const cart = createRandomCart().data;
+    const expected = cart.length - 1;
+    const result = decrementTheQuantityOfAProduct({
+        cart,
+        product: cart[cart.length - 1],
+    }).length;
+    expect(result).toEqual(expected);
+});
+
+test('decrementTheQuantityOfAProduct removes the product from the cart and does not change the order of the elements in the list', () => {
+    const cart = createRandomCart().data;
+    const originalCart = [...cart];
+    decrementTheQuantityOfAProduct({
+        cart,
+        product: cart[cart.length - 1],
+    });
+    let isOrderChanged = false;
+    for (let i = 0; i < cart.length; i++) {
+        if (cart[i] !== originalCart[i]) {
+            isOrderChanged = true;
+            break;
+        }
+    }
+    expect(isOrderChanged).toBe(false);
 });

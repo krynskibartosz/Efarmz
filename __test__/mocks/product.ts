@@ -130,8 +130,8 @@ export function createRandomProduct(): PRODUCT {
 }
 
 export function createRandomCart(): PRODUCTS {
-    const numProducts = +faker.datatype.number(50);
-    const products = new Array(Math.max(1, +faker.datatype.number(5)))
+    const numProducts = +faker.datatype.number(100);
+    const products = new Array(Math.max(1, +faker.datatype.number(100)))
         .fill(createRandomProduct())
         .filter((product) => product !== null && product !== undefined);
 

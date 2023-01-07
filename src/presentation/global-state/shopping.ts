@@ -29,14 +29,16 @@ export const shoppingCartSlice: StoreSlice<SHOPPING_CART_STORE> = (set) => ({
         );
     },
     deductProduct: (product) => {
-        set((state) =>
-            produce(state, (draft) => {
-                decrementTheQuantityOfAProduct({
-                    cart: draft.shoppingCart.basic,
+        set((state) => {
+            const newShoppingCart = {
+                ...state.shoppingCart,
+                basic: decrementTheQuantityOfAProduct({
+                    cart: state.shoppingCart.basic,
                     product,
-                });
-            })
-        );
+                }),
+            };
+            return { ...state, shoppingCart: newShoppingCart };
+        });
     },
     removeProduct: (product) => {
         set((state) =>

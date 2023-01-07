@@ -1,5 +1,6 @@
 import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/mod_product';
 import { removeElementById } from '../../../libraries/array';
+import produce from 'immer';
 
 type ACTIONS_PROPS = {
     cart: PRODUCT[];
@@ -10,7 +11,7 @@ export const decrementTheQuantityOfAProduct = ({
     cart,
     product,
 }: ACTIONS_PROPS) => {
-    removeElementById(cart, product.id);
+    return produce(cart, (draft) => removeElementById(draft, product.id));
 };
 
 export const removeProductWithSameID = ({ cart, product }: ACTIONS_PROPS) => {
