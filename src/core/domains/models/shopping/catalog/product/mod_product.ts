@@ -14,7 +14,7 @@ export type PRODUCTS = {
     total: number;
 };
 
-interface BRAND {
+export interface BRAND {
     id: string;
     name: string;
     parentId: string;
@@ -25,9 +25,9 @@ interface BRAND {
 
 export interface PRODUCT {
     ARTID: string;
-    availabilities_dates: undefined;
-    availabilities_days: undefined;
-    availability_date: undefined;
+    availabilities_dates: Date[];
+    availabilities_days: string[];
+    availability_date: Date;
     bio: boolean;
     box_price: number;
     brand: BRAND;
@@ -36,17 +36,17 @@ export interface PRODUCT {
     category_3: CATEGORY_N;
     description_long: string;
     description_short: string;
-    discount_tag: undefined;
+    discount_tag: string;
     dlc: string;
     ecotax: number;
-    exp_date: undefined;
+    exp_date: Date;
     fresh: boolean;
     gest_type: string;
     id: string;
     image: string;
     is_bio: boolean;
     is_deals: boolean;
-    is_web_express: number;
+    is_web_express: boolean;
     labels: LABELS;
     link: string;
     min_quantity: number;
@@ -58,25 +58,26 @@ export interface PRODUCT {
     out_of_delivery_window: boolean;
     parent_id: string;
     populaire: boolean;
-    position: undefined;
+    position: number;
     price: number;
     recipe_baking_time: string;
-    recipe_link: undefined;
+    recipe_link: string;
     recipe_prep_time: string;
     related: PRODUCT[];
     sale_price: number;
     step: number;
     stock_type: number;
-    subscription_available: number;
+    subscription_available: boolean;
     tag: boolean;
-    tags: undefined[];
+    tags: string[];
     thumbnail: string;
     type: string;
     unit: string;
-    unity: undefined;
+    unity: string;
     vat: number;
 }
-interface CATEGORY_N {
+
+export interface CATEGORY_N {
     banner: string;
     count: number;
     description_long: string;
@@ -94,7 +95,7 @@ interface CATEGORY_N {
     seo_title: string;
     thumbnail: string;
 }
-interface LABEL {
+export interface LABEL {
     id: string;
     name: string;
     product_id: string;
@@ -102,6 +103,6 @@ interface LABEL {
     type_name: string;
     link: string;
 }
-interface LABELS {
+export interface LABELS {
     labels: { [key: string]: LABEL };
 }

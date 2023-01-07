@@ -4,8 +4,8 @@ import { SHOPPING_CART } from 'src/core/domains/models/shopping/catalog/product/
 import { SHOPPING_CART_STORE } from 'src/core/domains/models/shopping/mod_checkout';
 import { StoreSlice } from './useRoot';
 import {
-    decrementProductQuantity,
-    removeAProductOfCart,
+    decrementTheQuantityOfAProduct,
+    removeProductWithSameID,
 } from 'src/core/usecases/shopping/action';
 
 const initialState: SHOPPING_CART = {
@@ -31,7 +31,7 @@ export const shoppingCartSlice: StoreSlice<SHOPPING_CART_STORE> = (set) => ({
     deductProduct: (product) => {
         set((state) =>
             produce(state, (draft) => {
-                decrementProductQuantity({
+                decrementTheQuantityOfAProduct({
                     cart: draft.shoppingCart.basic,
                     product,
                 });
@@ -41,7 +41,7 @@ export const shoppingCartSlice: StoreSlice<SHOPPING_CART_STORE> = (set) => ({
     removeProduct: (product) => {
         set((state) =>
             produce(state, (draft) => {
-                removeAProductOfCart({
+                removeProductWithSameID({
                     cart: draft.shoppingCart.basic,
                     product,
                 });

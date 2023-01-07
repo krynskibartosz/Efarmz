@@ -3,6 +3,7 @@ import { useFetchProducts } from 'src/presentation/hooks/services/shopping/useFe
 
 function Home() {
     const { products, isLoading } = useFetchProducts();
+
     return (
         <>
             <main className="xl:px-32 px-5 pb-10 mt-52 w-full">
