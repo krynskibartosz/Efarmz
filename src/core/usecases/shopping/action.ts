@@ -10,12 +10,16 @@ type ACTIONS_PROPS = {
 export const decrementTheQuantityOfAProduct = ({
     cart,
     product,
-}: ACTIONS_PROPS) => {
-    return produce(cart, (draft) => removeElementById(draft, product.id));
-};
+}: ACTIONS_PROPS) =>
+    produce(cart, (draft) => removeElementById(draft, product.id));
 
 export const removeProductWithSameID = ({ cart, product }: ACTIONS_PROPS) => {
     while (cart.some((item) => item.id === product.id)) {
         removeElementById(cart, product.id);
     }
 };
+
+export const addProductToShoppingCart = (cart: PRODUCT[], product: PRODUCT) =>
+    produce(cart, (draft) => {
+        draft.splice(cart.length, 0, product);
+    });

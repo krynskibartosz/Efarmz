@@ -10,11 +10,13 @@ export type ADRESS = {
     deliveryDate: string;
 };
 
+export type USER_DATA = {
+    adress: ADRESS;
+    hasMinimalAdress: boolean;
+};
+
 export type USER = {
-    data: {
-        adress: ADRESS;
-        hasMinimalAdress: boolean;
-    };
+    data: USER_DATA;
     language: LANGUAGE;
 };
 export type USER_STORE = {

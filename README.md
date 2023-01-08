@@ -14,6 +14,17 @@
 ### Folder architecture
 
 <!--
+README.md
+-__test__
+    - mocks
+        - product.ts
+        - user.ts
+    - unit
+        - shopping
+            - http.test.ts
+            - product.test.ts
+        - user
+            - actions.test.ts
 -public
 -src
     - adapters
@@ -27,25 +38,25 @@
                 -actions.ts
         - domains
             -logic
-                - language.ts
+                - mod_language.ts
                 - checkout.ts
                 - user.ts
             -models
                 - shopping
                     - catalog
                         - category
-                            -  category.ts
+                            -  mod_category.ts
                         - product
                             - by-category
-                                - products-response.ts
-                            - product-response.ts
-                            - product-sotre.ts
-                            - product.ts
-                        checkout.ts
+                                - mod_products-response.ts
+                            - mod_product-response.ts
+                            - mod_product-sotre.ts
+                            - mod_product.ts
+                        mod_checkout.ts
                 - user
                     -schema
-                        - deliveryOptions.ts
-                    user.ts
+                        - mod_deliveryOptions.ts
+                    mod_user.ts
     - infrastructure
         -api
             -client
@@ -120,113 +131,3 @@
     - ports
         - shopping-port.ts
         - user-port.ts
--test
-
-
--public
--src
-    - adapters
-        - shopping-api-adapter.ts
-        - user-api-adapter.ts
-    - core
-        - usecases
-            - shopping
-                -actions.ts
-            - user
-                -actions.ts
-        - domains
-            -logic
-                - language.ts
-                - checkout.ts
-                - user.ts
-            -models
-                - shopping
-                    - catalog
-                        - category
-                            -  category.ts
-                        - product
-                            - by-category
-                                - products-response.ts
-                            - product-response.ts
-                            - product-sotre.ts
-                            - product.ts
-                        checkout.ts
-                - user
-                    -schema
-                        - deliveryOptions.ts
-                    user.ts
-    - infrastructure
-        -api
-            -client
-                -shopping
-                    - catalog
-                        - category.ts
-                        - product.ts
-                -user
-                    - user.ts
-    - libraries
-        - array.ts
-        - date.ts
-    - pages
-        - shopping
-            - checkout.tsx
-            - catalog
-                - [product-category]
-                    - index.tsx
-    - presentation
-        - components
-            - home
-                - ProductShow.tsx
-            - layouts
-                - Footer.tsx
-                - Header.tsx
-            - shopping
-                - catalog
-                    - category
-                        - SubNavbar.tsx
-                    - product
-                        - ProductCard.tsx
-                        - ProductContainer.tsx
-                    - checkout
-                        - receipt
-                            - CommandResume.tsx
-                            - index.tsx
-                            - logic.ts
-                        - shopping-cart
-                            - logic.ts
-                            - ProductCart.tsx
-                            - ShoppingCart.tsx
-                            - ShoppingCartItems.tsx
-                    - ProductShow.tsx
-                    - index.ts
-            - user
-                - delivery
-                    - DeliveryOptionsModal.tsx
-                - index.tsx
-        - global-state
-            -actions
-            -shopping.ts
-            -user.ts
-            -useRoot.ts
-        - hooks
-            - services
-                - shopping
-                    - useFetchItemsByProductCategory.tsx
-                    - useFetchProducts.tsx
-                    - useFetchProductsCategory.tsx
-                - user
-                    - useFetchUserDeliveryDate.tsx
-            - index.ts
-            - useEventListener.ts
-            - useHasHydrated.ts
-            - useIsomorphicLayoutEffect.ts
-            - useKeyPress.ts
-            - useLockedBody.ts
-            - useMediaQuery.ts
-            - useModal.ts
-            - useUpdateEffect.ts
-        - ui
-    - ports
-        - shopping-port.ts
-        - user-port.ts
--test -->

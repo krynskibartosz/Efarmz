@@ -3,11 +3,21 @@ import { expect, test } from 'vitest';
 import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/mod_product';
 
 import { createRandomCart } from '__test__/mocks/product';
+import { createRandomProduct } from '__test__/mocks/product';
 
 import {
+    addProductToShoppingCart,
     decrementTheQuantityOfAProduct,
     removeProductWithSameID,
 } from 'src/core/usecases/shopping/action';
+
+test('addProductToShoppingCart adds a product to the shopping cart', () => {
+    const state = createRandomCart();
+    const product = createRandomProduct();
+    const result = addProductToShoppingCart(state.data, product);
+    const expectedResult = [...state.data, product];
+    expect(result).toEqual(expectedResult);
+});
 
 test('removeProductWithSameID removes all products with the same ID from the cart', () => {
     const cart = createRandomCart().data;

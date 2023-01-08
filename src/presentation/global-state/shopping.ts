@@ -4,6 +4,7 @@ import { SHOPPING_CART } from 'src/core/domains/models/shopping/catalog/product/
 import { SHOPPING_CART_STORE } from 'src/core/domains/models/shopping/mod_checkout';
 import { StoreSlice } from './useRoot';
 import {
+    addProductToShoppingCart,
     decrementTheQuantityOfAProduct,
     removeProductWithSameID,
 } from 'src/core/usecases/shopping/action';
@@ -14,31 +15,27 @@ const initialState: SHOPPING_CART = {
     subscriptions: [],
 };
 
-// todo!: there's a bug when the remove product is used in the shopping cart,
-//! It re order the list when we deduct a product from the shoppingCart
 export const shoppingCartSlice: StoreSlice<SHOPPING_CART_STORE> = (set) => ({
     shoppingCart: initialState,
     addProduct: (product) => {
         set((state) =>
             produce(state, (draft) => {
-                draft.shoppingCart.basic = [
-                    ...state.shoppingCart.basic,
-                    product,
-                ];
+                draft.shoppingCart.basic = addProductToShoppingCart(
+                    state.shoppingCart.basic,
+                    product
+                );
             })
         );
     },
     deductProduct: (product) => {
-        set((state) => {
-            const newShoppingCart = {
-                ...state.shoppingCart,
-                basic: decrementTheQuantityOfAProduct({
+        set((state) =>
+            produce(state, (draft) => {
+                draft.shoppingCart.basic = decrementTheQuantityOfAProduct({
                     cart: state.shoppingCart.basic,
                     product,
-                }),
-            };
-            return { ...state, shoppingCart: newShoppingCart };
-        });
+                });
+            })
+        );
     },
     removeProduct: (product) => {
         set((state) =>

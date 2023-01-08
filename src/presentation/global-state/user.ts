@@ -19,9 +19,9 @@ export const initialUser: USER = {
 export const userSlice: StoreSlice<USER_STORE> = (set) => ({
     user: initialUser,
     updateMinimalAdress: (adress) => {
-        set((state) =>
-            produce(state, (draft) => {
-                updateUserAdress(draft.user.data, adress);
+        set(
+            produce((state) => {
+                state.user.data = updateUserAdress(state.user.data, adress);
             })
         );
     },
