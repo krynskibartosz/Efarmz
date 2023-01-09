@@ -1,5 +1,5 @@
-import { ACTIONS } from '../../../../presentation/global-state/actions/mod_user';
-import { COUNTRY, LANGUAGE } from '../../logic/mod_language';
+import { ACTIONS } from '../../../../presentations/global-state/actions/mod_user';
+import { COUNTRY } from '../../logic/mod_language';
 
 export type DELIVERY_MODE = 'home' | 'collection-point';
 
@@ -17,7 +17,6 @@ export type USER_DATA = {
 
 export type USER = {
     data: USER_DATA;
-    language: LANGUAGE;
 };
 export type USER_STORE = {
     user: USER;

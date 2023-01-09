@@ -1,5 +1,6 @@
-import { Header } from 'src/presentation/components/layouts/Header';
-import '../../global.css';
+import { Header } from 'src/presentations/components/layouts/Header';
+import '../presentations/css/global.css';
+import '../presentations/css/reset.css';
 import type { AppProps } from 'next/app';
 
 function MyApp({ Component, pageProps }: AppProps) {

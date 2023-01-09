@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import { useState } from 'react';
-import { ProductsOfACategoryShow } from 'src/presentation/components/shopping/catalog/ProductShow';
+import { ProductsOfACategoryShow } from 'src/presentations/components/shopping/catalog/ProductShow';
 
-import { useFetchItemsByProductCategory } from 'src/presentation/hooks/services/shopping/useFetchItemsByProductCategory';
+import { useFetchItemsByProductCategory } from 'src/presentations/hooks/services/shopping/useFetchItemsByProductCategory';
 
 // todo: Optimiser la pagination pour ne plus fetch certain produit temporairement
 const ProductCategory = () => {

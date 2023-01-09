@@ -1,6 +1,8 @@
-import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/mod_product';
+interface Element {
+    id: string;
+}
 
-export function removeElementById(array: PRODUCT[], id: string) {
+export function removeElementById(array: Element[], id: string) {
     const index = array.findIndex((item) => item.id === id);
     if (index !== -1) {
         array.splice(index, 1);

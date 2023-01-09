@@ -25,9 +25,9 @@ export interface BRAND {
 
 export interface PRODUCT {
     ARTID: string;
-    availabilities_dates: Date[];
+    availabilities_dates: string[];
     availabilities_days: string[];
-    availability_date: Date;
+    availability_date: string;
     bio: boolean;
     box_price: number;
     brand: BRAND;
@@ -39,7 +39,7 @@ export interface PRODUCT {
     discount_tag: string;
     dlc: string;
     ecotax: number;
-    exp_date: Date;
+    exp_date: string;
     fresh: boolean;
     gest_type: string;
     id: string;
@@ -63,7 +63,7 @@ export interface PRODUCT {
     recipe_baking_time: string;
     recipe_link: string;
     recipe_prep_time: string;
-    related: PRODUCT[];
+    related: PRODUCT[] | null;
     sale_price: number;
     step: number;
     stock_type: number;

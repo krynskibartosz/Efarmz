@@ -17,14 +17,21 @@
 README.md
 -__test__
     - mocks
-        - product.ts
+        - shopping
+            - categories.ts
+            - product.ts
+            - productsByCategory.ts
         - user.ts
     - unit
         - shopping
-            - http.test.ts
-            - product.test.ts
+            - catalog
+                - categories
+                    -  getProductsByCategory.test.ts
+                - products
+                    -  getProducts.test.ts
         - user
             - actions.test.ts
+        - adapter.ts
 -public
 -src
     - adapters
@@ -33,9 +40,9 @@ README.md
     - core
         - usecases
             - shopping
-                -actions.ts
+                - product-actions.ts
             - user
-                -actions.ts
+                - user-actions.ts
         - domains
             -logic
                 - mod_language.ts
@@ -49,8 +56,6 @@ README.md
                         - product
                             - by-category
                                 - mod_products-response.ts
-                            - mod_product-response.ts
-                            - mod_product-sotre.ts
                             - mod_product.ts
                         mod_checkout.ts
                 - user
@@ -75,7 +80,7 @@ README.md
             - catalog
                 - [product-category]
                     - index.tsx
-    - presentation
+    - presentations
         - components
             - home
                 - ProductShow.tsx
@@ -106,7 +111,9 @@ README.md
                     - DeliveryOptionsModal.tsx
                 - index.tsx
         - global-state
-            -actions
+            - actions
+                -  mod_shopping.ts
+                -  mod_user.ts
             -shopping.ts
             -user.ts
             -useRoot.ts
@@ -118,16 +125,17 @@ README.md
                     - useFetchProductsCategory.tsx
                 - user
                     - useFetchUserDeliveryDate.tsx
+            - event
+                - useEventListener.ts
+                - useHasHydrated.ts
+                - useIsomorphicLayoutEffect.ts
+                - useKeyPress.ts
+                - useLockedBody.ts
+                - useMediaQuery.ts
+                - useModal.ts
+                - useUpdateEffect.ts
             - index.ts
-            - useEventListener.ts
-            - useHasHydrated.ts
-            - useIsomorphicLayoutEffect.ts
-            - useKeyPress.ts
-            - useLockedBody.ts
-            - useMediaQuery.ts
-            - useModal.ts
-            - useUpdateEffect.ts
-        - ui
+        - ui/
     - ports
         - shopping-port.ts
         - user-port.ts

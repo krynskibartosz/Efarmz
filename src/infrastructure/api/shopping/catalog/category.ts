@@ -1,5 +1,5 @@
-import { PRODUCT_CATEGORY_API_RESPONSE } from 'src/core/domains/models/shopping/catalog/category/mod_category';
-import { RESPONSE } from 'src/core/domains/models/shopping/catalog/product/by-category/mod_products_response';
+import { PRODUCTS_CATEGORIES_API_RESPONSE } from 'src/core/domains/models/shopping/catalog/category/mod_categories';
+import { PRODUCTS_BY_CATEGORY_RESPONSE } from 'src/core/domains/models/shopping/catalog/product/by-category/mod_products_by_category';
 import { ShoppingApiPort } from 'src/ports/shopping-port';
 
 export class CategoryService {
@@ -15,16 +15,18 @@ export class CategoryService {
     }: {
         currentPage: number;
         query: string;
-    }): Promise<RESPONSE> {
-        const response = await this.api.get<RESPONSE>(
+    }): Promise<PRODUCTS_BY_CATEGORY_RESPONSE> {
+        const response = await this.api.get<PRODUCTS_BY_CATEGORY_RESPONSE>(
             `categories/${query}?page=${currentPage}`
         );
         return response;
     }
     async getProductsCategories(
         url: string
-    ): Promise<PRODUCT_CATEGORY_API_RESPONSE> {
-        const response = await this.api.get<PRODUCT_CATEGORY_API_RESPONSE>(url);
+    ): Promise<PRODUCTS_CATEGORIES_API_RESPONSE> {
+        const response = await this.api.get<PRODUCTS_CATEGORIES_API_RESPONSE>(
+            url
+        );
         return response;
     }
 }

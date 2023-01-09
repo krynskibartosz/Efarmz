@@ -1,7 +1,4 @@
-import {
-    PRODUCT,
-    PRODUCTS,
-} from 'src/core/domains/models/shopping/catalog/product/mod_product';
+import { PRODUCTS } from 'src/core/domains/models/shopping/catalog/product/mod_product';
 import { ShoppingApiPort } from 'src/ports/shopping-port';
 
 export class ProductService {
@@ -11,8 +8,8 @@ export class ProductService {
         this.api = api;
     }
 
-    async getProducts(): Promise<PRODUCT[]> {
+    async getProducts(): Promise<PRODUCTS> {
         const response = await this.api.get<PRODUCTS>('products');
-        return response.data;
+        return response;
     }
 }
