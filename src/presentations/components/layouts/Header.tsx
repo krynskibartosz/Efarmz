@@ -37,7 +37,7 @@ export const Header = () => {
                 </Row>
                 <nav className="h-5 mb-5 md:mb-0">
                     {/* // todo: create a skeleton of text link */}
-                    <SubNavbar categories={categories?.data} />
+                    <SubNavbar categories={categories} />
                 </nav>
                 <div className="block md:hidden">
                     <DeliveryDetailsDisplay modal={modal} />

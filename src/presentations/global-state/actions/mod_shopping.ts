@@ -5,5 +5,5 @@ export type ACTIONS = {
     addProduct: (product: PRODUCT) => void;
     deductProduct: (product: PRODUCT) => void;
     removeProduct: (product: PRODUCT) => void;
-    setCategories: (product: PRODUCT_CATEGORY[]) => void;
+    setCategoriesToCatalog: (product: PRODUCT_CATEGORY[]) => void;
 };

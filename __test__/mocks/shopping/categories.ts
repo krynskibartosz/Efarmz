@@ -24,7 +24,16 @@ const mockProductCategory: PRODUCT_CATEGORY = {
     thumbnail: faker.image.imageUrl(),
 };
 
+const numCategories = 10; // number of mock categories to create
+const mockCategories: PRODUCT_CATEGORY[] = [];
+
+for (let i = 0; i < numCategories; i++) {
+    const mockCategory: PRODUCT_CATEGORY = mockProductCategory;
+
+    mockCategories.push(mockCategory);
+}
+
 export const mockProductCategoryApiResponse: PRODUCTS_CATEGORIES_API_RESPONSE =
     {
-        data: [mockProductCategory],
+        data: mockCategories,
     };

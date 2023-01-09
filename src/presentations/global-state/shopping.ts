@@ -5,13 +5,13 @@ import {
     addProductToShoppingCart,
     decrementTheQuantityOfAProduct,
     removeProductWithSameID,
-    // setCategoriesToCatalog,
+    setCategories,
 } from 'src/core/usecases/shopping/product-action';
 import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/mod_product';
 import { ACTIONS } from './actions/mod_shopping';
 import { PRODUCT_CATEGORY } from 'src/core/domains/models/shopping/catalog/category/mod_categories';
 
-type CATALOG = {
+export type CATALOG = {
     products: [];
     categories: PRODUCT_CATEGORY[];
 };
@@ -75,13 +75,13 @@ export const shoppingCartSlice: StoreSlice<SHOPPING_CART_STORE> = (set) => ({
             })
         );
     },
-    setCategories(categories) {
+    setCategoriesToCatalog(categories) {
         set((state) =>
             produce(state, (draft) => {
-                // setCategoriesToCatalog({
-                //     catalog: draft.shoppingCart.catalog,
-                //     categories: categories,
-                // });
+                draft.shoppingCart.catalog = setCategories(
+                    state.shoppingCart.catalog,
+                    categories
+                );
             })
         );
     },

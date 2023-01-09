@@ -1,6 +1,8 @@
 import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/mod_product';
 import { removeElementById } from '../../../libraries/array';
 import produce from 'immer';
+import { CATALOG } from 'src/presentations/global-state/shopping';
+import { PRODUCT_CATEGORY } from 'src/core/domains/models/shopping/catalog/category/mod_categories';
 
 type ACTIONS_PROPS = {
     cart: PRODUCT[];
@@ -23,3 +25,12 @@ export const addProductToShoppingCart = (cart: PRODUCT[], product: PRODUCT) =>
     produce(cart, (draft) => {
         draft.splice(cart.length, 0, product);
     });
+
+export const setCategories = (
+    catalog: CATALOG,
+    categories: PRODUCT_CATEGORY[]
+) => {
+    return produce(catalog, (draft) => {
+        draft.categories = [...categories];
+    });
+};
