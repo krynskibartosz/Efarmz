@@ -1,17 +1,17 @@
 import { useState, SyntheticEvent } from 'react';
 
-export type MODAL = {
-    opened: string;
-    toggle: (e: string) => void;
+export type MODAL<T> = {
+    opened: T | string;
+    toggle: (e: '' | T) => void;
     close: (e?: SyntheticEvent<HTMLButtonElement>) => void;
 };
 
-export const useModal = (): MODAL => {
-    const [toggleModal, setToggleModal] = useState('');
+export const useModal = <T>(initialState: T | '' = ''): MODAL<T> => {
+    const [toggleModal, setToggleModal] = useState<T | ''>(initialState);
 
-    const modal: MODAL = {
+    const modal: MODAL<T> = {
         opened: toggleModal,
-        toggle: (e: string) => setToggleModal(e),
+        toggle: (e: '' | T) => setToggleModal(e),
         close: () => setToggleModal(''),
     };
 

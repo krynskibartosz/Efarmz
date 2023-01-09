@@ -23,11 +23,14 @@ type DELIVERY_OPTIONS_DTO = {
     zipCode: string;
 };
 
-// todo: lock body only when modal is open
-
-export const DeliveryOptionsModal = ({ modal }: { modal: MODAL }) => {
+export const DeliveryOptionsModal = ({
+    modal,
+}: {
+    modal: MODAL<'deliverySlot'>;
+}) => {
     const onExit = useKeyPress(27);
-    // useLockedBody(modal.opened.length > 0, 'root');
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
     const { user, updateMinimalAdress } = useRootStore.getState();
     const {
         adress: { country, zipCode, deliveryDate },
@@ -88,7 +91,7 @@ export const DeliveryOptionsModal = ({ modal }: { modal: MODAL }) => {
     }, [onExit]);
 
     return (
-        <CardModalOverlay modal={modal}>
+        <CardModalOverlay id="deliverySlot" modal={modal}>
             <Column className="relative w-full  h-[100%-20px] overflow-y-auto ">
                 <CloseButton modal={modal} />
                 <form
@@ -202,7 +205,7 @@ const DeliveryDateToDisplay = ({
     return <></>;
 };
 
-const CloseButton = ({ modal }: { modal: MODAL }) => {
+const CloseButton = ({ modal }: { modal: MODAL<'deliverySlot'> }) => {
     return (
         <Row
             horizontalPosition="right"

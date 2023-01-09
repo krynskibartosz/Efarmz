@@ -5,6 +5,27 @@ import { ProductService } from 'src/infrastructure/api/shopping/catalog/product'
 import { ShoppingApiPort } from 'src/ports/shopping-port';
 import { ProductShow } from 'src/presentations/components/home/ProductShow';
 
+const api: ShoppingApiPort = new ShoppingApiAdapter(
+    process.env.NEXT_PUBLIC_END_POINT as string
+);
+const productService = new ProductService(api);
+
+export const getStaticProps: GetStaticProps = async () => {
+    let products;
+    try {
+        products = await productService.getProducts();
+    } catch (error) {
+        console.error(error);
+    }
+
+    return {
+        props: {
+            products,
+        },
+        revalidate: 60, // revalidate the component every minutes
+    };
+};
+
 const Home = ({ products }: { products: PRODUCTS }) => {
     return (
         <>
@@ -16,28 +37,6 @@ const Home = ({ products }: { products: PRODUCTS }) => {
             </main>
         </>
     );
-};
-
-const api: ShoppingApiPort = new ShoppingApiAdapter(
-    process.env.NEXT_PUBLIC_END_POINT as string
-);
-const productService = new ProductService(api);
-
-export const getStaticProps: GetStaticProps = async () => {
-    let products = null;
-
-    try {
-        products = await productService.getProducts();
-    } catch (error) {
-        console.error(error);
-    }
-
-    return {
-        props: {
-            products,
-        },
-        revalidate: 60, // revalidate the component every 120 seconds
-    };
 };
 
 export default Home;

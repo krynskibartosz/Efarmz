@@ -43,7 +43,7 @@ const BasicShoppingActionButton = ({ product }: { product: PRODUCT }) => {
                 verticalPosition="center"
                 className={classnames(
                     'border-t',
-                    'rounded-r-md',
+                    'rounded-r-xl',
                     'transition-all',
                     'duration-300',
                     'ease-in-out',
@@ -68,11 +68,11 @@ const BasicShoppingActionButton = ({ product }: { product: PRODUCT }) => {
                     onClick={() => addProduct(product)}
                     className={classnames(
                         'text-green-700',
-                        'rounded-l-md',
+                        'rounded-l-xl',
                         'py-2',
                         'hover:bg-[#EEFCF3]',
                         'w-full',
-                        'rounded-md'
+                        'roundedxld'
                     )}
                 >
                     Ajouter
@@ -138,7 +138,7 @@ const SubscriptionsShoppingActionsButton = () => {
                     'duration-300',
                     'ease-in-out',
                     'disabled:hover:brightness-100',
-                    'rounded-b-md',
+                    'rounded-b-xl',
                     'hover:brightness-110',
                     'light',
                     'font-semibold',

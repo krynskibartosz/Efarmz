@@ -6,18 +6,17 @@ import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/mod_pr
 import { ProductCardDetails } from './ProductCardDetails';
 import { ProductActions } from './ProductActions';
 
-// todo: The image doesn't have the good size on first render
 export const ProductCard = ({ product }: { product: PRODUCT }) => {
     return (
         <Card as="article">
-            <div className="relative w-full">
-                <TypeBadges product={product} />
-                <div className="relative  aspect-square  w-full object-cover ">
+            <div className="relative w-full h-min">
+                <QuantityBadge product={product} />
+                <div className="relative  aspect-square  w-full object-cover">
                     <Image
                         fill
                         src={product.image}
                         alt={product.name}
-                        className="rounded-t-md "
+                        className="rounded-t-xl"
                     />
                 </div>
             </div>
@@ -30,7 +29,7 @@ export const ProductCard = ({ product }: { product: PRODUCT }) => {
     );
 };
 
-const TypeBadges = ({ product }: { product: PRODUCT }) => {
+const QuantityBadge = ({ product }: { product: PRODUCT }) => {
     if (product.unit.length > 0)
         return (
             <div

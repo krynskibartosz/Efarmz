@@ -10,9 +10,8 @@ import useRootStore from 'src/presentations/global-state/useRoot';
 import { MODAL } from 'src/presentations/hooks/event/useModal';
 
 export const Header = () => {
-    const modal = useModal();
+    const modal = useModal<'deliverySlot'>();
     const { categories } = useFetchProductsCategories();
-    //todo:  put a height on the header
 
     return (
         <>
@@ -40,7 +39,7 @@ export const Header = () => {
                     {/* // todo: create a skeleton of text link */}
                     <SubNavbar categories={categories} />
                 </nav>
-                <div className="block md:hidden">
+                <div className="block md:hidden min-h-[32px]">
                     <DeliveryDetailsDisplay modal={modal} />
                 </div>
             </header>
@@ -77,7 +76,12 @@ const ShoppingCartLink = () => {
     return <></>;
 };
 
-const DeliveryDetailsDisplay = ({ modal }: { modal: MODAL }) => {
+// todo: reset data when the modal close
+const DeliveryDetailsDisplay = ({
+    modal,
+}: {
+    modal: MODAL<'deliverySlot'>;
+}) => {
     const hasHydrated = useHasHydrated();
 
     const { user } = useRootStore(

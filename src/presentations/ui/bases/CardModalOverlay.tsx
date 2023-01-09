@@ -1,16 +1,36 @@
 import classNames from 'classnames';
 import { Overlay, ClickOutside } from '../utils';
 import { Column } from './containers/Containers';
-import { MODAL } from 'src/presentations/hooks/event/useModal';
 
-export const CardModalOverlay = ({
+import { SyntheticEvent, useEffect } from 'react';
+import { useLockedBody } from 'lib';
+
+type MODAL<T> = {
+    opened: T | string;
+    toggle: (e: '' | T) => void;
+    close: (e?: SyntheticEvent<HTMLButtonElement>) => void;
+};
+
+export const CardModalOverlay = <T extends string>({
     children,
     modal,
+    id,
 }: {
     children: JSX.Element;
-    modal: MODAL;
+    modal: MODAL<T>;
+    id: string | '';
 }) => {
-    const isModalOpen = modal.opened === 'deliverySlot';
+    const [_, setLocked] = useLockedBody();
+
+    const isModalOpen = modal.opened === id;
+    useEffect(() => {
+        if (isModalOpen) {
+            setLocked(true);
+        }
+        if (!isModalOpen) {
+            setLocked(false);
+        }
+    }, [isModalOpen, setLocked]);
 
     return (
         <Overlay

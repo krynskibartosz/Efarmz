@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { Row } from 'src/presentations/ui';
 import { PRODUCT_CATEGORY } from 'src/core/domains/models/shopping/catalog/category/mod_categories';
 import { useHasHydrated } from 'lib';
+export const formatName = (name: string) => name.replace(/ /g, '_');
 
 export const SubNavbar = ({
     categories,
@@ -10,7 +11,6 @@ export const SubNavbar = ({
     categories: PRODUCT_CATEGORY[] | undefined;
 }) => {
     const hasHydrated = useHasHydrated();
-    const formatName = (name: string) => name.replace(/ /g, '_');
     return (
         <Row
             horizontalPosition="between"

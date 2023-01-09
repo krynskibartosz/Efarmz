@@ -31,7 +31,7 @@ const TagBadges = ({ product }: { product: PRODUCT }) => {
     const className =
         'text-[#00C5FF] font-medium border text-sm border-[#00C5FF] rounded-md py-0.5 px-3';
     return (
-        <Row className="w-ful gap-x-2">
+        <Row as="ul" className="w-ful gap-x-2">
             {product.is_bio && <li className={className}>Bio</li>}
             {product.new && <li className={className}>Nouveau</li>}
             {product.fresh && <li className={className}>Frais</li>}

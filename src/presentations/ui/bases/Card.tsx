@@ -15,7 +15,7 @@ const MobileHover = ({ children }: { children: ReactNode | ReactNode[] }) => (
 export const Card = ({ children, as = 'div' }: CARD) => {
     return (
         <MobileHover>
-            <Column className={`h-full rounded-md  shadow-main`} as={as}>
+            <Column className={`h-full  shadow-main`} as={as}>
                 {children}
             </Column>
         </MobileHover>
