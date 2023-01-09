@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/mod_product';
-import { ProductCardSkeleton, ProductCard } from './ProductCard';
+import { ProductCardSkeleton, ProductCard } from './card/ProductCard';
 
 type PRODUCT_CONTAINER_PROPS = {
     products: PRODUCT[] | undefined;
@@ -21,7 +21,7 @@ export const ProductsContainer = ({
                 'grid-cols-12',
                 'grid-rows-6',
                 'gap-y-8',
-                'md:gap-x-14',
+                'gap-x-5',
                 'md:gap-y-12'
             )}
         >
@@ -35,11 +35,13 @@ export const ProductsContainer = ({
 };
 
 const productGridClassName = classnames(
-    'col-span-full',
     'row-span-6',
+    'col-span-full',
+    'sm:col-span-6',
     'md:col-span-6',
-    'xl:col-span-4',
-    '2xl:col-span-4'
+    'lg:col-span-4',
+    'xl:col-span-3',
+    '2xl:col-span-3'
 );
 
 const ProductList = ({
@@ -64,7 +66,7 @@ const ProductList = ({
     return (
         <>
             {products?.map((product: PRODUCT, i) => {
-                if (i > numberOfProductsToDisplay) return <></>;
+                if (i > numberOfProductsToDisplay) return <div key={i}></div>;
                 return (
                     <li className={productGridClassName} key={i}>
                         <ProductCard product={product} />

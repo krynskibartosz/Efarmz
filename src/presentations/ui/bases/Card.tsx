@@ -1,8 +1,9 @@
-import { ReactNode } from 'react';
+import { ElementType, ReactNode } from 'react';
 import { Column } from './containers/Containers';
 
 interface CARD {
     children: JSX.Element | ReactNode | ReactNode[];
+    as: ElementType;
 }
 
 const MobileHover = ({ children }: { children: ReactNode | ReactNode[] }) => (
@@ -11,12 +12,10 @@ const MobileHover = ({ children }: { children: ReactNode | ReactNode[] }) => (
     </div>
 );
 
-export const Card = ({ children }: CARD) => {
+export const Card = ({ children, as = 'div' }: CARD) => {
     return (
         <MobileHover>
-            <Column
-                className={`h-full rounded-md border border-gray-200 shadow-main`}
-            >
+            <Column className={`h-full rounded-md  shadow-main`} as={as}>
                 {children}
             </Column>
         </MobileHover>
