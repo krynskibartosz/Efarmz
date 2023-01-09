@@ -71,10 +71,6 @@ export const DeliveryOptionsModal = ({ modal }: { modal: MODAL }) => {
         modal.close();
     };
 
-    useUpdateEffect(() => {
-        modal.close();
-    }, [onExit]);
-
     const deliveryDateToDisplay = () => {
         if (error) {
             return error;
@@ -87,6 +83,9 @@ export const DeliveryOptionsModal = ({ modal }: { modal: MODAL }) => {
         }
         return '';
     };
+    useUpdateEffect(() => {
+        modal.close();
+    }, [onExit]);
 
     return (
         <CardModalOverlay modal={modal}>

@@ -1,7 +1,7 @@
 import { ProductShow } from 'src/presentations/components/home/ProductShow';
 import { useFetchProducts } from 'src/presentations/hooks/services/shopping/useFetchProducts';
 
-function Home() {
+const Home = () => {
     const { products, isLoading } = useFetchProducts();
 
     return (
@@ -14,5 +14,5 @@ function Home() {
             </main>
         </>
     );
-}
+};
 export default Home;

@@ -2,14 +2,18 @@ import { expect, test } from 'vitest';
 
 import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/mod_product';
 
-import { createRandomCart } from '__test__/mocks/shopping/product';
-import { createRandomProduct } from '__test__/mocks/shopping/product';
+import {
+    createRandomCart,
+    createRandomProduct,
+} from '__test__/mocks/shopping/product';
 
 import {
-    addProductToShoppingCart,
     decrementTheQuantityOfAProduct,
     removeProductWithSameID,
+    setCategories,
+    addProductToShoppingCart,
 } from 'src/core/usecases/shopping/product-action';
+import { mockProductCategoryApiResponse } from '__test__/mocks/shopping/categories';
 
 test('addProductToShoppingCart adds a product to the shopping cart', () => {
     const state = createRandomCart();
@@ -21,12 +25,12 @@ test('addProductToShoppingCart adds a product to the shopping cart', () => {
 
 test('removeProductWithSameID removes all products with the same ID from the cart', () => {
     const cart = createRandomCart().data;
-    function createExpectedResult(
+    const createExpectedResult = (
         cartData: PRODUCT[],
         productToRemove: PRODUCT
-    ): PRODUCT[] {
-        return cartData.filter((product) => product.id !== productToRemove.id);
-    }
+    ): PRODUCT[] =>
+        cartData.filter((product) => product.id !== productToRemove.id);
+
     const expectedResult = createExpectedResult(cart, cart[cart.length - 1]);
 
     removeProductWithSameID({ cart, product: cart[0] });
@@ -58,4 +62,13 @@ test('decrementTheQuantityOfAProduct removes the product from the cart and does 
         }
     }
     expect(isOrderChanged).toBe(false);
+});
+test('addProductToShoppingCart adds a product to the shopping cart', () => {
+    const state = mockProductCategoryApiResponse;
+    const result = setCategories(
+        { products: [], categories: state.data },
+        state.data
+    );
+    const expectedResult = [...state.data];
+    expect(result.categories).toEqual(expectedResult);
 });

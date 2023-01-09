@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
 
-export function useUpdateEffect(
+export const useUpdateEffect = (
     callback: () => void,
     dependencies: unknown[]
-): void {
+): void => {
     const firstRenderRef = useRef<boolean>(true);
 
     useEffect(() => {
@@ -14,4 +14,4 @@ export function useUpdateEffect(
         return callback();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, dependencies);
-}
+};

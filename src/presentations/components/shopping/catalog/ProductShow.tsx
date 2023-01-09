@@ -2,6 +2,7 @@ import { Row, Pagination } from 'src/presentations/ui';
 import { ProductsContainer } from './product/ProductsContainer';
 import { PRODUCTS } from 'src/core/domains/models/shopping/catalog/product/mod_product';
 
+// todo: create on object pagination props
 export const ProductsOfACategoryShow = ({
     currentPage,
     setCurrentPage,

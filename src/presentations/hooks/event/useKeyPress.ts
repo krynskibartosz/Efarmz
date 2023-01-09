@@ -7,21 +7,21 @@ export const useKeyPress = (targetKeyCode: string | number): boolean => {
     useEffect(() => {
         let prevKeyCode: string | number = '';
 
-        function downHandler({ keyCode }: { keyCode: number }) {
+        const downHandler = ({ keyCode }: { keyCode: number }) => {
             if (prevKeyCode === targetKeyCode) return;
 
             if (keyCode === targetKeyCode) {
                 setKeyPressed(true);
                 prevKeyCode = keyCode;
             }
-        }
+        };
 
-        function upHandler({ keyCode }: { keyCode: number }) {
+        const upHandler = ({ keyCode }: { keyCode: number }) => {
             if (keyCode === targetKeyCode) {
                 setKeyPressed(false);
                 prevKeyCode = '';
             }
-        }
+        };
 
         window.addEventListener('keydown', downHandler);
 

@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react';
 
-export function useEventListener(
+export const useEventListener = (
     eventType: string,
     callback: (event: Event) => void,
     element: HTMLElement | Window = window
-) {
+) => {
     const callbackRef = useRef(callback);
 
     useEffect(() => {
@@ -18,4 +18,4 @@ export function useEventListener(
 
         return () => element.removeEventListener(eventType, handler);
     }, [element, eventType]);
-}
+};

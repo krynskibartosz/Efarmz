@@ -4,7 +4,7 @@ import {
     PRODUCTS_CATEGORIES_API_RESPONSE,
 } from 'src/core/domains/models/shopping/catalog/category/mod_categories';
 
-const mockProductCategory: PRODUCT_CATEGORY = {
+export const mockProductCategory: PRODUCT_CATEGORY = {
     banner: faker.image.imageUrl(),
     children: [],
     count: faker.datatype.number(),

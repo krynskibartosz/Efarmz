@@ -1,4 +1,4 @@
-function Home() {
+const Home = () => {
     return (
         <>
             <main className="xl:px-32 px-5 pb-10 mt-52 w-full">
@@ -8,5 +8,5 @@ function Home() {
             </main>
         </>
     );
-}
+};
 export default Home;

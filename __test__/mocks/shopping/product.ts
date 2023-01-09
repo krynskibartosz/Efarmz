@@ -7,25 +7,25 @@ import {
     PRODUCTS,
 } from 'src/core/domains/models/shopping/catalog/product/mod_product';
 
-export function createRandomOptions(): { [key: number]: number } {
+export const createRandomOptions = (): { [key: number]: number } => {
     const options: { [key: number]: number } = {};
     const numOptions = faker.datatype.number(5);
     for (let i = 0; i < numOptions; i++) {
         options[faker.datatype.number(10)] = faker.datatype.number(10);
     }
     return options;
-}
+};
 
-export function createRandomOptionsBox(): { [key: number]: number } {
+export const createRandomOptionsBox = (): { [key: number]: number } => {
     const optionsBox: { [key: number]: number } = {};
     const numOptions = faker.datatype.number(5);
     for (let i = 0; i < numOptions; i++) {
         optionsBox[faker.datatype.number(10)] = faker.datatype.number(10);
     }
     return optionsBox;
-}
+};
 
-export function createRandomCategory(): CATEGORY_N {
+export const createRandomCategory = (): CATEGORY_N => {
     return {
         banner: faker.image.imageUrl(),
         count: faker.datatype.number(5),
@@ -44,9 +44,9 @@ export function createRandomCategory(): CATEGORY_N {
         seo_title: faker.lorem.sentence(),
         thumbnail: faker.image.imageUrl(),
     };
-}
+};
 
-export function createRandomLabel(): LABEL {
+export const createRandomLabel = (): LABEL => {
     return {
         id: faker.random.alphaNumeric(32),
         name: faker.commerce.productMaterial(),
@@ -55,18 +55,18 @@ export function createRandomLabel(): LABEL {
         type_name: faker.commerce.productAdjective(),
         link: faker.internet.url(),
     };
-}
+};
 
-export function createRandomLabels(): LABELS {
+export const createRandomLabels = (): LABELS => {
     const labels: { [key: string]: LABEL } = {};
     const numLabels = faker.datatype.number(5);
     for (let i = 0; i < numLabels; i++) {
         labels[faker.random.alphaNumeric(32)] = createRandomLabel();
     }
     return { labels };
-}
+};
 
-export function createRandomProduct(): PRODUCT {
+export const createRandomProduct = (): PRODUCT => {
     return {
         ARTID: faker.random.alphaNumeric(32),
         availabilities_days: [faker.date.weekday()],
@@ -127,9 +127,9 @@ export function createRandomProduct(): PRODUCT {
         unity: faker.commerce.productMaterial(),
         vat: faker.datatype.number(21),
     };
-}
+};
 
-export function createRandomCart(): PRODUCTS {
+export const createRandomCart = (): PRODUCTS => {
     const numProducts = faker.datatype.number(1);
     const products = [];
     for (let i = 0; i < Math.max(1, numProducts); i++) {
@@ -160,4 +160,4 @@ export function createRandomCart(): PRODUCTS {
         to: faker.datatype.number(numProducts),
         total: numProducts,
     };
-}
+};

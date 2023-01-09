@@ -8,11 +8,11 @@ type PRODUCT_CONTAINER_PROPS = {
     numberOfProductsToDisplay: number;
 };
 
-export function ProductsContainer({
+export const ProductsContainer = ({
     products,
     isLoading,
     numberOfProductsToDisplay,
-}: PRODUCT_CONTAINER_PROPS) {
+}: PRODUCT_CONTAINER_PROPS) => {
     return (
         <ul
             className={classnames(
@@ -32,7 +32,7 @@ export function ProductsContainer({
             />
         </ul>
     );
-}
+};
 
 const productGridClassName = classnames(
     'col-span-full',
