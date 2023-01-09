@@ -1,9 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import {
-    PRODUCTS_CATEGORIES_API_RESPONSE,
-    PRODUCT_CATEGORY,
-} from 'src/core/domains/models/shopping/catalog/category/mod_categories';
+import { PRODUCT_CATEGORY } from 'src/core/domains/models/shopping/catalog/category/mod_categories';
 
 import { ShoppingApiAdapter } from 'src/adapters/shopping-api-adapter';
 import { ShoppingApiPort } from 'src/ports/shopping-port';

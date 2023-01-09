@@ -12,6 +12,7 @@ import { MODAL } from 'src/presentations/hooks/event/useModal';
 export const Header = () => {
     const modal = useModal();
     const { categories } = useFetchProductsCategories();
+    //todo:  put a height on the header
 
     return (
         <>

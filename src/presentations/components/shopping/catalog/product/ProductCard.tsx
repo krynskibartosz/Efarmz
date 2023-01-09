@@ -5,6 +5,7 @@ import { PRODUCT } from 'src/core/domains/models/shopping/catalog/product/mod_pr
 import shallow from 'zustand/shallow';
 import useRootStore from 'src/presentations/global-state/useRoot';
 
+// todo: The image doesn't have the good size on first render
 export const ProductCard = ({ product }: { product: PRODUCT }) => {
     return (
         <article className="h-full">

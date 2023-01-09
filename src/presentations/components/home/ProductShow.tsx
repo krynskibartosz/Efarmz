@@ -3,17 +3,11 @@ import { ProductsContainer } from '../shopping/catalog/product/ProductsContainer
 
 export const ProductShow = ({
     products,
-    isLoading,
 }: {
     products: PRODUCT[] | undefined;
-    isLoading: boolean;
 }) => (
     <section>
         <h2>Nombre de produit {40}</h2>
-        <ProductsContainer
-            numberOfProductsToDisplay={40}
-            products={products}
-            isLoading={isLoading}
-        />
+        <ProductsContainer numberOfProductsToDisplay={40} products={products} />
     </section>
 );

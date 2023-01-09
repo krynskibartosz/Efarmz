@@ -4,7 +4,7 @@ import { ProductCardSkeleton, ProductCard } from './ProductCard';
 
 type PRODUCT_CONTAINER_PROPS = {
     products: PRODUCT[] | undefined;
-    isLoading: boolean;
+    isLoading?: boolean;
     numberOfProductsToDisplay: number;
 };
 
@@ -66,7 +66,7 @@ const ProductList = ({
             {products?.map((product: PRODUCT, i) => {
                 if (i > numberOfProductsToDisplay) return <></>;
                 return (
-                    <li className={productGridClassName} key={product.id}>
+                    <li className={productGridClassName} key={i}>
                         <ProductCard product={product} />
                     </li>
                 );

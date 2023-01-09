@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 
+// todo: the currentPage doesn't change when the route change
 export const Pagination = ({
     totalPages,
     currentPage,
