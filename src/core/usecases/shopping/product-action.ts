@@ -34,3 +34,21 @@ export const setCategories = (
         draft.categories = [...categories];
     });
 };
+export const addProducts = ({
+    catalog,
+    products,
+    currentPage,
+    category,
+}: {
+    catalog: CATALOG;
+    products: PRODUCT[];
+    currentPage: number;
+    category: string;
+}) => {
+    return produce(catalog, (draft) => {
+        draft.products = [
+            ...catalog.products,
+            { currentPage: currentPage, category, data: products },
+        ];
+    });
+};

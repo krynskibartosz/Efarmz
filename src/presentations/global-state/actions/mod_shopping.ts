@@ -6,5 +6,13 @@ export type ACTIONS = {
     deductProduct: (product: PRODUCT) => void;
     removeProduct: (product: PRODUCT) => void;
     setCategoriesToCatalog: (categories: PRODUCT_CATEGORY[]) => void;
-    addProductToCatalog: (products: PRODUCT_CATEGORY[]) => void;
+    addProductsToCatalog: ({
+        products,
+        currentPage,
+        category,
+    }: {
+        products: PRODUCT[];
+        currentPage: number;
+        category: string;
+    }) => void;
 };

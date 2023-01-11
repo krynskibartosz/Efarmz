@@ -3,6 +3,7 @@ import produce from 'immer';
 import { StoreSlice } from './useRoot';
 import {
     addProductToShoppingCart,
+    addProducts,
     decrementTheQuantityOfAProduct,
     removeProductWithSameID,
     setCategories,
@@ -12,7 +13,7 @@ import { ACTIONS } from './actions/mod_shopping';
 import { PRODUCT_CATEGORY } from 'src/core/domains/models/shopping/catalog/category/mod_categories';
 
 export type CATALOG = {
-    products: [{ name: string; currentPage: number; data: PRODUCT[] }[]] | [];
+    products: { category: string; currentPage: number; data: PRODUCT[] }[] | [];
     categories: PRODUCT_CATEGORY[];
 };
 
@@ -85,10 +86,15 @@ export const shoppingCartSlice: StoreSlice<SHOPPING_CART_STORE> = (set) => ({
             })
         );
     },
-    addProductToCatalog(products) {
+    addProductsToCatalog({ products, category, currentPage }) {
         set((state) =>
             produce(state, (draft) => {
-                draft.shoppingCart.catalog.products = [];
+                draft.shoppingCart.catalog = addProducts({
+                    catalog: state.shoppingCart.catalog,
+                    products,
+                    currentPage: currentPage,
+                    category: category,
+                });
             })
         );
     },

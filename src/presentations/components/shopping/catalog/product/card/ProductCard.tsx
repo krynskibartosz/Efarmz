@@ -13,6 +13,7 @@ export const ProductCard = ({ product }: { product: PRODUCT }) => {
                 <QuantityBadge product={product} />
                 <div className="relative  aspect-square  w-full object-cover">
                     <Image
+                        sizes="(max-width: 768px) calc(100vw - 40px),(max-width: 768px) calc(33vw - 60px), (max-width: 1280px) 25vw,"
                         fill
                         src={product.image}
                         alt={product.name}
@@ -35,7 +36,7 @@ const QuantityBadge = ({ product }: { product: PRODUCT }) => {
             <div
                 className={classnames(
                     'text-white',
-                    'text-sm',
+                    'text-base',
                     'font-semibold',
                     'absolute ',
                     'py-0.5',
@@ -53,6 +54,9 @@ const QuantityBadge = ({ product }: { product: PRODUCT }) => {
     return <></>;
 };
 
+//todo: adapt skeleton
+// - find a way to skeleton text like put filter on it
+// - adapt to the new design
 export const ProductCardSkeleton = () => {
     return (
         <Column

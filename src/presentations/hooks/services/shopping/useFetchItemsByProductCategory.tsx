@@ -1,60 +1,74 @@
 import { useRouter } from 'next/router';
-import { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import { useState, useEffect } from 'react';
 
-import { ShoppingApiAdapter } from 'src/adapters/shopping-api-adapter';
-import { ShoppingApiPort } from 'src/ports/shopping-port';
-import { CategoryService } from 'src/infrastructure/api/shopping/catalog/category';
 import { PRODUCTS_BY_CATEGORY_RESPONSE } from 'src/core/domains/models/shopping/catalog/product/by-category/mod_products_by_category';
-import { useUpdateEffect } from '../../event/useUpdateEffect';
+import { useUpdateEffect } from 'lib';
+import { categoryService } from 'src/services/categories';
 
-const api: ShoppingApiPort = new ShoppingApiAdapter(
-    process.env.NEXT_PUBLIC_END_POINT as string
-);
+const CATEGORY_QUERY_NAME = 'product-category';
 
-const categoryService = new CategoryService(api);
+interface Props {
+    pageNumber: number;
+    setPageNumber: React.Dispatch<React.SetStateAction<number>>;
+}
 
 export const useFetchItemsByProductCategory = ({
-    setCurrentPage,
-    currentPage,
-}: {
-    currentPage: number;
-    setCurrentPage: Dispatch<SetStateAction<number>>;
-}) => {
+    pageNumber,
+    setPageNumber,
+}: Props) => {
+    interface State {
+        categories: PRODUCTS_BY_CATEGORY_RESPONSE | undefined;
+        loading: boolean;
+        error: boolean;
+    }
+
     const router = useRouter();
     const { query } = router;
-    const [categories, setCategories] =
-        useState<PRODUCTS_BY_CATEGORY_RESPONSE>();
-    const [loading, setLoading] = useState(true);
+    const [state, setState] = useState<State>({
+        categories: undefined,
+        loading: false,
+        error: false,
+    });
 
-    const productQuery = query?.['product-category'];
+    const fetchData = async () => {
+        setState((currentState) => ({ ...currentState, loading: true }));
+        try {
+            const categories =
+                await categoryService.getProductBasedOnACategoryAndHisCurrentPage(
+                    {
+                        currentPage: pageNumber,
+                        query: query[CATEGORY_QUERY_NAME] as string,
+                    }
+                );
+            setState({
+                categories: categories,
+                loading: false,
+                error: false,
+            });
+        } catch (error) {
+            setState((currentState) => ({
+                ...currentState,
+                loading: false,
+                error: false,
+            }));
+        }
+    };
+
     useUpdateEffect(() => {
-        setCurrentPage(1);
-    }, [productQuery, setCurrentPage]);
+        setPageNumber(1);
+    }, [query, setPageNumber]);
 
     useEffect(() => {
-        const fetchProducts = async () => {
-            setLoading(true);
-            if (query['product-category'] && currentPage > 1) {
-                const categories =
-                    await categoryService.getProductBasedOnACategoryAndHisCurrentPage(
-                        {
-                            currentPage,
-                            query: productQuery as string,
-                        }
-                    );
+        if (pageNumber > 1) {
+            fetchData();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pageNumber, query]);
 
-                setCategories(categories);
-                setLoading(false);
-            }
-            if (currentPage === 1) {
-                setLoading(false);
-            }
-        };
-        fetchProducts();
-    }, [productQuery, currentPage, query]);
     return {
-        categories: categories,
-        loading,
-        productQuery,
+        categories: state.categories,
+        loading: state.loading,
+        error: state.error,
+        query: query[CATEGORY_QUERY_NAME],
     };
 };

@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 
-// todo: the currentPage doesn't change when the route change
 export const Pagination = ({
     totalPages,
     currentPage,
@@ -32,24 +31,24 @@ export const Pagination = ({
                                 'p-2',
                                 'rounded-full',
                                 'border',
-                                'border-green-200',
+                                'border-green-500',
                                 'w-10',
                                 'h-10',
                                 'grid',
                                 'place-content-center',
-                                'hover:bg-gray-200',
+                                'text-green-700',
                                 'transition-all',
                                 'duration-300',
                                 'ease-in-out',
-                                'cursor-pointer',
+                                'cursor-pointer font-medium',
                                 {
-                                    'bg-green-200': isCurrent,
-                                    'text-green-700': isCurrent,
-                                    'border-green-200': isCurrent,
+                                    'hover:bg-green-200': !isCurrent,
+                                    'bg-green-700 !text-white border-green-700 cursor-default':
+                                        isCurrent,
                                 }
                             )}
                         >
-                            <a className={``}>{page}</a>
+                            {page}
                         </li>
                     );
                 })}

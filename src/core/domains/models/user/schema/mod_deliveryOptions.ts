@@ -15,7 +15,7 @@ interface CARRIER {
     name: string;
     address1?: string | null;
     address2?: string | null;
-    availabilities?: unknown[];
+    availabilities?: unknown[]; // todo: check this
     city?: string | null;
     days: {
         d1: number;

@@ -1,41 +1,76 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react/prop-types */
-
+import { Column } from 'components';
 import Head from 'next/head';
 import { useState } from 'react';
-import { ShoppingApiAdapter } from 'src/adapters/shopping-api-adapter';
-import { CategoryService } from 'src/infrastructure/api/shopping/catalog/category';
-import { ShoppingApiPort } from 'src/ports/shopping-port';
-import { ProductsOfACategoryShow } from 'src/presentations/components/shopping/catalog/ProductShow';
+import { PRODUCTS_BY_CATEGORY_RESPONSE } from 'src/core/domains/models/shopping/catalog/product/by-category/mod_products_by_category';
+import { ProductsOfACategorySection } from 'src/presentations/components/shopping/catalog/ProductShow';
+import useRootStore from 'src/presentations/global-state/useRoot';
+import { categoryService } from 'src/services/categories';
+import Image from 'next/image';
+import { useHasHydrated } from 'lib';
 
-// todo: Optimiser la pagination pour ne plus fetch certain produit temporairement
-const ProductCategory = ({ categories, loading }: any) => {
+// todo?: Optimiser la pagination pour ne plus fetch certain produit temporairement
+interface PRODUCT_CATEGORY {
+    categoriesFromApi: PRODUCTS_BY_CATEGORY_RESPONSE;
+    categoryName: string;
+    categoryId: number;
+}
+
+const ProductCategory = ({
+    categoriesFromApi,
+    categoryName,
+    categoryId,
+}: PRODUCT_CATEGORY) => {
     const [currentPage, setCurrentPage] = useState(1);
+    const { categories } = useRootStore((state) => ({
+        categories: state.shoppingCart.catalog.categories,
+    }));
+
+    const matchingProduct = categories.find((el) => {
+        return el.id === +categoryId;
+    });
+    const hasHydrated = useHasHydrated();
 
     return (
         <>
             <Head>
-                <title>Efarmz </title>
+                <title>Efarmz {categoryName} </title>
             </Head>
-            <main className="xl:px-32 px-5 pb-10 mt-52 h-full relative w-full">
-                <ProductsOfACategoryShow
-                    categories={categories?.products}
-                    currentPage={currentPage}
-                    setCurrentPage={setCurrentPage}
-                    loading={loading}
-                />
+            <main className=" pb-10  h-full relative w-full">
+                <section className="md:mt-[116px] mt-[169px] isolate relative w-full mb-10 h-[300px] md:h-[400px]">
+                    <div className="absolute aspect-video object-cover top-0 left-0 w-full h-full -z-20">
+                        {hasHydrated && (
+                            <Image
+                                src={matchingProduct?.banner as string}
+                                alt={matchingProduct?.name as string}
+                                fill
+                            />
+                        )}
+                    </div>
+                    <div className="absolute  top-0 bg-opacity-40 left-0 w-full h-full bg-black -z-10" />
+                    <Column
+                        horizontalPosition="center"
+                        verticalPosition="center"
+                        className=" w-full h-full z-0 px-5"
+                    >
+                        <h1 className="text-4xl text-white text-center pb-2 font-bold ">
+                            {categoryName} ({categoriesFromApi.products.total})
+                        </h1>
+                        <p className="text-center text-gray-100 font-semibold text-xl max-w-xl">
+                            {hasHydrated && matchingProduct?.seo_description}
+                        </p>
+                    </Column>
+                </section>
+                <section className="xl:px-32 px-5 w-full">
+                    <ProductsOfACategorySection
+                        categories={categoriesFromApi.products}
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                    />
+                </section>
             </main>
         </>
     );
 };
-
-// const productService = new ProductService(api);
-
-const api: ShoppingApiPort = new ShoppingApiAdapter(
-    process.env.NEXT_PUBLIC_END_POINT as string
-);
-
-const categoryService = new CategoryService(api);
 
 export async function getStaticPaths() {
     // Get the list of product categories
@@ -54,6 +89,11 @@ export async function getStaticPaths() {
     };
 }
 
+function extractNumberFromText(string: string) {
+    const numbers = string.match(/\b\d+\b/g);
+    return numbers?.[0];
+}
+
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 export async function getStaticProps({ params }) {
@@ -66,9 +106,11 @@ export async function getStaticProps({ params }) {
 
     return {
         props: {
-            categories,
-            loading: false,
-            productQuery: params['product-category'],
+            categoriesFromApi: categories,
+            categoryName: params['product-category']
+                .replace(/^\d+--/, '')
+                .replaceAll('_', ' '),
+            categoryId: extractNumberFromText(params['product-category']),
         },
         revalidate: 120, // 2 minutes
     };

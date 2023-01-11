@@ -23,6 +23,7 @@ type DELIVERY_OPTIONS_DTO = {
     zipCode: string;
 };
 
+// TODO: There's a problem here.
 export const DeliveryOptionsModal = ({
     modal,
 }: {
@@ -40,6 +41,7 @@ export const DeliveryOptionsModal = ({
         handleSubmit,
         control,
         watch,
+        reset,
         formState: { isDirty },
     } = useForm({
         defaultValues: {
@@ -72,6 +74,7 @@ export const DeliveryOptionsModal = ({
             country: data.country,
         });
         modal.close();
+        reset();
     };
 
     const deliveryDateToDisplay = () => {
@@ -88,12 +91,13 @@ export const DeliveryOptionsModal = ({
     };
     useUpdateEffect(() => {
         modal.close();
+        reset();
     }, [onExit]);
 
     return (
         <CardModalOverlay id="deliverySlot" modal={modal}>
             <Column className="relative w-full  h-[100%-20px] overflow-y-auto ">
-                <CloseButton modal={modal} />
+                <CloseButton reset={reset} modal={modal} />
                 <form
                     onSubmit={handleSubmit(onSubmit)}
                     className="pt-2 flex pb-5 px-6  w-full flex-col gap-y-5  max-md:mb-0"
@@ -205,7 +209,13 @@ const DeliveryDateToDisplay = ({
     return <></>;
 };
 
-const CloseButton = ({ modal }: { modal: MODAL<'deliverySlot'> }) => {
+const CloseButton = ({
+    modal,
+    reset,
+}: {
+    modal: MODAL<'deliverySlot'>;
+    reset: () => void;
+}) => {
     return (
         <Row
             horizontalPosition="right"
@@ -229,6 +239,7 @@ const CloseButton = ({ modal }: { modal: MODAL<'deliverySlot'> }) => {
                 )}
                 onClick={() => {
                     modal.close();
+                    reset();
                 }}
             >
                 <XCircleIcon className="h-9 w-9  text-green-700" />

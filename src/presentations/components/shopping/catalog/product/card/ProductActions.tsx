@@ -54,7 +54,7 @@ const BasicShoppingActionButton = ({ product }: { product: PRODUCT }) => {
             >
                 <button
                     className={classnames(
-                        'text-green-700',
+                        'text-green-700 text-base',
                         'py-2',
                         'hover:bg-[#EEFCF3]',
                         'w-full'
@@ -67,7 +67,7 @@ const BasicShoppingActionButton = ({ product }: { product: PRODUCT }) => {
                 <button
                     onClick={() => addProduct(product)}
                     className={classnames(
-                        'text-green-700',
+                        'text-green-700 text-base',
                         'rounded-l-xl',
                         'py-2',
                         'hover:bg-[#EEFCF3]',
@@ -106,7 +106,7 @@ const BasicShoppingActionButton = ({ product }: { product: PRODUCT }) => {
                         'font-semibold',
                         'py-2',
                         'w-full',
-                        'text-green-700'
+                        'text-green-700 text-base'
                     )}
                     onClick={() => addProduct(product)}
                 >

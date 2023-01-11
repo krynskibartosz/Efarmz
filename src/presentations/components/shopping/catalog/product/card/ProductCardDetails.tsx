@@ -8,7 +8,7 @@ export const ProductCardDetails = ({ product }: { product: PRODUCT }) => {
                 <h3 className="text-gray-700 font-semibold text-lg">
                     {product.name}
                 </h3>
-                <div className="underline hover:brightness-50 text-gray-700 text-sm -translate-y-0.5">
+                <div className="underline hover:text-green-700 text-gray-700 text-base -translate-y-0.5">
                     <a
                         aria-label="products"
                         target="_blank"
@@ -20,7 +20,9 @@ export const ProductCardDetails = ({ product }: { product: PRODUCT }) => {
                 </div>
             </div>
             <div className="px-5 pb-5">
-                <p className="pb-5 font-bold">{product.price.toFixed(2)} €</p>
+                <p className="pb-7 font-bold text-lg text-gray-900">
+                    {product.price.toFixed(2) ?? product.box_price.toFixed(2)} €
+                </p>
                 <TagBadges product={product} />
             </div>
         </Column>

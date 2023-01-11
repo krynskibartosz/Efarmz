@@ -86,3 +86,9 @@ h6 {
 body.loading * {
     transition: none !important;
 }
+/* Safari 15+ displays a gray border while loading. Possible solutions: */
+@supports (font: -apple-system-body) and (-webkit-appearance: none) {
+    img[loading='lazy'] {
+        clip-path: inset(0.6px);
+    }
+}

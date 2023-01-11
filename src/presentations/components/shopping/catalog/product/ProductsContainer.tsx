@@ -20,9 +20,8 @@ export const ProductsContainer = ({
                 'w-full',
                 'grid-cols-12',
                 'grid-rows-6',
-                'gap-y-8',
-                'gap-x-5',
-                'md:gap-y-12'
+                'gap-x-7',
+                'gap-y-7'
             )}
         >
             <ProductList

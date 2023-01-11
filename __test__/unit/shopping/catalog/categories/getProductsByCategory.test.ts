@@ -13,6 +13,7 @@ class MockShoppingApiPort implements ShoppingApiPort {
     }
 }
 
+// todo: put baseURL to a config files
 describe('CategoryService', () => {
     const baseUrl = 'https://dev.efarmz.be/api/v1/';
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

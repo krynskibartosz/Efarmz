@@ -2,16 +2,9 @@ import { useState, useEffect } from 'react';
 
 import { PRODUCT_CATEGORY } from 'src/core/domains/models/shopping/catalog/category/mod_categories';
 
-import { ShoppingApiAdapter } from 'src/adapters/shopping-api-adapter';
-import { ShoppingApiPort } from 'src/ports/shopping-port';
-import { CategoryService } from 'src/infrastructure/api/shopping/catalog/category';
 import useRootStore from 'src/presentations/global-state/useRoot';
+import { categoryService } from 'src/services/categories';
 import shallow from 'zustand/shallow';
-
-const api: ShoppingApiPort = new ShoppingApiAdapter(
-    process.env.NEXT_PUBLIC_END_POINT as string
-);
-const categoryService = new CategoryService(api);
 
 export const useFetchProductsCategories = () => {
     const {
@@ -39,10 +32,10 @@ export const useFetchProductsCategories = () => {
             setCategoriesToCatalog(categories.data);
             setLoading(false);
         };
-        if (categories.length === 0) {
+        if (categories?.length === 0) {
             fetchProducts();
         }
-    }, [categories.length, setCategoriesToCatalog]);
+    }, [categories?.length, setCategoriesToCatalog]);
 
     return {
         categories: fetchedCategories ?? categories,
