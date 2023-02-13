@@ -1,9 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     // reactStrictMode: false,
-    images: {
-        domains: ['cdn.efarmz.be'],
-    },
+    images: {},
 };
 
 module.exports = nextConfig;
